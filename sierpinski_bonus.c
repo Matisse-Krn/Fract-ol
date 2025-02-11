@@ -90,15 +90,16 @@ static void	sierpinski_recursive(int x, int y, int new_size, t_fractal *fractal)
 		j = -1;
 		while (++j < 3)
 		{
-			if (i == 1 && j == 1)
-				continue ;
-			original_size = fractal->size;
-			original_depth = fractal->depth;
-			fractal->size = new_size;
-			fractal->depth--;
-			draw_sierpinski_carpet(x + i * new_size, y + j * new_size, fractal);
-			fractal->size = original_size;
-			fractal->depth = original_depth;
+			if (!(i == 1 && j == 1))
+			{
+				original_size = fractal->size;
+				original_depth = fractal->depth;
+				fractal->size = new_size;
+				fractal->depth--;
+				draw_sierpinski_carpet(x + i * new_size, y + j * new_size, fractal);
+				fractal->size = original_size;
+				fractal->depth = original_depth;
+			}
 		}
 	}
 }
