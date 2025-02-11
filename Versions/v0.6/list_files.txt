@@ -1,0 +1,13 @@
+	change_colors.c
+	display_functions.c
+	fractol.c
+	handle_hooks2.c
+	handle_hooks.c
+	initialize.c
+	main.c
+	manipulate_colors.c
+	maths_functions.c
+	rendering.c
+	strings_utils2.c
+	strings_utils.c
+	text_box.c
