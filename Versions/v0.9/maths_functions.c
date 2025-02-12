@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "includes/fractol.h"
 
 /*
  * Maps a value from an original range [0, origin_max] to a new range 

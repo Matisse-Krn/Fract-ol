@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "includes/fractol.h"
 
 /*
  * Handles the last set of keyboard inputs for contrast changes,

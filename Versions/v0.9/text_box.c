@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "includes/fractol.h"
 
 /*
  * Draws a filled black rectangle (box) within the image buffer.

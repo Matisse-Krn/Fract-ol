@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "includes/fractol.h"
 
 /*
  * Checks if the given string represents a valid numeric value.

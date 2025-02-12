@@ -23,7 +23,7 @@ SRC				= ./fractol.c ./maths_functions.c ./rendering.c ./main.c \
 				./change_colors.c ./initialize.c ./handle_hooks2.c \
 				./parsing.c ./sierpinski_bonus.c ./sierpinski_utils_bonus.c
 
-INCLUDE			= -I/usr/include -Ilibft -Imlx_linux -Iincludes
+INCLUDE			= -I/usr/include -Ilibft/includes -Iincludes -Imlx_linux
 
 OBJ				= $(SRC:.c=.o)
 
@@ -31,14 +31,10 @@ all				: $(NAME)
 
 bonus			: $(NAME)
 
-%.o 			: %.c
-	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@ >>/dev/null
-
 $(NAME)			: $(OBJ)
-	@make -sC libft/ >>/dev/null
-	@make -sC mlx_linux/ >>/dev/null
-	@$(CC) $(CFLAGS) $(OBJ) $(LIBPATH) $(LIBNAME) $(INCLUDE) -o $(NAME) >>/dev/null
-	@echo "\nCompilation done !\n"
+	@make -sC libft/
+	@make -sC mlx_linux/
+	$(CC) $(CFLAGS) $(OBJ) $(LIBPATH) $(INCLUDE) $(LIBNAME) -o $(NAME)
 
 clean			:
 	@make clean -sC libft/
@@ -50,4 +46,4 @@ fclean			: clean
 
 re				: fclean all
 
-.PHONY			: all bonus clean fclean re bonus
+.PHONY			: mandatory all clean fclean re bonus

@@ -10,7 +10,7 @@
 /*																			  */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "includes/fractol.h"
 
 /*
  * Initializes event handling for the Sierpiński Carpet fractal.

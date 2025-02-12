@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "./includes/fractol.h"
 
 /*
  * Handles program exit by freeing all allocated resources,

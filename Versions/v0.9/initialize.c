@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "./includes/fractol.h"
 
 /*
  * Initializes the default position, zoom settings, and complex plane shift
