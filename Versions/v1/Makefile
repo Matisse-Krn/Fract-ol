@@ -17,12 +17,11 @@ NAME			= fractol
 LIBPATH 		= -Lmlx_linux -Llibft -L/usr/lib
 LIBNAME 		= -lmlx_Linux -lft -lz -lX11 -lXext -lm
 
-SRC				= srcs/fractol.c srcs/maths_functions.c srcs/rendering.c \
-				  srcs/main.c srcs/handle_hooks.c srcs/strings_utils.c \
-				  srcs/text_box.c srcs/strings_utils2.c srcs/manipulate_colors.c \
-				  srcs/display_functions.c srcs/change_colors.c srcs/initialize.c \
-				  srcs/handle_hooks2.c srcs/parsing.c srcs/sierpinski_bonus.c \
-				  srcs/sierpinski_utils_bonus.c
+SRC				= ./fractol.c ./maths_functions.c ./rendering.c ./main.c \
+				./handle_hooks.c ./strings_utils.c ./text_box.c \
+				./strings_utils2.c ./manipulate_colors.c ./display_functions.c \
+				./change_colors.c ./initialize.c ./handle_hooks2.c \
+				./parsing.c ./sierpinski_bonus.c ./sierpinski_utils_bonus.c
 
 INCLUDE			= -I/usr/include -Ilibft -Imlx_linux -Iincludes
 
@@ -51,4 +50,4 @@ fclean			: clean
 
 re				: fclean all
 
-.PHONY			: all bonus clean fclean re
+.PHONY			: all bonus clean fclean re bonus
