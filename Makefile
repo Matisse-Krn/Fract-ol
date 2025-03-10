@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 CC				= cc
-CFLAGS			= -Wall -Wextra -Werror -g3
+CFLAGS			= -Wall -Wextra -Werror -g3 -O3
 NAME			= fractol 
 
 LIBPATH 		= -Lmlx_linux -Llibft -L/usr/lib
