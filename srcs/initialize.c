@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initialize.c                                 :+:      :+:    :+:   */
+/*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkerrien <mkerrien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 03:54:18 by mkerrien          #+#    #+#             */
-/*   Updated: 2025/02/09 21:47:27 by mkerrien         ###   ########.fr       */
+/*   Updated: 2025/08/02 09:07:02 by mkerrien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	data_init(t_fractal *fractal)
 	fractal->img.height = 960;
 	fractal->img.width = 960;
 	fractal->escape_value = pow(2, 2);
-	fractal->max_iterations = 100;
+	fractal->max_iterations = 1000;
 	fractal->tick_iterations = 10;
 	fractal->color = 0x000000;
 	fractal->init_color_min = 0x000000;

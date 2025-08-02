@@ -6,7 +6,7 @@
 #    By: mkerrien <mkerrien@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/06 15:34:25 by mkerrien          #+#    #+#              #
-#    Updated: 2025/02/07 23:19:52 by mkerrien         ###   ########.fr        #
+#    Updated: 2025/08/02 08:58:04 by mkerrien         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRC				= srcs/fractol.c srcs/maths_functions.c srcs/rendering.c \
 				  srcs/text_box.c srcs/strings_utils2.c srcs/manipulate_colors.c \
 				  srcs/display_functions.c srcs/change_colors.c srcs/initialize.c \
 				  srcs/handle_hooks2.c srcs/parsing.c srcs/sierpinski_bonus.c \
-				  srcs/sierpinski_utils_bonus.c
+				  srcs/sierpinski_utils_bonus.c \
+				  srcs/multithreading.c
 
 INCLUDE			= -I/usr/include -Ilibft -Imlx_linux -Iincludes
 

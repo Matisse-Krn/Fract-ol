@@ -6,18 +6,23 @@
 /*   By: mkerrien <mkerrien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 03:38:25 by mkerrien          #+#    #+#             */
-/*   Updated: 2025/02/08 06:12:55 by mkerrien         ###   ########.fr       */
+/*   Updated: 2025/08/02 09:01:59 by mkerrien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
+# define TRUE 1
+# define FALSE 0
+
 # include "mlx.h"
 # include "mlx_int.h"
 # include "libft.h"
 # include <math.h>
 # include <float.h>
+
+# include <pthread.h>
 
 typedef struct s_complex_nb
 {
@@ -93,6 +98,14 @@ typedef struct s_box
 	int			to_y;
 }				t_box;
 
+typedef struct s_thread_arg
+{
+	t_fractal	*fractal;
+	char		type;
+	int			y_start;
+	int			y_end;
+} t_thread_args;
+
 /* Memory and error handling */
 void		malloc_error(void);
 char		*if_malloc_error(char *s);
@@ -103,6 +116,9 @@ void		data_init_sierpinski(t_fractal *fractal);
 void		initialize_window(t_fractal *fractal);
 void		initialize_image(t_fractal *fractal);
 void		initialize_text_image(t_fractal *fractal);
+
+/*Multithreading init and routine*/
+int			init_threads(t_fractal *fractal);
 
 /* Event handling */
 void		initialize_events(t_fractal *fractal);
@@ -117,6 +133,8 @@ int			handle_mouse_move(int x, int y, t_fractal *fractal);
 
 /* Fractal rendering management */
 void		fractal_rendering(t_fractal *fractal);
+void		handle_pixel_mandelbrot(t_pixel *pixel, t_fractal *fractal);
+void		handle_pixel_julia(t_pixel *pixel, t_fractal *fractal);
 void		rendering_sierpinski(t_fractal *fractal);
 void		draw_sierpinski_carpet(int x, int y, t_fractal *fractal);
 void		my_mlx_pixel_put(t_image *data, int x, int y, int color);
