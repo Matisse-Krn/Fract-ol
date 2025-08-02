@@ -88,7 +88,7 @@ void	data_init(t_fractal *fractal)
 	fractal->img.height = 960;
 	fractal->img.width = 960;
 	fractal->escape_value = pow(2, 2);
-	fractal->max_iterations = 1000;
+	fractal->max_iterations = 10000;
 	fractal->tick_iterations = 10;
 	fractal->color = 0x000000;
 	fractal->init_color_min = 0x000000;
