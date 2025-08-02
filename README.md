@@ -78,6 +78,7 @@ Utilisation de la MLX implique :
 
 # Sierpinski carpet (mono-thread seulement)
 ./fractol sierpinski
+```
 
 ---
 
