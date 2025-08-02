@@ -41,11 +41,12 @@ Utilisation de la MLX implique :
     - Option d’activation/désactivation du multi-threading.
 - **Contrôle total du rendu en temps réel :**
     - Zoom fin ou rapide (molette, clic).
-    - Déplacement par clic/drag.
+    - Zoom suivant le curseur.
+    - Déplacement par clic/molette ou flèches.
     - Ajustement du nombre d’itérations (définition/calcul).
     - Réglage dynamique du contraste et du lissage.
 - **Palette et affichage interactifs :**
-    - Changement de gamme de couleurs (R/G/B, raccourcis clavier).
+    - Changement de gamme de couleurs (raccourcis clavier R/G/B/Y/...).
     - Inversion instantanée des couleurs.
     - Activation du mode "psychédélique".
     - Affichage d’informations : nombre d’itérations max, coordonnées souris, mode actif, palette courante.
@@ -69,12 +70,36 @@ Utilisation de la MLX implique :
 ## 🛠️ Exemples de lancement
 
 ```bash
-# Mandelbrot en multi-threading
-./fractol mandelbrot --threads
+# Mandelbrot
+./fractol mandelbrot
 
-# Julia, mono-thread
+# Julia
 ./fractol julia
 
-# Sierpinski carpet, multi-thread forcé
-./fractol sierpinski --threads
+# Sierpinski carpet (mono-thread seulement)
+./fractol sierpinski
 
+---
+
+## 📋 Prérequis
+
+- C99+
+- MiniLibX (MLX)
+- POSIX Threads (pour l’option multi-thread)
+- Linux ou macOS (selon la version de la MLX)
+
+---
+
+## 🎯 Objectifs atteints
+
+- Moteur de rendu fractal interactif, rapide (compte-tenu de la MLX), optimisé et flexible.
+- Maîtrise de la MLX et du rendu graphique bas-niveau.
+- Implémentation robuste de l’arithmétique complexe.
+- Optimisation concrète via multi-threading (pool de threads manuel).
+- Interface riche, contrôlée en temps réel, avec de multiples options.
+- Structuration modulaire du code C, orientée maintenabilité et performance.
+
+---
+
+Aucune dépendance à d’autres frameworks que la MiniLibX.  
+Projet centré sur l’algorithmique, la maîtrise de la programmation bas-niveau, et l’optimisation des rendus mathématiques en temps réel.
