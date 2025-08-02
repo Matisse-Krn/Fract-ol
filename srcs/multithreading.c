@@ -6,11 +6,37 @@
 /*   By: mkerrien <mkerrien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 08:19:55 by mkerrien          #+#    #+#             */
-/*   Updated: 2025/08/02 09:02:16 by mkerrien         ###   ########.fr       */
+/*   Updated: 2025/08/02 10:16:48 by mkerrien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+int	get_multi_thread(void)
+{
+	int		ret;
+	char	buf[4];
+
+	ret = FALSE;
+	printf("Activate multi-threading ? (for Mandelbrot and Julia only)"
+			"\n(Yes/No) : ");
+	while (read(0, buf, 3) > 0)
+	{
+		if (!ft_strncmp(buf, "y", 1) || !ft_strncmp(buf, "Y", 1))
+			ret = TRUE;
+		else if (!ft_strncmp(buf, "n", 1) || !ft_strncmp(buf, "N", 1))
+			break ;
+		else
+		{
+			printf("Retry :\n\ny/Y/yes/YES  or  n/N/no/No\n");
+			printf("Activate multi-threading ? (for Mandelbrot and Julia only)"
+		"\n(Yes/No) : ");
+			continue ;
+		}
+		break ;
+	}
+	return (ret);
+}
 
 static void	pixel_partial_loop(char type, t_fractal *fractal, int y_start, int y_end)
 {

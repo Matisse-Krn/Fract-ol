@@ -6,7 +6,7 @@
 /*   By: mkerrien <mkerrien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 21:32:51 by mkerrien          #+#    #+#             */
-/*   Updated: 2025/08/02 09:09:12 by mkerrien         ###   ########.fr       */
+/*   Updated: 2025/08/02 10:19:53 by mkerrien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,32 +134,32 @@ void	handle_pixel_julia(t_pixel *pixel, t_fractal *fractal)
  * @param type The fractal type ('M' for Mandelbrot, 'J' for Julia).
  * @param fractal A pointer to the fractal structure.
 */
-/*static void	pixel_loop(char type, t_fractal *fractal)*/
-/*{*/
-/*	t_pixel	pixel;*/
-/**/
-/*	pixel.y = -1;*/
-/*	if (type == 'M')*/
-/*	{*/
-/*		ft_putstr_fd("Rendering Mandelbrot...\n\n", 1);*/
-/*		while (++(pixel.y) <= fractal->img.height)*/
-/*		{*/
-/*			pixel.x = -1;*/
-/*			while (++(pixel.x) <= fractal->img.width)*/
-/*				handle_pixel_mandelbrot(&pixel, fractal);*/
-/*		}*/
-/*	}*/
-/*	else if (type == 'J')*/
-/*	{*/
-/*		ft_putstr_fd("Rendering Julia...\n\n", 1);*/
-/*		while (++(pixel.y) <= fractal->img.height)*/
-/*		{*/
-/*			pixel.x = -1;*/
-/*			while (++(pixel.x) <= fractal->img.width)*/
-/*				handle_pixel_julia(&pixel, fractal);*/
-/*		}*/
-/*	}*/
-/*}*/
+static void	pixel_loop(char type, t_fractal *fractal)
+{
+	t_pixel	pixel;
+
+	pixel.y = -1;
+	if (type == 'M')
+	{
+		ft_putstr_fd("Rendering Mandelbrot...\n\n", 1);
+		while (++(pixel.y) <= fractal->img.height)
+		{
+			pixel.x = -1;
+			while (++(pixel.x) <= fractal->img.width)
+				handle_pixel_mandelbrot(&pixel, fractal);
+		}
+	}
+	else if (type == 'J')
+	{
+		ft_putstr_fd("Rendering Julia...\n\n", 1);
+		while (++(pixel.y) <= fractal->img.height)
+		{
+			pixel.x = -1;
+			while (++(pixel.x) <= fractal->img.width)
+				handle_pixel_julia(&pixel, fractal);
+		}
+	}
+}
 
 /*
  * Initiates the rendering process for the selected fractal type.
@@ -178,12 +178,18 @@ void	handle_pixel_julia(t_pixel *pixel, t_fractal *fractal)
 */
 void	fractal_rendering(t_fractal *fractal)
 {
-	/*if (!ft_strcmp(fractal->name, "mandelbrot"))*/
-		/*pixel_loop('M', fractal);*/
-	/*else if (!ft_strcmp(fractal->name, "julia"))*/
-		/*pixel_loop('J', fractal);*/
-	if (init_threads(fractal) == FALSE)
-		return ;
+	if (fractal->multithread == FALSE)
+	{
+		if (!ft_strcmp(fractal->name, "mandelbrot"))
+			pixel_loop('M', fractal);
+		else if (!ft_strcmp(fractal->name, "julia"))
+			pixel_loop('J', fractal);
+	}
+	else
+	{
+		if (init_threads(fractal) == FALSE)
+			return ;
+	}
 	mlx_put_image_to_window(fractal->mlx_ptr, fractal->win_ptr,
 		fractal->img.img_ptr, 0, 0);
 	manage_text(fractal);

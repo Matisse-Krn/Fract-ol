@@ -6,7 +6,7 @@
 /*   By: mkerrien <mkerrien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 03:38:25 by mkerrien          #+#    #+#             */
-/*   Updated: 2025/08/02 09:01:59 by mkerrien         ###   ########.fr       */
+/*   Updated: 2025/08/02 10:09:14 by mkerrien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_fractal
 	char		psy;
 	void		*mlx_ptr;
 	void		*win_ptr;
+	int			multithread;
 	int			max_iterations;
 	int			tick_iterations;
 	int			color;
@@ -118,6 +119,7 @@ void		initialize_image(t_fractal *fractal);
 void		initialize_text_image(t_fractal *fractal);
 
 /*Multithreading init and routine*/
+int			get_multi_thread(void);
 int			init_threads(t_fractal *fractal);
 
 /* Event handling */

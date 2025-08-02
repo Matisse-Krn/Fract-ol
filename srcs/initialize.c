@@ -6,7 +6,7 @@
 /*   By: mkerrien <mkerrien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 03:54:18 by mkerrien          #+#    #+#             */
-/*   Updated: 2025/08/02 09:07:02 by mkerrien         ###   ########.fr       */
+/*   Updated: 2025/08/02 10:08:59 by mkerrien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,11 @@ static void	position_init(t_fractal *fractal)
 void	data_init(t_fractal *fractal)
 {
 	ft_putstr_fd("Initialize all necessary data...\n", 1);
+	fractal->multithread = get_multi_thread();
+	if (fractal->multithread == TRUE)
+		printf("MultiThreading : yes\n");
+	else
+		printf("MultiThreading : no\n");
 	fractal->img.height = 960;
 	fractal->img.width = 960;
 	fractal->escape_value = pow(2, 2);
