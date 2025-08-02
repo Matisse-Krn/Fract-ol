@@ -6,7 +6,7 @@
 /*   By: mkerrien <mkerrien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 03:38:25 by mkerrien          #+#    #+#             */
-/*   Updated: 2025/08/02 10:09:14 by mkerrien         ###   ########.fr       */
+/*   Updated: 2025/08/02 11:17:01 by mkerrien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,25 @@
 # include <float.h>
 
 # include <pthread.h>
+
+# define RST "\001\033[0m\002"
+# define RED "\001\033[0;31m\002"
+# define GREEN "\001\033[0;32m\002"
+# define YELLOW "\001\033[0;33m\002"
+# define BLUE "\001\033[0;34m\002"
+# define MAGENTA "\001\033[0;35m\002"
+# define CYAN "\001\033[0;36m\002"
+# define WHITE "\001\033[0;37m\002"
+# define ORANGE "\001\033[0;91m\002"
+# define PURPLE "\001\033[0;95m\002"
+# define DARK_ORANGE "\001\033[0;33m\002"
+# define PINK "\001\033[0;95m\002"
+# define TEAL "\001\033[0;96m\002"
+# define GRAY "\001\033[0;90m\002"
+
+# define BOLD      "\001\033[1m\002"
+# define ITALIC    "\001\033[3m\002"
+# define UNDERLINE "\001\033[4m\002"
 
 typedef struct s_complex_nb
 {

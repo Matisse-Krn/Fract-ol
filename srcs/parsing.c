@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                    :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkerrien <mkerrien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 19:17:49 by mkerrien          #+#    #+#             */
-/*   Updated: 2025/02/09 22:02:41 by mkerrien         ###   ########.fr       */
+/*   Updated: 2025/08/02 11:42:01 by mkerrien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ static int	is_valid_number(const char *str)
 */
 void	init_mandelbrot(char **argv, t_fractal *fractal)
 {
-	ft_putstr_fd("Fractal type identified !\n", 1);
-	ft_putstr_fd("Launching the program...\n", 1);
+	ft_putstr_fd("🦠 Mandelbrot fractal identified ! 🦠\n", 1);
+	ft_putstr_fd("\t⚙️  Launching the program... ⚙️\n", 1);
 	ft_bzero(fractal, sizeof(t_fractal));
 	fractal->name = argv[1];
 	data_init(fractal);
@@ -79,18 +79,18 @@ void	init_mandelbrot(char **argv, t_fractal *fractal)
 */
 void	init_julia(char **argv, t_fractal *fractal)
 {
-	ft_putstr_fd("Fractal type identified !\n", 1);
-	ft_putstr_fd("Launching the program...\n", 1);
+	ft_putstr_fd("🦠 Julia fractal identified ! 🦠\n", 1);
+	ft_putstr_fd("\t⚙️  Launching the program... ⚙️ \n", 1);
 	ft_bzero(fractal, sizeof(t_fractal));
 	fractal->name = argv[1];
 	if (is_valid_number(argv[2]))
 	{
-		ft_printf("\n'%s' is not a valid input...\nExit program\n\n", argv[2]);
+		ft_printf("\n\t\t⚠️  '%s' is not a valid input... ⚠️\n👋 Exit program 👋\n\n", argv[2]);
 		exit(EXIT_FAILURE);
 	}
 	else if (is_valid_number(argv[3]))
 	{
-		ft_printf("\n'%s' is not a valid input...\nExit program\n\n", argv[3]);
+		ft_printf("\n\t\t⚠️  '%s' is not a valid input... ⚠️\n👋 Exit program 👋\n\n", argv[3]);
 		exit(EXIT_FAILURE);
 	}
 	fractal->c.real = ft_atod(argv[2]);
@@ -115,11 +115,12 @@ void	init_julia(char **argv, t_fractal *fractal)
 */
 void	init_sierpinski(char **argv, t_fractal *fractal)
 {
-	ft_putstr_fd("Fractal type identified !\n", 1);
-	ft_putstr_fd("Launching the program...\n", 1);
+	ft_putstr_fd("🦠 Sierpinski fractal identified ! 🦠\n", 1);
+	ft_putstr_fd("\t⚙️  Launching the program... ⚙️ \n", 1);
 	ft_bzero(fractal, sizeof(t_fractal));
 	fractal->name = argv[1];
 	data_init(fractal);
+	data_init_sierpinski(fractal);
 	ft_printf("Max depth : %d\nDefault depth : %d\n",
 		fractal->max_depth, fractal->depth);
 	initialize_window(fractal);
@@ -139,16 +140,17 @@ void	init_sierpinski(char **argv, t_fractal *fractal)
 */
 void	init_sierpinski_depth(char **argv, t_fractal *fractal)
 {
-	ft_putstr_fd("Fractal type identified !\n", 1);
-	ft_putstr_fd("Launching the program...\n", 1);
+	ft_putstr_fd("🦠 Fractal type identified ! 🦠\n", 1);
+	ft_putstr_fd("⚙️  Launching the program... ⚙️ \n", 1);
 	ft_bzero(fractal, sizeof(t_fractal));
 	fractal->name = argv[1];
 	data_init(fractal);
+	printf("Max depth = %d\n", fractal->max_depth);
 	if (ft_strlen(argv[2]) == 1 && *argv[2] >= '0' && *argv[2] <= \
 		fractal->max_depth + '0' && fractal->max_depth <= 9)
 	{
 		fractal->depth = ft_atoi(argv[2]);
-		ft_printf("Max depth : %d\nChoosen depth : %d\n", fractal->max_depth, \
+		ft_printf("🗔  Max depth : %d 🗔\n🕳️  Choosen depth : %d 🕳️\n", fractal->max_depth, \
 		fractal->depth);
 	}
 	else

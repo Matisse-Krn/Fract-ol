@@ -6,7 +6,7 @@
 /*   By: mkerrien <mkerrien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 08:19:55 by mkerrien          #+#    #+#             */
-/*   Updated: 2025/08/02 10:16:48 by mkerrien         ###   ########.fr       */
+/*   Updated: 2025/08/02 11:37:53 by mkerrien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,11 @@
 int	get_multi_thread(void)
 {
 	int		ret;
-	char	buf[4];
+	char	buf[2];
 
 	ret = FALSE;
-	printf("Activate multi-threading ? (for Mandelbrot and Julia only)"
-			"\n(Yes/No) : ");
-	while (read(0, buf, 3) > 0)
+	write(1, "\nActivate multi-threading ? Yes/No :  ", 38);
+	while (read(0, buf, 1) > 0)
 	{
 		if (!ft_strncmp(buf, "y", 1) || !ft_strncmp(buf, "Y", 1))
 			ret = TRUE;
@@ -28,13 +27,13 @@ int	get_multi_thread(void)
 			break ;
 		else
 		{
-			printf("Retry :\n\ny/Y/yes/YES  or  n/N/no/No\n");
-			printf("Activate multi-threading ? (for Mandelbrot and Julia only)"
-		"\n(Yes/No) : ");
+			write(1, "Retry :\n\ny/Y/yes/YES  or  n/N/no/No\n", 36);
+			write(1, "\nActivate multi-threading ? Yes/No : ", 38);
 			continue ;
 		}
 		break ;
 	}
+	write(1, "\n", 1);
 	return (ret);
 }
 
