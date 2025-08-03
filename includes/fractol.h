@@ -122,10 +122,12 @@ char		*if_malloc_error(char *s);
 /* Program initialization */
 void		data_init(t_fractal *fractal);
 void		data_init_sierpinski(t_fractal *fractal);
-void		initialize_window(t_fractal *fractal);
+void		invalid_depth(char **argv, t_fractal *fractal);
+void		initialize_window(t_fractal *f);
 void		initialize_image(t_fractal *fractal);
 void		initialize_text_image(t_fractal *fractal);
-
+void		init_mlx(t_fractal *fractal);
+void		print_launch_messages(char type);
 /*Multithreading init and routine*/
 int			get_multi_thread(void);
 int			init_threads(t_fractal *fractal);

@@ -45,14 +45,11 @@ static int	is_valid_number(const char *str)
 */
 void	init_mandelbrot(char **argv, t_fractal *fractal)
 {
-	ft_putstr_fd("🦠 Mandelbrot fractal identified ! 🦠\n", 1);
-	ft_putstr_fd("\t⚙️  Launching the program... ⚙️\n", 1);
+	print_launch_messages('M');
 	ft_bzero(fractal, sizeof(t_fractal));
 	fractal->name = argv[1];
 	data_init(fractal);
-	initialize_window(fractal);
-	initialize_image(fractal);
-	initialize_events(fractal);
+	init_mlx(fractal);
 	fractal_rendering(fractal);
 	mlx_loop(fractal->mlx_ptr);
 }
@@ -67,18 +64,19 @@ void	init_mandelbrot(char **argv, t_fractal *fractal)
 */
 void	init_julia(char **argv, t_fractal *fractal)
 {
-	ft_putstr_fd("🦠 Julia fractal identified ! 🦠\n", 1);
-	ft_putstr_fd("\t⚙️  Launching the program... ⚙️ \n", 1);
+	print_launch_messages('J');
 	ft_bzero(fractal, sizeof(t_fractal));
 	fractal->name = argv[1];
 	if (is_valid_number(argv[2]))
 	{
-		ft_printf("\n\t\t⚠️  '%s' is not a valid input... ⚠️\n👋 Exit program 👋\n\n", argv[2]);
+		ft_printf("\n\t\t⚠️  '%s' is not a valid input... ⚠️\n"
+			"👋 Exit program 👋\n\n", argv[2]);
 		exit(EXIT_FAILURE);
 	}
 	else if (is_valid_number(argv[3]))
 	{
-		ft_printf("\n\t\t⚠️  '%s' is not a valid input... ⚠️\n👋 Exit program 👋\n\n", argv[3]);
+		ft_printf("\n\t\t⚠️  '%s' is not a valid input... ⚠️\n"
+			"👋 Exit program 👋\n\n", argv[3]);
 		exit(EXIT_FAILURE);
 	}
 	fractal->c.real = ft_atod(argv[2]);
@@ -86,9 +84,7 @@ void	init_julia(char **argv, t_fractal *fractal)
 	fractal->init_c_real = argv[2];
 	fractal->init_c_imag = argv[3];
 	data_init(fractal);
-	initialize_window(fractal);
-	initialize_image(fractal);
-	initialize_events(fractal);
+	init_mlx(fractal);
 	fractal_rendering(fractal);
 	mlx_loop(fractal->mlx_ptr);
 }
@@ -103,23 +99,21 @@ void	init_julia(char **argv, t_fractal *fractal)
 */
 void	init_sierpinski(char **argv, t_fractal *fractal)
 {
-	ft_putstr_fd("🦠 Sierpinski fractal identified ! 🦠\n", 1);
-	ft_putstr_fd("\t⚙️  Launching the program... ⚙️ \n", 1);
+	print_launch_messages('S');
 	ft_bzero(fractal, sizeof(t_fractal));
 	fractal->name = argv[1];
 	data_init(fractal);
 	fractal->mlx_ptr = mlx_init();
 	if (!fractal->mlx_ptr)
 		malloc_error();
-	mlx_get_screen_size(fractal->mlx_ptr, &fractal->img.width, &fractal->img.height);
+	mlx_get_screen_size(fractal->mlx_ptr, &fractal->img.width,
+		&fractal->img.height);
 	fractal->img.width = fractal->img.width - (fractal->img.width / 15);
 	fractal->img.height = fractal->img.height - (fractal->img.height / 10);
 	data_init_sierpinski(fractal);
-	ft_printf("Max depth : %d\nDefault depth : %d\n",
+	ft_printf("🗔  Max depth : %d 🗔\n🕳️  Default depth : %d 🕳️\n",
 		fractal->max_depth, fractal->depth);
-	initialize_window(fractal);
-	initialize_image(fractal);
-	initialize_events(fractal);
+	init_mlx(fractal);
 	rendering_sierpinski(fractal);
 	mlx_loop(fractal->mlx_ptr);
 }
@@ -134,28 +128,29 @@ void	init_sierpinski(char **argv, t_fractal *fractal)
 */
 void	init_sierpinski_depth(char **argv, t_fractal *fractal)
 {
-	ft_putstr_fd("🦠 Fractal type identified ! 🦠\n", 1);
-	ft_putstr_fd("⚙️  Launching the program... ⚙️ \n", 1);
+	print_launch_messages('S');
 	ft_bzero(fractal, sizeof(t_fractal));
 	fractal->name = argv[1];
 	data_init(fractal);
+	fractal->mlx_ptr = mlx_init();
+	if (!fractal->mlx_ptr)
+		malloc_error();
+	mlx_get_screen_size(fractal->mlx_ptr, &fractal->img.width,
+		&fractal->img.height);
+	fractal->img.width = fractal->img.width - (fractal->img.width / 15);
+	fractal->img.height = fractal->img.height - (fractal->img.height / 10);
+	data_init_sierpinski(fractal);
 	printf("Max depth = %d\n", fractal->max_depth);
 	if (ft_strlen(argv[2]) == 1 && *argv[2] >= '0' && *argv[2] <= \
 		fractal->max_depth + '0' && fractal->max_depth <= 9)
 	{
 		fractal->depth = ft_atoi(argv[2]);
-		ft_printf("🗔  Max depth : %d 🗔\n🕳️  Choosen depth : %d 🕳️\n", fractal->max_depth, \
-		fractal->depth);
+		ft_printf("🗔  Max depth : %d 🗔\n🕳️  Choosen depth : %d 🕳️\n",
+			fractal->max_depth, fractal->depth);
 	}
 	else
-	{
-		ft_printf("%s is an invalid depth value for Sierpinski Carpet...\n\
-Allowed values in a window of this size : [0-%d]\nValue applied to \
-depth : %d\n", argv[2], fractal->max_depth, fractal->depth);
-	}
-	initialize_window(fractal);
-	initialize_image(fractal);
-	initialize_events(fractal);
+		invalid_depth(argv, fractal);
+	init_mlx(fractal);
 	rendering_sierpinski(fractal);
 	mlx_loop(fractal->mlx_ptr);
 }

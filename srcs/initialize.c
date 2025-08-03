@@ -73,8 +73,6 @@ void	data_init(t_fractal *fractal)
 		printf("🏁 [MultiThreading=yes] 🏁\n");
 	else
 		printf("🏁 [MultiThreading=no] 🏁\n");
-	/*fractal->img.height -= 960;*/
-	/*fractal->img.width -= 960;*/
 	fractal->escape_value = pow(2, 2);
 	fractal->max_iterations = 1000;
 	fractal->tick_iterations = 10;
@@ -139,30 +137,30 @@ void	initialize_events(t_fractal *fractal)
  * - mlx_ptr: MiniLibX connection instance, initialized via mlx_init().
  * - win_ptr: MiniLibX window instance, created with mlx_new_window().
 */
-void	initialize_window(t_fractal *fractal)
+void	initialize_window(t_fractal *f)
 {
 	char	*name_formatted;
 
-	if (ft_strcmp(fractal->name, "sierpinski"))
+	if (ft_strcmp(f->name, "sierpinski"))
 	{
-		fractal->mlx_ptr = mlx_init();
-		if (!fractal->mlx_ptr)
+		f->mlx_ptr = mlx_init();
+		if (!f->mlx_ptr)
 			malloc_error();
-		mlx_get_screen_size(fractal->mlx_ptr, &fractal->img.width, &fractal->img.height);
-		fractal->img.width = fractal->img.width - (fractal->img.width / 15);
-		fractal->img.height = fractal->img.height - (fractal->img.height / 10);
+		mlx_get_screen_size(f->mlx_ptr, &f->img.width, &f->img.height);
+		f->img.width = f->img.width - (f->img.width / 15);
+		f->img.height = f->img.height - (f->img.height / 10);
 	}
-	fractal->aspect_ratio = (double)fractal->img.width / (double)fractal->img.height;
-	name_formatted = get_window_name(fractal);
+	f->aspect_ratio = (double)f->img.width / (double)f->img.height;
+	name_formatted = get_window_name(f);
 	if (!name_formatted)
 		malloc_error();
-	fractal->win_ptr = mlx_new_window(fractal->mlx_ptr, fractal->img.width,
-			fractal->img.height, name_formatted);
+	f->win_ptr = mlx_new_window(f->mlx_ptr, f->img.width,
+			f->img.height, name_formatted);
 	free(name_formatted);
-	if (!fractal->win_ptr)
+	if (!f->win_ptr)
 	{
-		mlx_destroy_display(fractal->mlx_ptr);
-		free(fractal->mlx_ptr);
+		mlx_destroy_display(f->mlx_ptr);
+		free(f->mlx_ptr);
 		malloc_error();
 	}
 }

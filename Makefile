@@ -11,7 +11,8 @@ SRC				= srcs/fractol.c srcs/maths_functions.c srcs/rendering.c \
 				  srcs/display_functions.c srcs/change_colors.c srcs/initialize.c \
 				  srcs/handle_hooks2.c srcs/parsing.c srcs/sierpinski_bonus.c \
 				  srcs/sierpinski_utils_bonus.c \
-				  srcs/multithreading.c
+				  srcs/multithreading.c \
+				  srcs/init_utils.c
 
 INCLUDE			= -I/usr/include -Ilibft -Imlx_linux -Iincludes
 

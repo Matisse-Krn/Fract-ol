@@ -67,7 +67,7 @@ t_complex	julia_init_complex(t_pixel *pixel, t_fractal *fractal)
 {
 	t_complex	z;
 	double		x_range;
-	
+
 	x_range = fractal->zoom_rate * fractal->aspect_ratio;
 	z.real = scale_map(pixel->x, -fractal->zoom_rate, fractal->zoom_rate,
 			fractal->img.width) + fractal->shift_x;
