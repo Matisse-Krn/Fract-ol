@@ -2,11 +2,9 @@
 
 void	displacement(char direction, t_fractal *fractal)
 {
-	double	aspect_ratio;
 	double	x_range;
 
-	aspect_ratio = (double)fractal->img.width / (double)fractal->img.height;
-	x_range = fractal->zoom_rate * aspect_ratio;
+	x_range = fractal->zoom_rate * fractal->aspect_ratio;
 	if (direction == 'L')
 	{
 		ft_putstr_fd("Going left\n", 1);
@@ -41,11 +39,9 @@ void	displacement(char direction, t_fractal *fractal)
 */
 void	apply_zoom(t_fractal *fractal, int x, int y, double factor)
 {
-	double	aspect_ratio;
 	double	x_range;
 
-	aspect_ratio = (double)fractal->img.width / (double)fractal->img.height;
-	x_range = fractal->zoom_rate * aspect_ratio;
+	x_range = fractal->zoom_rate * fractal->aspect_ratio;
 	fractal->shift_x += scale_map(x, -x_range, x_range,
 			fractal->img.width) - scale_map(x, -x_range * factor,
 			x_range * factor, fractal->img.width);

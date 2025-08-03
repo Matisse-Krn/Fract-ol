@@ -108,6 +108,12 @@ void	init_sierpinski(char **argv, t_fractal *fractal)
 	ft_bzero(fractal, sizeof(t_fractal));
 	fractal->name = argv[1];
 	data_init(fractal);
+	fractal->mlx_ptr = mlx_init();
+	if (!fractal->mlx_ptr)
+		malloc_error();
+	mlx_get_screen_size(fractal->mlx_ptr, &fractal->img.width, &fractal->img.height);
+	fractal->img.width = fractal->img.width - (fractal->img.width / 15);
+	fractal->img.height = fractal->img.height - (fractal->img.height / 10);
 	data_init_sierpinski(fractal);
 	ft_printf("Max depth : %d\nDefault depth : %d\n",
 		fractal->max_depth, fractal->depth);

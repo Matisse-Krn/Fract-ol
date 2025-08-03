@@ -143,14 +143,16 @@ void	initialize_window(t_fractal *fractal)
 {
 	char	*name_formatted;
 
-	fractal->mlx_ptr = mlx_init();
-	if (!fractal->mlx_ptr)
-		malloc_error();
-	mlx_get_screen_size(fractal->mlx_ptr, &fractal->img.width, &fractal->img.height);
-	fractal->img.width = fractal->img.width - (fractal->img.width / 15);
-	fractal->img.height = fractal->img.height - (fractal->img.height / 10);
-	/*fractal->img.width = 960;*/
-	/*fractal->img.height = 960;*/
+	if (ft_strcmp(fractal->name, "sierpinski"))
+	{
+		fractal->mlx_ptr = mlx_init();
+		if (!fractal->mlx_ptr)
+			malloc_error();
+		mlx_get_screen_size(fractal->mlx_ptr, &fractal->img.width, &fractal->img.height);
+		fractal->img.width = fractal->img.width - (fractal->img.width / 15);
+		fractal->img.height = fractal->img.height - (fractal->img.height / 10);
+	}
+	fractal->aspect_ratio = (double)fractal->img.width / (double)fractal->img.height;
 	name_formatted = get_window_name(fractal);
 	if (!name_formatted)
 		malloc_error();

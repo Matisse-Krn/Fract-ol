@@ -56,13 +56,11 @@ void	handle_pixel_mandelbrot(t_pixel *pixel, t_fractal *fractal)
 	t_complex	z;
 	t_complex	z_squared;
 	t_complex	c;
-	double		aspect_ratio;
 	double		x_range;
 
 	z.real = 0;
 	z.imag = 0;
-	aspect_ratio = (double)fractal->img.width / (double)fractal->img.height;
-	x_range = fractal->zoom_rate * aspect_ratio;
+	x_range = fractal->zoom_rate * fractal->aspect_ratio;
 	c.real = scale_map(pixel->x, -x_range, x_range,
 			fractal->img.width) + fractal->shift_x;
 	c.imag = scale_map(pixel->y, fractal->zoom_rate, -fractal->zoom_rate,

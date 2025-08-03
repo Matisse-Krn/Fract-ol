@@ -65,6 +65,7 @@ typedef struct s_fractal
 	int			depth;
 	int			max_depth;
 	int			size;
+	double		aspect_ratio;
 	double		escape_value;
 	double		shift_x;
 	double		shift_y;
