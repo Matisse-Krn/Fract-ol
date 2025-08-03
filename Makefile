@@ -5,14 +5,13 @@ NAME			= fractol
 LIBPATH 		= -Lmlx_linux -Llibft -L/usr/lib
 LIBNAME 		= -lmlx_Linux -lft -lz -lX11 -lXext -lm
 
-SRC				= srcs/fractol.c srcs/maths_functions.c srcs/rendering.c \
+SRC				= srcs/maths_functions.c srcs/rendering.c srcs/errors.c \
 				  srcs/main.c srcs/handle_hooks.c srcs/strings_utils.c \
 				  srcs/text_box.c srcs/strings_utils2.c srcs/manipulate_colors.c \
 				  srcs/display_functions.c srcs/change_colors.c srcs/initialize.c \
 				  srcs/handle_hooks2.c srcs/parsing.c srcs/sierpinski_bonus.c \
-				  srcs/sierpinski_utils_bonus.c \
-				  srcs/multithreading.c \
-				  srcs/init_utils.c
+				  srcs/sierpinski_utils_bonus.c srcs/multithreading.c srcs/init_utils.c \
+				  srcs/screen_utils.c
 
 INCLUDE			= -I/usr/include -Ilibft -Imlx_linux -Iincludes
 

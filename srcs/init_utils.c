@@ -49,7 +49,7 @@ void	is_fullscreen(char **argv, t_fractal *fractal)
 	fractal->fullscreen = FALSE;
 }
 
-void  set_multi_threading(char **argv, t_fractal *fractal)
+void	set_multi_threading(char **argv, t_fractal *fractal)
 {
 	int	i;
 

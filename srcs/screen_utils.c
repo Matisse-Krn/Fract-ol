@@ -17,26 +17,16 @@ void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-/*
- * Handles memory allocation failures by printing an error message
-	and terminating the program.
-*/
-void	malloc_error(void)
+void	set_real_screen_size(t_fractal *f)
 {
-	perror("Malloc ERROR...\n");
-	exit(EXIT_FAILURE);
-}
-
-/*
- * Checks if a memory allocation was successful.
- * If allocation failed, calls malloc_error() to exit the program.
- * 
- * @param s A pointer to the allocated memory.
- * @return Returns the same pointer if allocation was successful.
-*/
-char	*if_malloc_error(char *s)
-{
-	if (!s)
-		malloc_error();
-	return (s);
+	if (f->fullscreen == TRUE)
+	{
+		f->img.height = f->img.full_height - (f->img.full_height / 21);
+		f->img.width = f->img.full_width;
+	}
+	else
+	{
+		f->img.height = 960;
+		f->img.width = 960;
+	}
 }

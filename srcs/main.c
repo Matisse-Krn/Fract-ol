@@ -85,14 +85,21 @@ int	main(int argc, char **argv)
 {
 	t_fractal	fractal;
 
-	if (argc < 1)
+	if (argc < 2)
 		return (1);
 	ft_bzero(&fractal, sizeof(t_fractal));
 	ft_str_tolower(argv[1]);
 	if (parse_input(argc, argv, &fractal))
 	{
-		ft_putstr_fd(BOLD RED UNDERLINE"Usage :"RST"\n\n\t\t./fractol mandelbrot [-f] [-mt=no]\n"
-"\t\t./frac"RST"ol julia <real> <imaginary> [-f] [-mt=no]\n\t\t./fractol sierpinski [-f] [-mt=no]\n\t\t./fractol sierpinski <depth> [-f] [-mt=no]\n\n"BOLD RED UNDERLINE"Parameters :"RST"\n\n\t"BOLD"'-mt=no'"RST" =	Disable multi-threading\n\t"BOLD"'-f'"RST" =		Fullscreen (slower but beautifull)\n\n", 1);
+		ft_putstr_fd(BOLD RED UNDERLINE"Usage :"RST"\n\n", 2);
+		ft_putstr_fd("\t\t./fractol mandelbrot [-f] [-mt=no]\n", 2);
+		ft_putstr_fd("\t\t./fractol julia <real> <imaginary> [-f] [-mt=no]\n", 2);
+		ft_putstr_fd("\t\t./fractol sierpinski [-f] [-mt=no]\n", 2);
+		ft_putstr_fd("\t\t./fractol sierpinski <depth> [-f] [-mt=no]\n\n", 2);
+		ft_putstr_fd(BOLD RED UNDERLINE"Parameters :"RST"\n\n", 2);
+		ft_putstr_fd("\t"BOLD"'-mt=no'"RST" =	Disable multi-threading\n", 2);
+		ft_putstr_fd("\t"BOLD"'-f'"RST" =		", 2);
+		ft_putstr_fd("Fullscreen (slower but beautifull)\n\n", 2);
 		return (1);
 	}
 	return (0);

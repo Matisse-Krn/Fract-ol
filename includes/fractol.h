@@ -121,6 +121,7 @@ typedef struct s_thread_arg
 /* Memory and error handling */
 void		malloc_error(void);
 char		*if_malloc_error(char *s);
+void		check_valid_input_numbers(char **argv);
 
 /* Program initialization */
 void		data_init(t_fractal *fractal);
@@ -135,7 +136,8 @@ void		init_mlx(t_fractal *fractal);
 void		print_launch_messages(char type);
 void		is_fullscreen(char **argv, t_fractal *fractal);
 void		set_multi_threading(char **argv, t_fractal *fractal);
-/*	Multithreading init and routine */
+
+/*	Multi-threading init and routine */
 int			get_multi_thread(void);
 int			init_threads(t_fractal *fractal);
 
@@ -184,6 +186,7 @@ void		put_max_iterations(t_fractal *fractal);
 void		print_shortcuts(t_fractal *fractal);
 void		draw_text_boxes(t_fractal *fractal);
 void		draw_a_box(t_box *box, t_fractal *fractal);
+void		set_real_screen_size(t_fractal *f);
 
 /* Mathematical utilities and complex number operations */
 double		scale_map(double nb, double new_min, \

@@ -11,7 +11,6 @@
 */
 int	is_valid_number(const char *str)
 {
-	/*int	has_digits;*/
 	int	has_dot;
 
 	if (!str)
@@ -21,12 +20,10 @@ int	is_valid_number(const char *str)
 		str++;
 	if (*str == '-' || *str == '+')
 		str++;
-	/*has_digits = 0;*/
 	has_dot = 0;
 	while (*str)
 	{
 		if (*str >= '0' && *str <= '9')
-			/*has_digits = 1;*/
 			;
 		else if (*str == '.' || *str == ',')
 		{
@@ -78,18 +75,7 @@ void	init_julia(char **argv, t_fractal *fractal)
 		malloc_error();
 	print_launch_messages('J');
 	is_fullscreen(argv, fractal);
-	if (!is_valid_number(argv[2]))
-	{
-		ft_printf("\n\t\t⚠️  '%s' is not a valid input... ⚠️\n"
-			"👋 Exit program 👋\n\n", argv[2]);
-		exit(EXIT_FAILURE);
-	}
-	else if (!is_valid_number(argv[3]))
-	{
-		ft_printf("\n\t\t⚠️  '%s' is not a valid input... ⚠️\n"
-			"👋 Exit program 👋\n\n", argv[3]);
-		exit(EXIT_FAILURE);
-	}
+	check_valid_input_numbers(argv);
 	fractal->c.real = ft_atod(argv[2]);
 	fractal->c.imag = ft_atod(argv[3]);
 	fractal->init_c_real = argv[2];
@@ -108,33 +94,23 @@ void	init_julia(char **argv, t_fractal *fractal)
  * @param argv The array of command-line arguments.
  * @param fractal A pointer to the fractal structure to store parsed data.
 */
-void	init_sierpinski(char **argv, t_fractal *fractal)
+void	init_sierpinski(char **argv, t_fractal *f)
 {
-	fractal->name = argv[1];
-	fractal->mlx_ptr = mlx_init();
-	if (!fractal->mlx_ptr)
+	f->name = argv[1];
+	f->mlx_ptr = mlx_init();
+	if (!f->mlx_ptr)
 		malloc_error();
 	print_launch_messages('S');
-	is_fullscreen(argv, fractal);
-	mlx_get_screen_size(fractal->mlx_ptr, &fractal->img.full_width,
-					 &fractal->img.full_height);
-	if (fractal->fullscreen == TRUE)
-	{
-		fractal->img.height = fractal->img.full_height - (fractal->img.full_height / 21);
-		fractal->img.width = fractal->img.full_width/* - (fractal->img.width / 10)*/;
-	}
-	else
-	{
-		fractal->img.height = 960;
-		fractal->img.width = 960;
-	}
-	data_init(fractal);
-	data_init_sierpinski(fractal);
+	is_fullscreen(argv, f);
+	mlx_get_screen_size(f->mlx_ptr, &f->img.full_width, &f->img.full_height);
+	set_real_screen_size(f);
+	data_init(f);
+	data_init_sierpinski(f);
 	ft_printf("🗔  Max depth : %d 🗔\n🕳️  Default depth : %d 🕳️\n",
-		fractal->max_depth, fractal->depth);
-	init_mlx(fractal);
-	rendering_sierpinski(fractal);
-	mlx_loop(fractal->mlx_ptr);
+		f->max_depth, f->depth);
+	init_mlx(f);
+	rendering_sierpinski(f);
+	mlx_loop(f->mlx_ptr);
 }
 
 /*
@@ -145,39 +121,29 @@ void	init_sierpinski(char **argv, t_fractal *fractal)
  * @param argv The array of command-line arguments.
  * @param fractal A pointer to the fractal structure to store parsed data.
 */
-void	init_sierpinski_depth(char **argv, t_fractal *fractal)
+void	init_sierpinski_depth(char **argv, t_fractal *f)
 {
-	fractal->name = argv[1];
-	is_fullscreen(argv, fractal);
-	data_init(fractal);
-	fractal->mlx_ptr = mlx_init();
-	if (!fractal->mlx_ptr)
+	f->name = argv[1];
+	is_fullscreen(argv, f);
+	data_init(f);
+	f->mlx_ptr = mlx_init();
+	if (!f->mlx_ptr)
 		malloc_error();
-	mlx_get_screen_size(fractal->mlx_ptr, &fractal->img.full_width,
-					 &fractal->img.full_height);
-	if (fractal->fullscreen == TRUE)
-	{
-		fractal->img.height = fractal->img.full_height - (fractal->img.full_height / 21);
-		fractal->img.width = fractal->img.full_width/* - (fractal->img.width / 10)*/;
-	}
-	else
-	{
-		fractal->img.height = 960;
-		fractal->img.width = 960;
-	}
+	mlx_get_screen_size(f->mlx_ptr, &f->img.full_width, &f->img.full_height);
+	set_real_screen_size(f);
 	print_launch_messages('S');
-	data_init_sierpinski(fractal);
-	printf("Max depth = %d\n", fractal->max_depth);
+	data_init_sierpinski(f);
+	printf("Max depth = %d\n", f->max_depth);
 	if (ft_strlen(argv[2]) == 1 && *argv[2] >= '0' && *argv[2] <= \
-		fractal->max_depth + '0' && fractal->max_depth <= 9)
+		f->max_depth + '0' && f->max_depth <= 9)
 	{
-		fractal->depth = ft_atoi(argv[2]);
+		f->depth = ft_atoi(argv[2]);
 		ft_printf("🗔  Max depth : %d 🗔\n🕳️  Choosen depth : %d 🕳️\n",
-			fractal->max_depth, fractal->depth);
+			f->max_depth, f->depth);
 	}
 	else
-		invalid_depth(argv, fractal);
-	init_mlx(fractal);
-	rendering_sierpinski(fractal);
-	mlx_loop(fractal->mlx_ptr);
+		invalid_depth(argv, f);
+	init_mlx(f);
+	rendering_sierpinski(f);
+	mlx_loop(f->mlx_ptr);
 }
