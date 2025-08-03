@@ -168,7 +168,7 @@ static void	pixel_loop(char type, t_fractal *fractal)
 */
 void	fractal_rendering(t_fractal *fractal)
 {
-	if (fractal->multithread == FALSE)
+	if (fractal->mt == FALSE)
 	{
 		if (!ft_strcmp(fractal->name, "mandelbrot"))
 			pixel_loop('M', fractal);

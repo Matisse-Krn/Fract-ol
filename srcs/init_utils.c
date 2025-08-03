@@ -48,3 +48,16 @@ void	is_fullscreen(char **argv, t_fractal *fractal)
 	}
 	fractal->fullscreen = FALSE;
 }
+
+void  set_multi_threading(char **argv, t_fractal *fractal)
+{
+	int	i;
+
+	i = -1;
+	fractal->mt = TRUE;
+	while (argv[++i])
+	{
+		if (!ft_strncmp(argv[i], "-mt=no", 6))
+			fractal->mt = FALSE;
+	}
+}

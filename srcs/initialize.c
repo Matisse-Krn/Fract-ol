@@ -68,9 +68,7 @@ static void	position_init(t_fractal *fractal)
 void	data_init(t_fractal *fractal)
 {
 	ft_putstr_fd("\t\t💭 Initialize all necessary data... 💭\n", 1);
-	if (ft_strcmp(fractal->name, "sierpinski"))
-		fractal->multithread = get_multi_thread();
-	if (fractal->multithread == TRUE)
+	if (fractal->mt == TRUE)
 		printf("🏁 [MultiThreading=yes] 🏁\n");
 	else
 		printf("🏁 [MultiThreading=no] 🏁\n");

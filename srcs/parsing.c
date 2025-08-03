@@ -50,12 +50,11 @@ int	is_valid_number(const char *str)
 */
 void	init_mandelbrot(char **argv, t_fractal *fractal)
 {
-	print_launch_messages('M');
-	ft_bzero(fractal, sizeof(t_fractal));
 	fractal->name = argv[1];
 	fractal->mlx_ptr = mlx_init();
 	if (!fractal->mlx_ptr)
 		malloc_error();
+	print_launch_messages('M');
 	is_fullscreen(argv, fractal);
 	data_init(fractal);
 	init_mlx(fractal);
@@ -73,12 +72,11 @@ void	init_mandelbrot(char **argv, t_fractal *fractal)
 */
 void	init_julia(char **argv, t_fractal *fractal)
 {
-	print_launch_messages('J');
-	ft_bzero(fractal, sizeof(t_fractal));
 	fractal->name = argv[1];
 	fractal->mlx_ptr = mlx_init();
 	if (!fractal->mlx_ptr)
 		malloc_error();
+	print_launch_messages('J');
 	is_fullscreen(argv, fractal);
 	if (!is_valid_number(argv[2]))
 	{
@@ -112,12 +110,11 @@ void	init_julia(char **argv, t_fractal *fractal)
 */
 void	init_sierpinski(char **argv, t_fractal *fractal)
 {
-	print_launch_messages('S');
-	ft_bzero(fractal, sizeof(t_fractal));
 	fractal->name = argv[1];
 	fractal->mlx_ptr = mlx_init();
 	if (!fractal->mlx_ptr)
 		malloc_error();
+	print_launch_messages('S');
 	is_fullscreen(argv, fractal);
 	mlx_get_screen_size(fractal->mlx_ptr, &fractal->img.full_width,
 					 &fractal->img.full_height);
@@ -150,8 +147,6 @@ void	init_sierpinski(char **argv, t_fractal *fractal)
 */
 void	init_sierpinski_depth(char **argv, t_fractal *fractal)
 {
-	print_launch_messages('S');
-	ft_bzero(fractal, sizeof(t_fractal));
 	fractal->name = argv[1];
 	is_fullscreen(argv, fractal);
 	data_init(fractal);
@@ -170,6 +165,7 @@ void	init_sierpinski_depth(char **argv, t_fractal *fractal)
 		fractal->img.height = 960;
 		fractal->img.width = 960;
 	}
+	print_launch_messages('S');
 	data_init_sierpinski(fractal);
 	printf("Max depth = %d\n", fractal->max_depth);
 	if (ft_strlen(argv[2]) == 1 && *argv[2] >= '0' && *argv[2] <= \

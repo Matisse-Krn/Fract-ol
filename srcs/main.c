@@ -58,6 +58,7 @@
 static int	parse_input(int argc, char **argv, t_fractal *fractal)
 {
 	(void)argc;
+	set_multi_threading(argv, fractal);
 	if (!ft_strcmp(argv[1], "mandelbrot"))
 		init_mandelbrot(argv, fractal);
 	else if (!ft_strcmp(argv[1], "julia"))
@@ -84,12 +85,14 @@ int	main(int argc, char **argv)
 {
 	t_fractal	fractal;
 
+	if (argc < 1)
+		return (1);
+	ft_bzero(&fractal, sizeof(t_fractal));
 	ft_str_tolower(argv[1]);
 	if (parse_input(argc, argv, &fractal))
 	{
-		ft_putstr_fd("Usage :\n\n\t'./fractol mandelbrot'\n\
-\t'./fractol julia <real> <imaginary>'\n\t'./fractol sierpinski'\n\t\
-'./fractol sierpinski <depth>'\n\n", 1);
+		ft_putstr_fd(BOLD RED UNDERLINE"Usage :"RST"\n\n\t\t./fractol mandelbrot [-f] [-mt=no]\n"
+"\t\t./frac"RST"ol julia <real> <imaginary> [-f] [-mt=no]\n\t\t./fractol sierpinski [-f] [-mt=no]\n\t\t./fractol sierpinski <depth> [-f] [-mt=no]\n\n"BOLD RED UNDERLINE"Parameters :"RST"\n\n\t"BOLD"'-mt=no'"RST" =	Disable multi-threading\n\t"BOLD"'-f'"RST" =		Fullscreen (slower but beautifull)\n\n", 1);
 		return (1);
 	}
 	return (0);

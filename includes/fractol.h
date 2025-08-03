@@ -60,7 +60,6 @@ typedef struct s_fractal
 	char		psy;
 	void		*mlx_ptr;
 	void		*win_ptr;
-	int			multithread;
 	int			max_iterations;
 	int			tick_iterations;
 	int			color;
@@ -68,6 +67,7 @@ typedef struct s_fractal
 	int			max_depth;
 	int			size;
 	int			fullscreen;
+	int			mt;
 	double		aspect_ratio;
 	double		escape_value;
 	double		shift_x;
@@ -134,6 +134,7 @@ void		initialize_text_image(t_fractal *fractal);
 void		init_mlx(t_fractal *fractal);
 void		print_launch_messages(char type);
 void		is_fullscreen(char **argv, t_fractal *fractal);
+void		set_multi_threading(char **argv, t_fractal *fractal);
 /*	Multithreading init and routine */
 int			get_multi_thread(void);
 int			init_threads(t_fractal *fractal);
