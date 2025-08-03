@@ -147,8 +147,8 @@ void	initialize_window(t_fractal *f)
 		if (!f->mlx_ptr)
 			malloc_error();
 		mlx_get_screen_size(f->mlx_ptr, &f->img.width, &f->img.height);
-		f->img.width = f->img.width - (f->img.width / 15);
-		f->img.height = f->img.height - (f->img.height / 10);
+		/*f->img.width = f->img.width - (f->img.width / 15);*/
+		f->img.height = f->img.height - (f->img.height / 21);
 	}
 	f->aspect_ratio = (double)f->img.width / (double)f->img.height;
 	name_formatted = get_window_name(f);
