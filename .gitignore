@@ -1,8 +1,7 @@
-./fractol
-./*.o
-./*/*.o
-./*.a
-./*/*.a
+fractol
+*.o
+*.a
+mlx_linux/test
 len
 len.c
 a.out
