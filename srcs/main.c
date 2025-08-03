@@ -57,14 +57,15 @@
 */
 static int	parse_input(int argc, char **argv, t_fractal *fractal)
 {
-	if (argc == 2 && !ft_strcmp(argv[1], "mandelbrot"))
+	(void)argc;
+	if (!ft_strcmp(argv[1], "mandelbrot"))
 		init_mandelbrot(argv, fractal);
-	else if (argc == 4 && !ft_strcmp(argv[1], "julia"))
+	else if (!ft_strcmp(argv[1], "julia"))
 		init_julia(argv, fractal);
-	else if (argc == 2 && !ft_strcmp(argv[1], "sierpinski"))
-		init_sierpinski(argv, fractal);
-	else if (argc == 3 && !ft_strcmp(argv[1], "sierpinski"))
+	else if (!ft_strcmp(argv[1], "sierpinski") && is_valid_number(argv[2]))
 		init_sierpinski_depth(argv, fractal);
+	else if (!ft_strcmp(argv[1], "sierpinski"))
+		init_sierpinski(argv, fractal);
 	else
 		return (1);
 	return (0);

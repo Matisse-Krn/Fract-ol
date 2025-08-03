@@ -68,7 +68,8 @@ static void	position_init(t_fractal *fractal)
 void	data_init(t_fractal *fractal)
 {
 	ft_putstr_fd("\t\t💭 Initialize all necessary data... 💭\n", 1);
-	fractal->multithread = get_multi_thread();
+	if (ft_strcmp(fractal->name, "sierpinski"))
+		fractal->multithread = get_multi_thread();
 	if (fractal->multithread == TRUE)
 		printf("🏁 [MultiThreading=yes] 🏁\n");
 	else
@@ -141,14 +142,16 @@ void	initialize_window(t_fractal *f)
 {
 	char	*name_formatted;
 
-	if (ft_strcmp(f->name, "sierpinski"))
+	mlx_get_screen_size(f->mlx_ptr, &f->img.full_width, &f->img.full_height);
+	if (f->fullscreen == TRUE)
 	{
-		f->mlx_ptr = mlx_init();
-		if (!f->mlx_ptr)
-			malloc_error();
-		mlx_get_screen_size(f->mlx_ptr, &f->img.width, &f->img.height);
-		/*f->img.width = f->img.width - (f->img.width / 15);*/
-		f->img.height = f->img.height - (f->img.height / 21);
+		f->img.height = f->img.full_height - (f->img.full_height / 21);
+		f->img.width = f->img.full_width/* - (f->img.width / 10)*/;
+	}
+	else
+	{
+		f->img.height = 960;
+		f->img.width = 960;
 	}
 	f->aspect_ratio = (double)f->img.width / (double)f->img.height;
 	name_formatted = get_window_name(f);

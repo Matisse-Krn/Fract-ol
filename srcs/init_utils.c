@@ -32,3 +32,19 @@ void	print_launch_messages(char type)
 		ft_putstr_fd("\t⚙️  Launching the program... ⚙️ \n", 1);
 	}
 }
+
+void	is_fullscreen(char **argv, t_fractal *fractal)
+{
+	int	i;
+
+	i = -1;
+	while (argv[++i])
+	{
+		if (!ft_strncmp(argv[i], "-f", 2))
+		{
+			fractal->fullscreen = TRUE;
+			return ;
+		}
+	}
+	fractal->fullscreen = FALSE;
+}

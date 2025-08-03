@@ -44,6 +44,8 @@ typedef struct s_image
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		full_width;
+	int		full_height;
 	int		height;
 	int		width;
 }			t_image;
@@ -65,6 +67,7 @@ typedef struct s_fractal
 	int			depth;
 	int			max_depth;
 	int			size;
+	int			fullscreen;
 	double		aspect_ratio;
 	double		escape_value;
 	double		shift_x;
@@ -126,9 +129,12 @@ void		invalid_depth(char **argv, t_fractal *fractal);
 void		initialize_window(t_fractal *f);
 void		initialize_image(t_fractal *fractal);
 void		initialize_text_image(t_fractal *fractal);
+
+/*	Initialization utils */
 void		init_mlx(t_fractal *fractal);
 void		print_launch_messages(char type);
-/*Multithreading init and routine*/
+void		is_fullscreen(char **argv, t_fractal *fractal);
+/*	Multithreading init and routine */
 int			get_multi_thread(void);
 int			init_threads(t_fractal *fractal);
 
@@ -187,6 +193,7 @@ t_complex	square_complex(t_complex z);
 t_complex	julia_init_complex(t_pixel *pixel, t_fractal *fractal);
 
 /* Argument parsing and input handling */
+int			is_valid_number(const char *str);
 void		init_mandelbrot(char **argv, t_fractal *fractal);
 void		init_julia(char **argv, t_fractal *fractal);
 void		init_sierpinski(char **argv, t_fractal *fractal);
