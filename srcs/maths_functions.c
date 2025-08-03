@@ -66,7 +66,11 @@ t_complex	square_complex(t_complex z)
 t_complex	julia_init_complex(t_pixel *pixel, t_fractal *fractal)
 {
 	t_complex	z;
-
+	double		aspect_ratio;
+	double		x_range;
+	
+	aspect_ratio = (double)fractal->img.width / (double)fractal->img.height;
+	x_range = fractal->zoom_rate * aspect_ratio;
 	z.real = scale_map(pixel->x, -fractal->zoom_rate, fractal->zoom_rate,
 			fractal->img.width) + fractal->shift_x;
 	z.imag = scale_map(pixel->y, fractal->zoom_rate, -fractal->zoom_rate,

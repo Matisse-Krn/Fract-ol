@@ -1,20 +1,21 @@
 #include "fractol.h"
-	- 'L' → Move left
-	- 'R' → Move right
-	- 'U' → Move up
-	- 'D' → Move down
-*/
+
 void	displacement(char direction, t_fractal *fractal)
 {
+	double	aspect_ratio;
+	double	x_range;
+
+	aspect_ratio = (double)fractal->img.width / (double)fractal->img.height;
+	x_range = fractal->zoom_rate * aspect_ratio;
 	if (direction == 'L')
 	{
 		ft_putstr_fd("Going left\n", 1);
-		fractal->shift_x -= 0.25 * fractal->zoom_rate;
+		fractal->shift_x -= 0.25 * x_range;
 	}
 	else if (direction == 'R')
 	{
 		ft_putstr_fd("Going right\n", 1);
-		fractal->shift_x += 0.25 * fractal->zoom_rate;
+		fractal->shift_x += 0.25 * x_range;
 	}
 	else if (direction == 'U')
 	{
@@ -40,9 +41,14 @@ void	displacement(char direction, t_fractal *fractal)
 */
 void	apply_zoom(t_fractal *fractal, int x, int y, double factor)
 {
-	fractal->shift_x += scale_map(x, -fractal->zoom_rate, fractal->zoom_rate,
-			fractal->img.width) - scale_map(x, -fractal->zoom_rate * factor,
-			fractal->zoom_rate * factor, fractal->img.width);
+	double	aspect_ratio;
+	double	x_range;
+
+	aspect_ratio = (double)fractal->img.width / (double)fractal->img.height;
+	x_range = fractal->zoom_rate * aspect_ratio;
+	fractal->shift_x += scale_map(x, -x_range, x_range,
+			fractal->img.width) - scale_map(x, -x_range * factor,
+			x_range * factor, fractal->img.width);
 	fractal->shift_y += scale_map(y, fractal->zoom_rate, -fractal->zoom_rate,
 			fractal->img.height) - scale_map(y, fractal->zoom_rate * factor,
 			-fractal->zoom_rate * factor, fractal->img.height);

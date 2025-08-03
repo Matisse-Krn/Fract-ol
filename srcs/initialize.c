@@ -73,10 +73,10 @@ void	data_init(t_fractal *fractal)
 		printf("🏁 [MultiThreading=yes] 🏁\n");
 	else
 		printf("🏁 [MultiThreading=no] 🏁\n");
-	fractal->img.height = 960;
-	fractal->img.width = 960;
+	/*fractal->img.height -= 960;*/
+	/*fractal->img.width -= 960;*/
 	fractal->escape_value = pow(2, 2);
-	fractal->max_iterations = 100;
+	fractal->max_iterations = 1000;
 	fractal->tick_iterations = 10;
 	fractal->color = 0x000000;
 	fractal->init_color_min = 0x000000;
@@ -146,6 +146,11 @@ void	initialize_window(t_fractal *fractal)
 	fractal->mlx_ptr = mlx_init();
 	if (!fractal->mlx_ptr)
 		malloc_error();
+	mlx_get_screen_size(fractal->mlx_ptr, &fractal->img.width, &fractal->img.height);
+	fractal->img.width = fractal->img.width - (fractal->img.width / 15);
+	fractal->img.height = fractal->img.height - (fractal->img.height / 10);
+	/*fractal->img.width = 960;*/
+	/*fractal->img.height = 960;*/
 	name_formatted = get_window_name(fractal);
 	if (!name_formatted)
 		malloc_error();
