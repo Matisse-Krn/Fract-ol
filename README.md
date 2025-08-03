@@ -1,4 +1,4 @@
-# Fractol — Visualisation interactive de fractales en C avec MiniLibX
+# 🦠 Fractol — Visualisation interactive de fractales en C avec MiniLibX
 
 Visualisation interactive et temps réel de fractales mathématiques (Mandelbrot, Julia, Sierpiński Carpet) en C.  
 Rendu graphique natif via la **MiniLibX (MLX)**.  
