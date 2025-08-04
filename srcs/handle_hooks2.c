@@ -2,7 +2,7 @@
 
 static void	handle_key_four(int keysym, t_fractal *fractal)
 {
-	if (keysym == XK_J)
+	if (keysym == XK_J || keysym == XK_j)
 		jump_menu();
 	else if (keysym >= XK_1 && keysym <= XK_9)
 		handle_jump_choice(fractal, keysym - XK_0);
