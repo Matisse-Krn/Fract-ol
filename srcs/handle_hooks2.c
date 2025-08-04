@@ -1,11 +1,43 @@
 #include "fractol.h"
 
+static int	keypad_to_preset(int keysym)
+{
+	if (keysym == 65436)
+		return (1);
+	if (keysym == 65433)
+		return (2);
+	if (keysym == 65435)
+		return (3);
+	if (keysym == 65430)
+		return (4);
+	if (keysym == 65437)
+		return (5);
+	if (keysym == 65432)
+		return (6);
+	if (keysym == 65429)
+		return (7);
+	if (keysym == 65431)
+		return (8);
+	if (keysym == 65434)
+		return (9);
+	if (keysym == 65438)
+		return (0);
+	return (-1);
+}
+
 static void	handle_key_four(int keysym, t_fractal *fractal)
 {
+	int	preset;
+
+	preset = -1;
 	if (keysym == XK_J || keysym == XK_j)
 		jump_menu();
-	else if (keysym >= XK_1 && keysym <= XK_9)
+	if (keysym >= XK_1 && keysym <= XK_9)
 		handle_jump_choice(fractal, keysym - XK_0);
+	else
+		preset = keypad_to_preset(keysym);
+	if (preset > 0 && preset <= 9)
+		handle_jump_choice(fractal, preset);
 }
 
 /*

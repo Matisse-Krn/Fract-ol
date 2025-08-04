@@ -48,11 +48,31 @@ G : Green       B : Blue       Y : Yellow       O : Orange       P : Pink       
 C : Cyan    ||    TAB : Reverse color mode", fractal);
 }
 
-static void	put_zoom_and_position(t_fractal *f)
+static void	put_position(t_fractal *f)
 {
-	char	*zoom;
 	char	*x_str;
 	char	*y_str;
+	char	*line;
+
+	x_str = ft_dtoa(f->shift_x, 4);
+	if_malloc_error(x_str);
+	y_str = ft_dtoa(f->shift_y, 4);
+	if_malloc_error(y_str);
+	line = ft_strjoin("Position : ", x_str);
+	free(x_str);
+	if_malloc_error(line);
+	line = str_append(line, ", ");
+	if_malloc_error(line);
+	line = str_append(line, y_str);
+	free(y_str);
+	if_malloc_error(line);
+	put_a_string(5, 70, line, f);
+	free(line);
+}
+
+void	put_zoom_and_position(t_fractal *f)
+{
+	char	*zoom;
 	char	*line;
 
 	zoom = ft_dtoa(f->zoom_rate, 2);
@@ -62,23 +82,7 @@ static void	put_zoom_and_position(t_fractal *f)
 	if_malloc_error(line);
 	put_a_string(5, 55, line, f);
 	free(line);
-
-	x_str = ft_dtoa(f->shift_x, 4);
-	if_malloc_error(x_str);
-	y_str = ft_dtoa(f->shift_y, 4);
-	if_malloc_error(y_str);
-
-	line = ft_strjoin("Position : ", x_str);
-	free(x_str);
-	if_malloc_error(line);
-	line = str_append(line, ", ");
-	if_malloc_error(line);
-	line = str_append(line, y_str);
-	free(y_str);
-	if_malloc_error(line);
-
-	put_a_string(5, 70, line, f);
-	free(line);
+	put_position(f);
 }
 
 /*
