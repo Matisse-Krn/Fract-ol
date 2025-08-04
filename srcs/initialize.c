@@ -27,7 +27,7 @@ static void	position_init(t_fractal *fractal)
 	if (!ft_strcmp(fractal->name, "mandelbrot"))
 		fractal->shift_x = -0.6;
 	fractal->shift_y = 0;
-	fractal->zoom_rate = 1.6;
+	fractal->zoom_rate = 1;
 	fractal->init_shift_x = fractal->shift_x;
 	fractal->init_shift_y = fractal->shift_y;
 	fractal->init_zoom_rate = fractal->zoom_rate;

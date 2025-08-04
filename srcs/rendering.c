@@ -60,10 +60,10 @@ void	handle_pixel_mandelbrot(t_pixel *pixel, t_fractal *fractal)
 
 	z.real = 0;
 	z.imag = 0;
-	x_range = fractal->zoom_rate * fractal->aspect_ratio;
+	x_range = (1.6 / fractal->zoom_rate) * fractal->aspect_ratio;
 	c.real = scale_map(pixel->x, -x_range, x_range,
 			fractal->img.width) + fractal->shift_x;
-	c.imag = scale_map(pixel->y, fractal->zoom_rate, -fractal->zoom_rate,
+	c.imag = scale_map(pixel->y, 1.6 / fractal->zoom_rate, -1.6 / fractal->zoom_rate,
 			fractal->img.height) + fractal->shift_y;
 	pixel->i = -1;
 	while (++(pixel->i) < fractal->max_iterations)

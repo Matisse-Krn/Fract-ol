@@ -16,7 +16,7 @@ void	data_init_sierpinski(t_fractal *fractal)
 {
 	if (fractal->img.width < 3 || fractal->img.height < 3)
 	{
-		ft_printf("Window size too small : exit program.\nSee ya' !\n");
+		ft_printf("Window size too small : exit program.\nSee ya' ! 👋\n");
 		exit(EXIT_SUCCESS);
 	}
 	if (fractal->img.width > fractal->img.height)

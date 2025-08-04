@@ -1,5 +1,13 @@
 #include "fractol.h"
 
+static void	handle_key_four(int keysym, t_fractal *fractal)
+{
+	if (keysym == XK_J)
+		jump_menu();
+	else if (keysym >= XK_1 && keysym <= XK_9)
+		handle_jump_choice(fractal, keysym - XK_0);
+}
+
 /*
  * Handles the last set of keyboard inputs for contrast changes,
 	psychedelic mode toggling, and resetting the view.
@@ -24,7 +32,7 @@ void	handle_key_three(int keysym, t_fractal *fractal)
 	else if (keysym == XK_BackSpace)
 		reset_view(fractal);
 	else
-		return ;
+		handle_key_four(keysym, fractal);
 }
 
 /*

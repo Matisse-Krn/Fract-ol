@@ -1,31 +1,34 @@
 #include "fractol.h"
 
-void	displacement(char direction, t_fractal *fractal)
+void	displacement(char direction, t_fractal *f)
 {
-	double	x_range;
+	double	move_amount_x;
+	double	move_amount_y;
 
-	x_range = fractal->zoom_rate * fractal->aspect_ratio;
+	move_amount_x = (1.6 / f->zoom_rate) * f->aspect_ratio * 0.25;
+	move_amount_y = (1.6 / f->zoom_rate) * 0.25;
+
 	if (direction == 'L')
 	{
 		ft_putstr_fd("Going left\n", 1);
-		fractal->shift_x -= 0.25 * x_range;
+		f->shift_x -= move_amount_x;
 	}
 	else if (direction == 'R')
 	{
 		ft_putstr_fd("Going right\n", 1);
-		fractal->shift_x += 0.25 * x_range;
+		f->shift_x += move_amount_x;
 	}
 	else if (direction == 'U')
 	{
 		ft_putstr_fd("Going up\n", 1);
-		fractal->shift_y += 0.25 * fractal->zoom_rate;
+		f->shift_y += move_amount_y;
 	}
 	else if (direction == 'D')
 	{
 		ft_putstr_fd("Going down\n", 1);
-		fractal->shift_y -= 0.25 * fractal->zoom_rate;
+		f->shift_y -= move_amount_y;
 	}
-	fractal_rendering(fractal);
+	fractal_rendering(f);
 }
 
 /*
@@ -37,19 +40,26 @@ void	displacement(char direction, t_fractal *fractal)
  * @param y The y-coordinate of the zoom center.
  * @param factor The zoom factor (>1 for zoom out, <1 for zoom in).
 */
-void	apply_zoom(t_fractal *fractal, int x, int y, double factor)
+void	apply_zoom(t_fractal *f, int x, int y, double factor)
 {
-	double	x_range;
+	double	old_zoom;
+	double	new_zoom;
+	double	x_range_old;
+	double	x_range_new;
 
-	x_range = fractal->zoom_rate * fractal->aspect_ratio;
-	fractal->shift_x += scale_map(x, -x_range, x_range,
-			fractal->img.width) - scale_map(x, -x_range * factor,
-			x_range * factor, fractal->img.width);
-	fractal->shift_y += scale_map(y, fractal->zoom_rate, -fractal->zoom_rate,
-			fractal->img.height) - scale_map(y, fractal->zoom_rate * factor,
-			-fractal->zoom_rate * factor, fractal->img.height);
-	fractal->zoom_rate *= factor;
-	fractal_rendering(fractal);
+	old_zoom = f->zoom_rate;
+	new_zoom = f->zoom_rate * factor;
+
+	x_range_old = (1.6 / old_zoom) * f->aspect_ratio;
+	x_range_new = (1.6 / new_zoom) * f->aspect_ratio;
+
+	f->shift_x += scale_map(x, -x_range_old, x_range_old, f->img.width)
+		- scale_map(x, -x_range_new, x_range_new, f->img.width);
+	f->shift_y += scale_map(y, 1.6 / old_zoom, -1.6 / old_zoom, f->img.height)
+		- scale_map(y, 1.6 / new_zoom, -1.6 / new_zoom, f->img.height);
+
+	f->zoom_rate = new_zoom;
+	fractal_rendering(f);
 }
 
 /*

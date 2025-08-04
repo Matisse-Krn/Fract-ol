@@ -48,6 +48,39 @@ G : Green       B : Blue       Y : Yellow       O : Orange       P : Pink       
 C : Cyan    ||    TAB : Reverse color mode", fractal);
 }
 
+static void	put_zoom_and_position(t_fractal *f)
+{
+	char	*zoom;
+	char	*x_str;
+	char	*y_str;
+	char	*line;
+
+	zoom = ft_dtoa(f->zoom_rate, 2);
+	if_malloc_error(zoom);
+	line = ft_strjoin("Zoom : x", zoom);
+	free(zoom);
+	if_malloc_error(line);
+	put_a_string(5, 55, line, f);
+	free(line);
+
+	x_str = ft_dtoa(f->shift_x, 4);
+	if_malloc_error(x_str);
+	y_str = ft_dtoa(f->shift_y, 4);
+	if_malloc_error(y_str);
+
+	line = ft_strjoin("Position : ", x_str);
+	free(x_str);
+	if_malloc_error(line);
+	line = str_append(line, ", ");
+	if_malloc_error(line);
+	line = str_append(line, y_str);
+	free(y_str);
+	if_malloc_error(line);
+
+	put_a_string(5, 70, line, f);
+	free(line);
+}
+
 /*
  * Manages all textual elements displayed on the fractal window.
  * Draws background boxes for text, displays shortcuts,
@@ -64,6 +97,7 @@ C : Cyan    ||    TAB : Reverse color mode", fractal);
 void	manage_text(t_fractal *fractal)
 {
 	draw_text_boxes(fractal);
+	put_zoom_and_position(fractal);
 	print_shortcuts(fractal);
 	put_a_string(5, 25, fractal->last_pos, fractal);
 	put_color_mode(fractal);
