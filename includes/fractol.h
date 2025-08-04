@@ -12,24 +12,7 @@
 
 # include <pthread.h>
 
-# define RST "\001\033[0m\002"
-# define RED "\001\033[0;31m\002"
-# define GREEN "\001\033[0;32m\002"
-# define YELLOW "\001\033[0;33m\002"
-# define BLUE "\001\033[0;34m\002"
-# define MAGENTA "\001\033[0;35m\002"
-# define CYAN "\001\033[0;36m\002"
-# define WHITE "\001\033[0;37m\002"
-# define ORANGE "\001\033[0;91m\002"
-# define PURPLE "\001\033[0;95m\002"
-# define DARK_ORANGE "\001\033[0;33m\002"
-# define PINK "\001\033[0;95m\002"
-# define TEAL "\001\033[0;96m\002"
-# define GRAY "\001\033[0;90m\002"
 
-# define BOLD      "\001\033[1m\002"
-# define ITALIC    "\001\033[3m\002"
-# define UNDERLINE "\001\033[4m\002"
 
 typedef struct s_complex_nb
 {
@@ -164,6 +147,10 @@ void		my_mlx_pixel_put(t_image *data, int x, int y, int color);
 void		apply_zoom(t_fractal *fractal, int x, int y, double factor);
 void		displacement(char direction, t_fractal *fractal);
 void		reset_view(t_fractal *fractal);
+
+/*	"Jump to" functions */
+void		jump_menu(void);
+void		handle_jump_choice(t_fractal *f, int choice);
 
 /* Color management */
 void		change_color_mode(char mode, t_fractal *fractal);
