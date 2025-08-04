@@ -1,32 +1,6 @@
 #include "fractol.h"
 
 /*
- * Concatenates two strings into a new allocated string.
- * Frees the original string and returns the newly created string.
- * 
- * @param original The base string to append to.
- * @param to_add The string to append at the end.
- * @return A newly allocated string containing the concatenation,
-		or NULL if an input is NULL.
- * 
- * Memory:
-	- The original string is freed after concatenation.
-	- The caller is responsible for freeing the returned string.
-*/
-static char	*str_append(char *original, char *to_add)
-{
-	char	*new_str;
-	char	*tmp;
-
-	if (!original || !to_add)
-		return (NULL);
-	tmp = original;
-	new_str = ft_strjoin(tmp, to_add);
-	free(tmp);
-	return (new_str);
-}
-
-/*
  * Appends the initial Julia set parameters to the window name.
  * The format includes the real and imaginary parts of the user-defined
 	complex number.
