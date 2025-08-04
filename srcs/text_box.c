@@ -38,7 +38,7 @@ void	draw_text_boxes(t_fractal *fractal)
 	box.from_x = 0;
 	box.from_y = 0;
 	box.to_x = 220;
-	box.to_y = 50;
+	box.to_y = 80;
 	draw_a_box(&box, fractal);
 	box.from_x = 0;
 	box.from_y = fractal->img.height - 80;
