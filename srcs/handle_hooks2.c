@@ -38,6 +38,11 @@ static void	handle_key_four(int keysym, t_fractal *fractal)
 		preset = keypad_to_preset(keysym);
 	if (preset > 0 && preset <= 9)
 		handle_jump_choice(fractal, preset);
+	else if (keysym == XK_e)
+	{
+		ft_putstr_fd("Exporting image to PNG...\n", 1);
+		export_image(fractal);
+	}
 }
 
 /*

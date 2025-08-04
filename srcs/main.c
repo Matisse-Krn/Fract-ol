@@ -85,6 +85,7 @@ int	main(int argc, char **argv)
 {
 	t_fractal	fractal;
 
+	printf("DEBUG : TODO : Retirer le snprintf !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
 	if (argc < 2)
 		return (1);
 	ft_bzero(&fractal, sizeof(t_fractal));

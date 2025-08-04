@@ -74,6 +74,7 @@ void	data_init(t_fractal *fractal)
 		printf("🏁 [MultiThreading=no] 🏁\n");
 	fractal->escape_value = pow(2, 2);
 	fractal->max_iterations = 1000;
+	fractal->i_max = 0;
 	fractal->tick_iterations = 10;
 	fractal->color = 0x000000;
 	fractal->init_color_min = 0x000000;
@@ -81,6 +82,7 @@ void	data_init(t_fractal *fractal)
 	fractal->color_min = fractal->init_color_min;
 	fractal->color_max = fractal->init_color_max;
 	fractal->color_mode = 'N';
+	fractal->palette_mode = 'N';
 	fractal->contrast_exponent = 0.5;
 	fractal->psy = 'N';
 	position_init(fractal);
@@ -140,8 +142,8 @@ void	initialize_window(t_fractal *f)
 {
 	char	*name_formatted;
 
-	mlx_get_screen_size(f->mlx_ptr, &f->img.full_width, &f->img.full_height);
-	set_real_screen_size(f);
+	/*mlx_get_screen_size(f->mlx_ptr, &f->img.full_width, &f->img.full_height);*/
+	/*set_real_screen_size(f);*/
 	f->aspect_ratio = (double)f->img.width / (double)f->img.height;
 	name_formatted = get_window_name(f);
 	if (!name_formatted)

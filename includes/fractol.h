@@ -41,9 +41,11 @@ typedef struct s_fractal
 	char		*last_pos;
 	char		color_mode;
 	char		psy;
+	char		palette_mode;
 	void		*mlx_ptr;
 	void		*win_ptr;
 	int			max_iterations;
+	int			i_max;
 	int			tick_iterations;
 	int			color;
 	int			depth;
@@ -139,6 +141,7 @@ int			handle_mouse_move(int x, int y, t_fractal *fractal);
 void		fractal_rendering(t_fractal *fractal);
 void		handle_pixel_mandelbrot(t_pixel *pixel, t_fractal *fractal);
 void		handle_pixel_julia(t_pixel *pixel, t_fractal *fractal);
+void		pixel_loop(char type, t_fractal *fractal);
 void		rendering_sierpinski(t_fractal *fractal);
 void		draw_sierpinski_carpet(int x, int y, t_fractal *fractal);
 void		my_mlx_pixel_put(t_image *data, int x, int y, int color);
@@ -153,6 +156,7 @@ void		jump_menu(void);
 void		handle_jump_choice(t_fractal *f, int choice);
 
 /* Color management */
+int			distrib_colors(t_complex *z, t_pixel *pixel, t_fractal *f);
 void		change_color_mode(char mode, t_fractal *fractal);
 void		change_color_sierpinski(int keysym, t_fractal *fractal);
 void		swap_colors(t_fractal *fractal);
@@ -189,5 +193,8 @@ void		init_mandelbrot(char **argv, t_fractal *fractal);
 void		init_julia(char **argv, t_fractal *fractal);
 void		init_sierpinski(char **argv, t_fractal *fractal);
 void		init_sierpinski_depth(char **argv, t_fractal *fractal);
+
+/* Export image to PNG */
+void		export_image(t_fractal *fractal);
 
 #endif

@@ -52,9 +52,14 @@ void	init_mandelbrot(char **argv, t_fractal *fractal)
 	if (!fractal->mlx_ptr)
 		malloc_error();
 	print_launch_messages('M');
+	
 	is_fullscreen(argv, fractal);
+	mlx_get_screen_size(fractal->mlx_ptr, &fractal->img.full_width, &fractal->img.full_height);
+	set_real_screen_size(fractal);
+	
 	data_init(fractal);
 	init_mlx(fractal);
+	printf("DEBUG : HHHHHHHHHHHHHHHERE\n");
 	fractal_rendering(fractal);
 	mlx_loop(fractal->mlx_ptr);
 }
@@ -75,6 +80,8 @@ void	init_julia(char **argv, t_fractal *fractal)
 		malloc_error();
 	print_launch_messages('J');
 	is_fullscreen(argv, fractal);
+	mlx_get_screen_size(fractal->mlx_ptr, &fractal->img.full_width, &fractal->img.full_height);
+	set_real_screen_size(fractal);
 	check_valid_input_numbers(argv);
 	fractal->c.real = ft_atod(argv[2]);
 	fractal->c.imag = ft_atod(argv[3]);

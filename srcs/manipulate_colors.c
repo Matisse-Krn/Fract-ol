@@ -17,23 +17,72 @@
 	- adjusted_ratio: Contrast-adjusted ratio for smooth transitions.
 */
 
-int	interpolate_color(int min, int max, int i, t_fractal *fractal)
+/*int	interpolate_color(int min, int max, int i, t_fractal *fractal)*/
+/*{*/
+/*	t_rgb	color;*/
+/*	double	ratio;*/
+/*	double	adjusted_ratio;*/
+/**/
+/*	ratio = (double)i / (double)fractal->max_iterations;*/
+/*	adjusted_ratio = pow(ratio, fractal->contrast_exponent);*/
+/*	color.r_min = (min >> 16) & 0xFF;*/
+/*	color.g_min = (min >> 8) & 0xFF;*/
+/*	color.b_min = min & 0xFF;*/
+/*	color.r_max = (max >> 16) & 0xFF;*/
+/*	color.g_max = (max >> 8) & 0xFF;*/
+/*	color.b_max = max & 0xFF;*/
+/*	color.r_min += (color.r_max - color.r_min) * adjusted_ratio;*/
+/*	color.g_min += (color.g_max - color.g_min) * adjusted_ratio;*/
+/*	color.b_min += (color.b_max - color.b_min) * adjusted_ratio;*/
+/*	return ((color.r_min << 16) | (color.g_min << 8) | color.b_min);*/
+/*}*/
+
+
+
+
+
+
+
+
+
+
+
+/*
+ * Applies a color gradient using either:
+ * - contrast exponent (default mode),
+ * - logarithmic scale (palette_mode == 'L'),
+ * - adaptive scale (palette_mode == 'A'), based on max i reached.
+ */
+int	interpolate_color(int min, int max, int i, t_fractal *f)
 {
 	t_rgb	color;
 	double	ratio;
-	double	adjusted_ratio;
+	double	adjusted;
+	/*double	base;*/
 
-	ratio = (double)i / (double)fractal->max_iterations;
-	adjusted_ratio = pow(ratio, fractal->contrast_exponent);
+	if (f->palette_mode == 'L')
+	{
+		if (i == 0)
+			adjusted = 0;
+		else
+			adjusted = log((double)i + 1) / log((double)f->max_iterations);
+	}
+	else if (f->palette_mode == 'A' && f->i_max > 0)
+		adjusted = (double)i / (double)f->i_max;
+	else
+	{
+		ratio = (double)i / (double)f->max_iterations;
+		adjusted = pow(ratio, f->contrast_exponent);
+	}
 	color.r_min = (min >> 16) & 0xFF;
 	color.g_min = (min >> 8) & 0xFF;
 	color.b_min = min & 0xFF;
 	color.r_max = (max >> 16) & 0xFF;
 	color.g_max = (max >> 8) & 0xFF;
 	color.b_max = max & 0xFF;
-	color.r_min += (color.r_max - color.r_min) * adjusted_ratio;
-	color.g_min += (color.g_max - color.g_min) * adjusted_ratio;
-	color.b_min += (color.b_max - color.b_min) * adjusted_ratio;
+	color.r_min += (color.r_max - color.r_min) * adjusted;
+	color.g_min += (color.g_max - color.g_min) * adjusted;
+	color.b_min += (color.b_max - color.b_min) * adjusted;
 	return ((color.r_min << 16) | (color.g_min << 8) | color.b_min);
 }
 

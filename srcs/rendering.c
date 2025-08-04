@@ -11,21 +11,55 @@
  * @param fractal A pointer to the fractal structure.
  * @return Returns 1 if the pixel is colored, 0 otherwise.
 */
-static int	distrib_colors(t_complex *z, t_pixel *pixel, t_fractal *fractal)
+/*static int	distrib_colors(t_complex *z, t_pixel *pixel, t_fractal *fractal)*/
+/*{*/
+/*	if ((z->real * z->real) + (z->imag * z->imag) > fractal->escape_value)*/
+/*	{*/
+/*		if (fractal->psy == 'N')*/
+/*		{*/
+/*			fractal->color = interpolate_color(fractal->color_min,*/
+/*					fractal->color_max, pixel->i, fractal);*/
+/*		}*/
+/*		else if (fractal->psy == 'Y')*/
+/*		{*/
+/*			fractal->color = scale_map(pixel->i, fractal->color_min,*/
+/*					fractal->color_max, fractal->max_iterations);*/
+/*		}*/
+/*		my_mlx_pixel_put(&fractal->img, pixel->x, pixel->y, fractal->color);*/
+/*		return (1);*/
+/*	}*/
+/*	return (0);*/
+/*}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ * In distrib_colors, on mesure i_max si palette_mode == 'A'
+ */
+int	distrib_colors(t_complex *z, t_pixel *pixel, t_fractal *f)
 {
-	if ((z->real * z->real) + (z->imag * z->imag) > fractal->escape_value)
+	if ((z->real * z->real) + (z->imag * z->imag) > f->escape_value)
 	{
-		if (fractal->psy == 'N')
-		{
-			fractal->color = interpolate_color(fractal->color_min,
-					fractal->color_max, pixel->i, fractal);
-		}
-		else if (fractal->psy == 'Y')
-		{
-			fractal->color = scale_map(pixel->i, fractal->color_min,
-					fractal->color_max, fractal->max_iterations);
-		}
-		my_mlx_pixel_put(&fractal->img, pixel->x, pixel->y, fractal->color);
+		if (f->palette_mode == 'A' && pixel->i > f->i_max)
+			f->i_max = pixel->i;
+		if (f->psy == 'N')
+			f->color = interpolate_color(f->color_min, f->color_max, pixel->i, f);
+		else if (f->psy == 'Y')
+			f->color = scale_map(pixel->i, f->color_min, f->color_max, f->max_iterations);
+		my_mlx_pixel_put(&f->img, pixel->x, pixel->y, f->color);
 		return (1);
 	}
 	return (0);
@@ -124,7 +158,7 @@ void	handle_pixel_julia(t_pixel *pixel, t_fractal *fractal)
  * @param type The fractal type ('M' for Mandelbrot, 'J' for Julia).
  * @param fractal A pointer to the fractal structure.
 */
-static void	pixel_loop(char type, t_fractal *fractal)
+void	pixel_loop(char type, t_fractal *fractal)
 {
 	t_pixel	pixel;
 
@@ -168,6 +202,8 @@ static void	pixel_loop(char type, t_fractal *fractal)
 */
 void	fractal_rendering(t_fractal *fractal)
 {
+	if (fractal->palette_mode == 'A')
+		fractal->i_max = 0;
 	if (fractal->mt == FALSE)
 	{
 		if (!ft_strcmp(fractal->name, "mandelbrot"))
