@@ -6,67 +6,59 @@
 /*   By: mkerrien <mkerrien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 05:10:15 by mkerrien          #+#    #+#             */
-/*   Updated: 2024/11/18 05:25:34 by mkerrien         ###   ########.fr       */
+/*   Updated: 2025/03/09 19:41:50 by mkerrien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-void	ft_putnbr_fd(int n, int fd)
+int	ft_putnbr_fd(int n, int fd)
 {
+	int	count;
+
 	if (fd < 0)
-		return ;
+		return (-1);
+	count = 0;
 	if (n == -2147483648)
-	{
-		write(fd, "-2147483648", 11);
-		return ;
-	}
+		return (ft_putstr_fd("-2147483648", fd));
 	else if (n < 0)
 	{
-		ft_putchar_fd('-', fd);
+		count += ft_putchar_fd('-', fd);
 		n = -n;
 	}
 	if (n > 9)
 	{
-		ft_putnbr_fd((n / 10), fd);
-		ft_putnbr_fd((n % 10), fd);
+		count += ft_putnbr_fd((n / 10), fd);
+		count += ft_putnbr_fd((n % 10), fd);
 	}
 	else
-		ft_putchar_fd((n + '0'), fd);
-	return ;
+		count += ft_putchar_fd((n + '0'), fd);
+	return (count);
 }
 /*
 #include <stdio.h>
 #include <fcntl.h>
 
-int	main(int argc, char **argv)
+int	main(void)
 {
 	int		fd;
-	char	*file;
-	int		nb;
+	int		ret;
+	fd = 2;
 
-	if (argc != 3)
-	{
-		if (argc < 3)
-			printf("Missing argument (usage : write <n> in file <fd>)\n");
-		if (argc > 3)
-			printf("Too many arguments (usage : write <n> in file <fd>)\n");
-		return (1);
-	}
-	nb = ft_atoi(argv[1]);
-	file = argv[2];
-	fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (fd == -1)
-	{
-		printf("Error when openning file\n");
-		return (1);
-	}
-	ft_putnbr_fd(nb, fd);
-	if (close(fd) == -1)
-	{
-		printf("Error when clossing file\n");
-		return (1);
-	}
-	printf("'%d' wroted in '%s'\n", nb, file);
+	ret = ft_putnbr_fd(-2147483648, fd);
+	printf("\nret = %d char\n", ret);
+
+	ret = ft_putnbr_fd(-42, fd);
+	printf("\nret = %d char\n", ret);
+	
+	ret = ft_putnbr_fd(0, fd);
+	printf("\nret = %d char\n", ret);
+	
+	ret = ft_putnbr_fd(42, fd);
+	printf("\nret = %d char\n", ret);
+	
+	ret = ft_putnbr_fd(2147483647, fd);
+	printf("\nret = %d char\n", ret);
+	
 	return (0);
 }
 */

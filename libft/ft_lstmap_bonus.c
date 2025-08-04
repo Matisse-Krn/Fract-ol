@@ -68,9 +68,9 @@ int	main(void)
 	int		*val2;
 	int		*val3;
 
-	val1 = malloc(sizeof(int));
-	val2 = malloc(sizeof(int));
-	val3 = malloc(sizeof(int));
+	val1 = ft_calloc(1, sizeof(int));
+	val2 = ft_calloc(1, sizeof(int));
+	val3 = ft_calloc(1, sizeof(int));
 	*val1 = 1;
 	*val2 = 2;
 	*val3 = 3;

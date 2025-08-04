@@ -43,8 +43,8 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	size = strtoul(argv[2], NULL, 10);
-	dest1 = malloc(sizeof(size_t) * size);
-	dest2 = malloc(sizeof(size_t) * size);
+	dest1 = ft_calloc(size, sizeof(size_t));
+	dest2 = ft_calloc(size, sizeof(size_t));
 	if (argc == 3)
 	{
 		printf("MY RESULT :\nInitial '%s' length : '%zu'.\n", argv[1], \

@@ -32,7 +32,7 @@ int	main(void)
 {
 	t_list	*elem;
 
-	elem = ft_lstnew(malloc(10));
+	elem = ft_lstnew(ft_calloc(1, 10));
 	if (!elem)
 		return (1);
 	printf("Content address before deletion: %p\n", elem->content);

@@ -11,6 +11,10 @@
 /* ************************************************************************** */
 #include "libft.h"
 
+// Renvoie une nouvelle chaine de taille 'len' extraite depuis
+// l'index 'start' de 's';
+// Si l'index 'start' est superieur ou egal a la taille de 's',
+// alors on retourne NULL;
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*sub;

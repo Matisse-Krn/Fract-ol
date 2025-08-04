@@ -6,16 +6,17 @@
 /*   By: mkerrien <mkerrien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 01:35:35 by mkerrien          #+#    #+#             */
-/*   Updated: 2024/11/18 02:11:51 by mkerrien         ###   ########.fr       */
+/*   Updated: 2025/03/09 18:49:05 by mkerrien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-void	ft_putchar_fd(char c, int fd)
+int	ft_putchar_fd(char c, int fd)
 {
 	if (fd < 0)
-		return ;
+		return (-1);
 	write (fd, &c, 1);
+	return (1);
 }
 /*
 #include <stdio.h>

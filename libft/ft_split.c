@@ -54,15 +54,19 @@ static void	ft_free_all(char **tab, unsigned int index)
 	{
 		index--;
 		free(tab[index]);
+		tab[index] = NULL;
 	}
 	free(tab);
+	tab = NULL;
 }
 
-static void	ft_alloc_write(char const *s, char c, unsigned int nb, char **tab)
+static int	ft_alloc_write(char const *s, char c, unsigned int nb, char **tab)
 {
 	unsigned int	i;
 	unsigned int	j;
 
+	if (!s || !tab)
+		return (1);
 	i = 0;
 	while (i < nb)
 	{
@@ -70,12 +74,9 @@ static void	ft_alloc_write(char const *s, char c, unsigned int nb, char **tab)
 			s++;
 		if (*s)
 		{
-			tab[i] = malloc(sizeof(char) * (ft_len_word(s, c) + 1));
+			tab[i] = ft_calloc(ft_len_word(s, c) + 1, sizeof(char));
 			if (!tab[i])
-			{
-				ft_free_all(tab, i);
-				return ;
-			}
+				return (ft_free_all(tab, i), 1);
 			j = 0;
 			while (*s && *s != c)
 				tab[i][j++] = *(s++);
@@ -84,6 +85,7 @@ static void	ft_alloc_write(char const *s, char c, unsigned int nb, char **tab)
 		}
 	}
 	tab[i] = NULL;
+	return (0);
 }
 
 char	**ft_split(char const *s, char c)
@@ -94,10 +96,13 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	nb_word = ft_count_words(s, c);
-	tab = malloc(sizeof(char *) * (nb_word + 1));
+	tab = ft_calloc(nb_word + 1, sizeof(char *));
 	if (!tab)
 		return (NULL);
-	ft_alloc_write(s, c, nb_word, tab);
+	if (ft_alloc_write(s, c, nb_word, tab))
+		return (NULL);
+	if (!tab)
+		return (NULL);
 	return (tab);
 }
 /*
@@ -115,7 +120,7 @@ int	main(int argc, char **argv)
 	str = argv[1];
 	sep = *argv[2];
 	str = "Bonjour je m'appelle Matisse.";
-	sep = " ";
+	sep = ' ';
 	tab = ft_split(str, sep);
 	while (tab[i] != NULL)
 	{
@@ -127,5 +132,5 @@ int	main(int argc, char **argv)
 */
 // 1. compter le nombre de mots
 // 2. trouver longueur de chaque mot
-// 3. malloc tableau de tableaux (avec longueur des mots ?)
+// 3. ft_calloc tableau de tableaux (avec longueur des mots ?)
 // 4. fonction 'free_all' en cas d'erreur d'allocation

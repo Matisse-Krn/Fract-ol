@@ -6,21 +6,26 @@
 /*   By: mkerrien <mkerrien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 03:02:32 by mkerrien          #+#    #+#             */
-/*   Updated: 2024/11/18 03:13:41 by mkerrien         ###   ########.fr       */
+/*   Updated: 2025/03/09 18:55:18 by mkerrien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+int	ft_putstr_fd(char *s, int fd)
 {
 	size_t	i;
 
-	if (!s || fd < 0)
-		return ;
+	if (fd < 0)
+		return (0);
+	if (!s)
+	{
+		write(fd, "(null)", 6);
+		return (6);
+	}
 	i = -1;
 	while (s[++i])
 		ft_putchar_fd(s[i], fd);
-	return ;
+	return (i);
 }
 /*
 #include <stdio.h>

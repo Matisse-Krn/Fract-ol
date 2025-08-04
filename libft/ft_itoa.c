@@ -41,7 +41,7 @@ char	*ft_itoa(int n)
 	unsigned int	nbr;
 
 	l_int = ft_intlen(n);
-	dst = malloc(sizeof(char) * l_int + 1);
+	dst = ft_calloc(l_int + 1, sizeof(char));
 	if (!dst)
 		return (NULL);
 	nbr = n;

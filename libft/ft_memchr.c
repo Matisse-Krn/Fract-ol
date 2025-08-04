@@ -47,10 +47,10 @@ search <c>; block of memory <size>)");
 		return (1);
 	}
 	size = strtoul(argv[2], NULL, 10);
-	str = malloc(size);
+	str = ft_calloc(1, size);
 	if (!str)
 	{
-		printf("Malloc problem.");
+		printf("ft_calloc problem.");
 		return (1);
 	}
 	//To place 'c' in the memory block, for the test.

@@ -1,47 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_puthex_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkerrien <mkerrien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/28 18:45:08 by mkerrien          #+#    #+#             */
-/*   Updated: 2025/03/09 19:54:57 by mkerrien         ###   ########.fr       */
+/*   Created: 2025/03/09 18:42:28 by mkerrien          #+#    #+#             */
+/*   Updated: 2025/03/09 18:52:13 by mkerrien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_putnbr(int nb)
+int	ft_puthex_fd(unsigned long nbr, const int isupper, int fd)
 {
+	char	*base;
 	int		count;
 
 	count = 0;
-	if (nb == -2147483648)
-		return (ft_putstr("-2147483648"));
-	if (nb < 0)
+	if (isupper == 0)
+		base = "0123456789abcdef";
+	else
+		base = "0123456789ABCDEF";
+	if (nbr >= 16)
 	{
-		count += ft_putchar('-');
-		nb = -nb;
+		count += ft_puthex_fd(nbr / 16, isupper, fd);
+		count += ft_puthex_fd(nbr % 16, isupper, fd);
 	}
-	if (nb > 9)
-		count += ft_putnbr(nb / 10);
-	count += ft_putchar((nb % 10) + '0');
+	if (nbr < 16)
+		count += ft_putchar_fd(base[nbr], fd);
 	return (count);
 }
-/*
-int	main(void)
-{
-	ft_putnbr(-2147483648);
-	write (1, "\n", 1);
-	ft_putnbr(-42);
-	write (1, "\n", 1);
-	ft_putnbr(0);
-	write (1, "\n", 1);
-	ft_putnbr(42);
-	write (1, "\n", 1);
-	ft_putnbr(2147483647);
-	write (1, "\n", 1);
-	return (0);
-}
-*/
