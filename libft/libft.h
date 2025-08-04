@@ -6,7 +6,7 @@
 /*   By: mkerrien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 02:22:25 by mkerrien          #+#    #+#             */
-/*   Updated: 2025/08/03 21:35:23 by mkerrien         ###   ########.fr       */
+/*   Updated: 2025/08/04 02:08:50 by mkerrien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef LIBFT_H
@@ -127,6 +127,7 @@ char			*ft_strnstr(const char *big, const char *little, size_t len);
 char			*ft_strdup(const char *s);
 char			**ft_strsdup(const char **tab);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
+char			*str_append(char *original, char *to_add);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strfjoin(char *s1, char *s2);
 char			*ft_strtrim(char const *s1, char const *set);

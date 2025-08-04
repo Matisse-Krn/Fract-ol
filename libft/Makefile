@@ -6,7 +6,7 @@
 #    By: mkerrien <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/09 19:20:24 by mkerrien          #+#    #+#              #
-#    Updated: 2025/08/03 21:36:20 by mkerrien         ###   ########.fr        #
+#    Updated: 2025/08/04 02:10:01 by mkerrien         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 CC			=	cc
@@ -46,6 +46,7 @@ SRC			=	./ft_isalpha.c \
 				./ft_atod.c \
 				./ft_calloc.c \
 				./ft_fcalloc.c \
+				./ft_str_append.c \
 				./ft_strdup.c \
 				./ft_strsdup.c \
 				./ft_free_fullstrs.c \
