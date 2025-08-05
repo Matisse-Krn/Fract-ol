@@ -27,17 +27,18 @@ static int	keypad_to_preset(int keysym)
 
 static void	handle_key_four(int keysym, t_fractal *fractal)
 {
-	int	preset;
+	int			preset;
+	static int	preset_need = FALSE;
 
 	preset = -1;
 	if (keysym == XK_J || keysym == XK_j)
-		jump_menu();
-	if (keysym >= XK_1 && keysym <= XK_9)
-		handle_jump_choice(fractal, keysym - XK_0);
+		preset_need = jump_menu();
+	if (preset_need == TRUE && keysym >= XK_1 && keysym <= XK_9)
+		preset_need = handle_jump_choice(fractal, keysym - XK_0);
 	else
 		preset = keypad_to_preset(keysym);
 	if (preset > 0 && preset <= 9)
-		handle_jump_choice(fractal, preset);
+		preset_need = handle_jump_choice(fractal, preset);
 	else if (keysym == XK_e)
 	{
 		ft_putstr_fd("Exporting image to PNG...\n", 1);

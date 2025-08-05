@@ -1,6 +1,6 @@
 #include "fractol.h"
 
-void	jump_menu(void)
+int	jump_menu(void)
 {
 	ft_putstr_fd("\n🌌 "BOLD"Jump-to Presets (Mandelbrot only)"RST"\n\n", 1);
 	ft_putstr_fd("\t[1] Main Cardioid       → x = -0.6,			  y = 0.0\n", 1);
@@ -19,6 +19,7 @@ void	jump_menu(void)
 	ft_putstr_fd("\t[9] Antennae            → "
 		"x = -0.1745,		  y = 1.0206\n\n", 1);
 	ft_putstr_fd("Press corresponding number key to jump.\n\n", 1);
+	return (TRUE);
 }
 
 static void	set_position(t_fractal *f, double sx, double sy, double zoom)
@@ -28,10 +29,10 @@ static void	set_position(t_fractal *f, double sx, double sy, double zoom)
 	f->zoom_rate = zoom;
 }
 
-void	handle_jump_choice(t_fractal *f, int choice)
+int	handle_jump_choice(t_fractal *f, int choice)
 {
 	if (ft_strcmp(f->name, "mandelbrot"))
-		return ;
+		return (FALSE);
 	if (choice == 1)
 		set_position(f, -0.6, 0.0, 1.6);
 	else if (choice == 2)
@@ -51,7 +52,8 @@ void	handle_jump_choice(t_fractal *f, int choice)
 	else if (choice == 9)
 		set_position(f, -0.1745, 1.0206, 180);
 	else
-		return ;
+		return (FALSE);
 	ft_printf("✨ Jumped to preset [%d]\n", choice);
 	fractal_rendering(f);
+	return (FALSE);
 }

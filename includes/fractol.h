@@ -152,7 +152,7 @@ void		displacement(char direction, t_fractal *fractal);
 void		reset_view(t_fractal *fractal);
 
 /*	"Jump to" functions */
-void		jump_menu(void);
+int			jump_menu(void);
 void		handle_jump_choice(t_fractal *f, int choice);
 
 /* Color management */
