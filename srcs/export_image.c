@@ -12,11 +12,9 @@ static char	*build_filename(t_fractal *f, int suffix)
 {
 	char	*filename;
 	char	buffer[512];
-	char	name_part[64];
+	char	name_part[256];
 
-	snprintf(name_part, sizeof(name_part),
-		"fractol_%s_x=%.5f_y=%.5f_z=%.5f_iter=%d",
-		f->name, f->shift_x, f->shift_y, f->zoom_rate, f->max_iterations);
+	snprintf(name_part, sizeof(name_part), "fractol_%s_x=%.5f_y=%.5f_z=%.5f_iter=%d_mode=%s", f->name, f->shift_x, f->shift_y, f->zoom_rate, f->max_iterations, get_palette_mode_label(f->palette_mode));
 	if (suffix == 0)
 		snprintf(buffer, sizeof(buffer), "exports/%s.png", name_part);
 	else

@@ -67,6 +67,14 @@ int	interpolate_color(int min, int max, int i, t_fractal *f)
 		else
 			adjusted = log((double)i + 1) / log((double)f->max_iterations);
 	}
+
+
+	else if (f->palette_mode == 'F')
+		adjusted = log(i + 1) / log(1000); // Toujours fixe
+	else if (f->palette_mode == 'C')
+		adjusted = (double)(i % 256) / 255.0;
+
+
 	else if (f->palette_mode == 'A' && f->i_max > 0)
 		adjusted = (double)i / (double)f->i_max;
 	else

@@ -44,6 +44,9 @@ static void	handle_key_four(int keysym, t_fractal *fractal)
 		ft_putstr_fd("Exporting image to PNG...\n", 1);
 		export_image(fractal);
 	}
+	else if (keysym == XK_s || keysym == XK_S)
+		switch_palette_mode(fractal);
+
 }
 
 /*

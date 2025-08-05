@@ -153,7 +153,7 @@ void		reset_view(t_fractal *fractal);
 
 /*	"Jump to" functions */
 int			jump_menu(void);
-void		handle_jump_choice(t_fractal *f, int choice);
+int			handle_jump_choice(t_fractal *f, int choice);
 
 /* Color management */
 int			distrib_colors(t_complex *z, t_pixel *pixel, t_fractal *f);
@@ -162,6 +162,8 @@ void		change_color_sierpinski(int keysym, t_fractal *fractal);
 void		swap_colors(t_fractal *fractal);
 void		swap_psy_mode(t_fractal *fractal);
 int			interpolate_color(int min, int max, int i, t_fractal *fractal);
+void		switch_palette_mode(t_fractal *f);
+char		*get_palette_mode_label(char mode);
 
 /* Iterations and contrast management */
 void		change_max_iterations(char sign, t_fractal *fractal);
