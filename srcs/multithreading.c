@@ -94,19 +94,19 @@ int	init_threads(t_fractal *fractal)
 	long			n_threads;
 	int				i;
 
-	n_threads = sysconf(_SC_NPROCESSORS_ONLN);
-	if (n_threads > 16)
-		n_threads = 16;
+	n_threads = sysconf(_SC_NPROCESSORS_ONLN) * 4;
 	threads = ft_calloc(n_threads, sizeof(pthread_t));
 	if (!threads)
 		return (FALSE);
 	args = ft_calloc(n_threads, sizeof(t_thread_args));
-	if (!threads)
-		return (FALSE);
+	if (!args)
+		return (free(threads), FALSE);
 	if (loop_init_threads(n_threads, threads, args, fractal) == FALSE)
-		return (FALSE);
+		return (free(threads), free(args), FALSE);
 	i = -1;
 	while (++i < n_threads)
 		pthread_join(threads[i], NULL);
+	free(threads);
+	free(args);
 	return (TRUE);
 }
