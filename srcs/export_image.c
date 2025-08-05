@@ -90,17 +90,18 @@ static void	render_only_to_image(t_fractal *fractal)
 
 void	export_image(t_fractal *fractal)
 {
-	t_image		orig_img;
+	t_fractal	backup;
 	t_image		export;
 	char		*filename;
 	int			orig_iter;
-
+	t_image		orig_img;
 	// Créer dossier ./exports/ s'il n'existe pas
 	mkdir("exports", 0777);
 
 	// Sauvegarde des données de fractal
 	orig_img = fractal->img;
 	orig_iter = fractal->max_iterations;
+	backup = duplicate_fractal(fractal);
 
 	// Initialisation de l'image d'export
 	export.width = fractal->img.full_width;
@@ -117,7 +118,10 @@ void	export_image(t_fractal *fractal)
 	fractal->img = export;
 
 	// Augmentation des iterations
-	fractal->max_iterations = 1000000;
+	fractal->max_iterations = 10000;
+	// Modification aspect_ratio;
+	fractal->aspect_ratio = (double)fractal->img.width / (double)fractal->img.height;
+
 
 	// Rendu haute qualité
 	render_only_to_image(fractal);
@@ -133,10 +137,11 @@ void	export_image(t_fractal *fractal)
 	// Nettoyage
 	free(filename);
 	mlx_destroy_image(fractal->mlx_ptr, export.img_ptr);
+	*fractal = backup;
 	fractal->img = orig_img;
-	fractal->max_iterations = orig_iter;
+	fractal->aspect_ratio = (double)fractal->img.width / (double)fractal->img.height;
 
-	ft_putstr_fd("✅ Export terminé avec succès !\n", 1);
+	ft_putstr_fd("✅ Export completed successfully !\n", 1);
 }
 
 

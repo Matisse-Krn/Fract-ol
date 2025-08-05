@@ -73,7 +73,7 @@ void	data_init(t_fractal *fractal)
 	else
 		printf("🏁 [MultiThreading=no] 🏁\n");
 	fractal->escape_value = pow(2, 2);
-	fractal->max_iterations = 1000;
+	fractal->max_iterations = 100;
 	fractal->i_max = 0;
 	fractal->tick_iterations = 10;
 	fractal->color = 0x000000;
