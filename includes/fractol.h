@@ -197,5 +197,6 @@ void		init_sierpinski_depth(char **argv, t_fractal *fractal);
 /* Export image to PNG */
 void		export_image(t_fractal *fractal);
 t_fractal	duplicate_fractal(t_fractal *src);
+void		restore_fractal(t_fractal *f, t_fractal *backup, t_image *export);
 
 #endif

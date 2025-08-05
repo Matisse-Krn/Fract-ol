@@ -48,3 +48,16 @@ t_fractal	duplicate_fractal(t_fractal *src)
 	copy.img.px_ptr = NULL;
 	return (copy);
 }
+
+void	restore_fractal(t_fractal *f, t_fractal *backup, t_image *orig_img)
+{
+	f->max_iterations = backup->max_iterations;
+	f->i_max = backup->i_max;
+	f->color = backup->color;
+	f->color_min = backup->color_min;
+	f->color_max = backup->color_max;
+	f->palette_mode = backup->palette_mode;
+	f->psy = backup->psy;
+	f->aspect_ratio = (double)orig_img->width / (double)orig_img->height;
+	f->img = *orig_img;
+}

@@ -21,7 +21,7 @@ void	set_real_screen_size(t_fractal *f)
 {
 	if (f->fullscreen == TRUE)
 	{
-		f->img.height = f->img.full_height - (f->img.full_height / 21);
+		f->img.height = f->img.full_height - (f->img.full_height / 17);
 		f->img.width = f->img.full_width;
 	}
 	else

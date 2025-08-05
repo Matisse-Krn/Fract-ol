@@ -130,16 +130,15 @@ void	export_image(t_fractal *fractal)
 	filename = generate_export_filename(fractal);
 	if (!filename)
 		malloc_error();
-
 	// Conversion en RGB + écriture du PNG
 	write_image_to_png(filename, &export);
-
-	// Nettoyage
 	free(filename);
+
+	restore_fractal(fractal, &backup, &orig_img);
 	mlx_destroy_image(fractal->mlx_ptr, export.img_ptr);
-	*fractal = backup;
-	fractal->img = orig_img;
-	fractal->aspect_ratio = (double)fractal->img.width / (double)fractal->img.height;
+	/**fractal = backup;*/
+	/*fractal->img = orig_img;*/
+	/*fractal->aspect_ratio = (double)fractal->img.width / (double)fractal->img.height;*/
 
 	ft_putstr_fd("✅ Export completed successfully !\n", 1);
 }

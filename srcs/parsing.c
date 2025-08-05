@@ -59,7 +59,6 @@ void	init_mandelbrot(char **argv, t_fractal *fractal)
 	
 	data_init(fractal);
 	init_mlx(fractal);
-	printf("DEBUG : HHHHHHHHHHHHHHHERE\n");
 	fractal_rendering(fractal);
 	mlx_loop(fractal->mlx_ptr);
 }
