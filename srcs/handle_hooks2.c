@@ -25,28 +25,27 @@ static int	keypad_to_preset(int keysym)
 	return (-1);
 }
 
-static void	handle_key_four(int keysym, t_fractal *fractal)
+static void	handle_key_four(int keysym, t_fractal *f)
 {
 	int			preset;
 	static int	preset_need = FALSE;
 
 	preset = -1;
-	if ((keysym == XK_J || keysym == XK_j) && !ft_strcmp(fractal->name, "mandelbrot"))
+	if ((keysym == XK_J || keysym == XK_j) && !ft_strcmp(f->name, "mandelbrot"))
 		preset_need = jump_menu();
 	if (preset_need == TRUE && keysym >= XK_1 && keysym <= XK_9)
-		preset_need = handle_jump_choice(fractal, keysym - XK_0);
+		preset_need = handle_jump_choice(f, keysym - XK_0);
 	else
 		preset = keypad_to_preset(keysym);
 	if (preset > 0 && preset <= 9)
-		preset_need = handle_jump_choice(fractal, preset);
+		preset_need = handle_jump_choice(f, preset);
 	else if (keysym == XK_e)
 	{
 		ft_putstr_fd("Exporting image to PNG...\n", 1);
-		export_image(fractal);
+		export_image(f);
 	}
 	else if (keysym == XK_s || keysym == XK_S)
-		switch_render_mode(fractal);
-
+		switch_render_mode(f);
 }
 
 /*

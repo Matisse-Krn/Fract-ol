@@ -45,22 +45,20 @@ int	is_valid_number(const char *str)
  * @param argv The array of command-line arguments.
  * @param fractal A pointer to the fractal structure to store parsed data.
 */
-void	init_mandelbrot(char **argv, t_fractal *fractal)
+void	init_mandelbrot(char **argv, t_fractal *f)
 {
-	fractal->name = argv[1];
-	fractal->mlx_ptr = mlx_init();
-	if (!fractal->mlx_ptr)
+	f->name = argv[1];
+	f->mlx_ptr = mlx_init();
+	if (!f->mlx_ptr)
 		malloc_error();
 	print_launch_messages('M');
-	
-	is_fullscreen(argv, fractal);
-	mlx_get_screen_size(fractal->mlx_ptr, &fractal->img.full_width, &fractal->img.full_height);
-	set_real_screen_size(fractal);
-	
-	data_init(fractal);
-	init_mlx(fractal);
-	fractal_rendering(fractal);
-	mlx_loop(fractal->mlx_ptr);
+	is_fullscreen(argv, f);
+	mlx_get_screen_size(f->mlx_ptr, &f->img.full_width, &f->img.full_height);
+	set_real_screen_size(f);
+	data_init(f);
+	init_mlx(f);
+	fractal_rendering(f);
+	mlx_loop(f->mlx_ptr);
 }
 
 /*
@@ -71,25 +69,25 @@ void	init_mandelbrot(char **argv, t_fractal *fractal)
  * @param argv The array of command-line arguments.
  * @param fractal A pointer to the fractal structure to store parsed data.
 */
-void	init_julia(char **argv, t_fractal *fractal)
+void	init_julia(char **argv, t_fractal *f)
 {
-	fractal->name = argv[1];
-	fractal->mlx_ptr = mlx_init();
-	if (!fractal->mlx_ptr)
+	f->name = argv[1];
+	f->mlx_ptr = mlx_init();
+	if (!f->mlx_ptr)
 		malloc_error();
 	print_launch_messages('J');
-	is_fullscreen(argv, fractal);
-	mlx_get_screen_size(fractal->mlx_ptr, &fractal->img.full_width, &fractal->img.full_height);
-	set_real_screen_size(fractal);
+	is_fullscreen(argv, f);
+	mlx_get_screen_size(f->mlx_ptr, &f->img.full_width, &f->img.full_height);
+	set_real_screen_size(f);
 	check_valid_input_numbers(argv);
-	fractal->c.real = ft_atod(argv[2]);
-	fractal->c.imag = ft_atod(argv[3]);
-	fractal->init_c_real = argv[2];
-	fractal->init_c_imag = argv[3];
-	data_init(fractal);
-	init_mlx(fractal);
-	fractal_rendering(fractal);
-	mlx_loop(fractal->mlx_ptr);
+	f->c.real = ft_atod(argv[2]);
+	f->c.imag = ft_atod(argv[3]);
+	f->init_c_real = argv[2];
+	f->init_c_imag = argv[3];
+	data_init(f);
+	init_mlx(f);
+	fractal_rendering(f);
+	mlx_loop(f->mlx_ptr);
 }
 
 /*

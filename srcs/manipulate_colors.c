@@ -17,6 +17,20 @@
 	- adjusted_ratio: Contrast-adjusted ratio for smooth transitions.
 */
 
+static int	interpolate_rgb(t_rgb *color, int min, int max, double adjusted)
+{
+	color->r_min = (min >> 16) & 0xFF;
+	color->g_min = (min >> 8) & 0xFF;
+	color->b_min = min & 0xFF;
+	color->r_max = (max >> 16) & 0xFF;
+	color->g_max = (max >> 8) & 0xFF;
+	color->b_max = max & 0xFF;
+	color->r_min += (color->r_max - color->r_min) * adjusted;
+	color->g_min += (color->g_max - color->g_min) * adjusted;
+	color->b_min += (color->b_max - color->b_min) * adjusted;
+	return ((color->r_min << 16) | (color->g_min << 8) | color->b_min);
+}
+
 /*int	interpolate_color(int min, int max, int i, t_fractal *fractal)*/
 /*{*/
 /*	t_rgb	color;*/
@@ -37,20 +51,11 @@
 /*	return ((color.r_min << 16) | (color.g_min << 8) | color.b_min);*/
 /*}*/
 
-
-
-
-
-
-
-
-
 int	interpolate_color(int min, int max, int i, t_fractal *f)
 {
 	t_rgb	color;
 	double	ratio;
 	double	adjusted;
-	/*double	base;*/
 
 	if (f->render_mode == 'L')
 	{
@@ -60,7 +65,7 @@ int	interpolate_color(int min, int max, int i, t_fractal *f)
 			adjusted = log((double)i + 1) / log((double)f->max_iterations);
 	}
 	else if (f->render_mode == 'F')
-		adjusted = log(i + 1) / log(1000); // Toujours fixe
+		adjusted = log(i + 1) / log(1000);
 	else if (f->render_mode == 'C')
 		adjusted = (double)((i * 15) % 256) / 255.0;
 	else if (f->render_mode == 'A' && f->i_max > 0)
@@ -70,17 +75,7 @@ int	interpolate_color(int min, int max, int i, t_fractal *f)
 		ratio = (double)i / (double)f->max_iterations;
 		adjusted = pow(ratio, f->contrast_exponent);
 	}
-	/*printf("DEBUG : adjusted = %f\n", adjusted);*/
-	color.r_min = (min >> 16) & 0xFF;
-	color.g_min = (min >> 8) & 0xFF;
-	color.b_min = min & 0xFF;
-	color.r_max = (max >> 16) & 0xFF;
-	color.g_max = (max >> 8) & 0xFF;
-	color.b_max = max & 0xFF;
-	color.r_min += (color.r_max - color.r_min) * adjusted;
-	color.g_min += (color.g_max - color.g_min) * adjusted;
-	color.b_min += (color.b_max - color.b_min) * adjusted;
-	return ((color.r_min << 16) | (color.g_min << 8) | color.b_min);
+	return (interpolate_rgb(&color, min, max, adjusted));
 }
 
 /*

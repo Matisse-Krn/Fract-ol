@@ -11,7 +11,8 @@
  * @param fractal A pointer to the fractal structure.
  * @return Returns 1 if the pixel is colored, 0 otherwise.
 */
-/*static int	distrib_colors(t_complex *z, t_pixel *pixel, t_fractal *fractal)*/
+/*static int	distrib_colors(t_complex *z, t_pixel *pixel,*/
+/*	t_fractal *fractal)*/
 /*{*/
 /*	if ((z->real * z->real) + (z->imag * z->imag) > fractal->escape_value)*/
 /*	{*/
@@ -31,21 +32,6 @@
 /*	return (0);*/
 /*}*/
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*
  * In distrib_colors, on mesure i_max si render_mode == 'A'
  */
@@ -56,9 +42,11 @@ int	distrib_colors(t_complex *z, t_pixel *pixel, t_fractal *f)
 		if (f->render_mode == 'A' && pixel->i > f->i_max)
 			f->i_max = pixel->i;
 		if (f->range_color_mode == 'N')
-			f->color = interpolate_color(f->color_min, f->color_max, pixel->i, f);
+			f->color = interpolate_color(f->color_min,
+					f->color_max, pixel->i, f);
 		else if (f->range_color_mode == 'Y')
-			f->color = scale_map(pixel->i, f->color_min, f->color_max, f->max_iterations);
+			f->color = scale_map(pixel->i, f->color_min,
+					f->color_max, f->max_iterations);
 		my_mlx_pixel_put(&f->img, pixel->x, pixel->y, f->color);
 		return (1);
 	}

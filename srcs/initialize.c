@@ -142,8 +142,6 @@ void	initialize_window(t_fractal *f)
 {
 	char	*name_formatted;
 
-	/*mlx_get_screen_size(f->mlx_ptr, &f->img.full_width, &f->img.full_height);*/
-	/*set_real_screen_size(f);*/
 	f->aspect_ratio = (double)f->img.width / (double)f->img.height;
 	name_formatted = get_window_name(f);
 	if (!name_formatted)

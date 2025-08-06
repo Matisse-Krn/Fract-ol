@@ -4,6 +4,8 @@
 # define TRUE 1
 # define FALSE 0
 
+# define STB_IMAGE_WRITE_IMPLEMENTATION
+
 # include "mlx.h"
 # include "mlx_int.h"
 # include "libft.h"
@@ -11,8 +13,6 @@
 # include <float.h>
 
 # include <pthread.h>
-
-
 
 typedef struct s_complex_nb
 {
@@ -101,7 +101,7 @@ typedef struct s_thread_arg
 	char		type;
 	int			y_start;
 	int			y_end;
-} t_thread_args;
+}				t_thread_args;
 
 /* Memory and error handling */
 void		malloc_error(void);
@@ -197,6 +197,7 @@ void		init_sierpinski(char **argv, t_fractal *fractal);
 void		init_sierpinski_depth(char **argv, t_fractal *fractal);
 
 /* Export image to PNG */
+void		setup_export_image(t_image *export, t_fractal *fractal);
 void		export_image(t_fractal *fractal);
 t_fractal	duplicate_fractal(t_fractal *src);
 void		restore_fractal(t_fractal *f, t_fractal *backup, t_image *export);

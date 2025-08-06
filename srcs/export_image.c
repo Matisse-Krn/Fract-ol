@@ -1,11 +1,7 @@
 #include "fractol.h"
-
-
-#include "fractol.h"
 #include <sys/stat.h> // mkdir
 #include <unistd.h>   // access
 #include <fcntl.h>    // access macros
-#define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h" // à inclure une fois dans le fichier
 
 static char	*build_filename(t_fractal *f, int suffix)
@@ -14,11 +10,14 @@ static char	*build_filename(t_fractal *f, int suffix)
 	char	buffer[512];
 	char	name_part[256];
 
-	snprintf(name_part, sizeof(name_part), "fractol_%s_x=%.5f_y=%.5f_z=%.5f_iter=%d_mode=%s", f->name, f->shift_x, f->shift_y, f->zoom_rate, f->max_iterations, get_render_mode_label(f->render_mode));
+	snprintf(name_part, sizeof(name_part), "fractol_%s_x=%.5f_y=%.5f"
+		"_z=%.5f_iter=%d_mode=%s", f->name, f->shift_x, f->shift_y,
+		f->zoom_rate, f->max_iterations, get_render_mode_label(f->render_mode));
 	if (suffix == 0)
 		snprintf(buffer, sizeof(buffer), "exports/%s.png", name_part);
 	else
-		snprintf(buffer, sizeof(buffer), "exports/%s_%d.png", name_part, suffix);
+		snprintf(buffer, sizeof(buffer), "exports/%s_%d.png", name_part,
+			suffix);
 	filename = ft_strdup(buffer);
 	return (filename);
 }
@@ -39,14 +38,15 @@ static char	*generate_export_filename(t_fractal *f)
 	return (filename);
 }
 
-static void	write_image_to_png(const char *filename, t_image *img)
+static void	write_image_to_png(const char *name, t_image *img)
 {
 	unsigned char	*rgb;
 	int				x;
 	int				y;
 	int				i;
+	char			*px;
 
-	rgb = malloc(img->width * img->height * 3);
+	rgb = ft_calloc(img->width * img->height, 3);
 	if (!rgb)
 		malloc_error();
 	i = 0;
@@ -56,13 +56,13 @@ static void	write_image_to_png(const char *filename, t_image *img)
 		x = -1;
 		while (++x < img->width)
 		{
-			char *px = img->px_ptr + y * img->line_length + x * 4;
-			rgb[i++] = (unsigned char)px[2]; // R
-			rgb[i++] = (unsigned char)px[1]; // G
-			rgb[i++] = (unsigned char)px[0]; // B
+			px = img->px_ptr + y * img->line_length + x * 4;
+			rgb[i++] = (unsigned char)px[2];
+			rgb[i++] = (unsigned char)px[1];
+			rgb[i++] = (unsigned char)px[0];
 		}
 	}
-	if (!stbi_write_png(filename, img->width, img->height, 3, rgb, img->width * 3))
+	if (!stbi_write_png(name, img->width, img->height, 3, rgb, img->width * 3))
 		ft_putstr_fd("❌ Failed to write PNG file\n", 2);
 	free(rgb);
 }
@@ -83,7 +83,7 @@ static void	render_only_to_image(t_fractal *fractal)
 		if (init_threads(fractal) == FALSE)
 			return ;
 	}
-	/*manage_text(fractal);*/
+	manage_text(fractal);
 }
 
 void	export_image(t_fractal *fractal)
@@ -93,52 +93,19 @@ void	export_image(t_fractal *fractal)
 	char		*filename;
 	int			orig_iter;
 	t_image		orig_img;
-	// Créer dossier ./exports/ s'il n'existe pas
-	mkdir("exports", 0777);
 
-	// Sauvegarde des données de fractal
+	mkdir("exports", 0777);
 	orig_img = fractal->img;
 	orig_iter = fractal->max_iterations;
 	backup = duplicate_fractal(fractal);
-
-	// Initialisation de l'image d'export
-	export.width = fractal->img.full_width;
-	export.height = fractal->img.full_height;
-	export.img_ptr = mlx_new_image(fractal->mlx_ptr, export.width, export.height);
-	if (!export.img_ptr)
-		malloc_error();
-	export.px_ptr = mlx_get_data_addr(export.img_ptr,
-		&export.bits_per_pixel,
-		&export.line_length,
-		&export.endian);
-	if (!export.px_ptr)
-		malloc_error();
-	fractal->img = export;
-
-	// Augmentation des iterations
-	fractal->max_iterations = 100000;
-	// Modification aspect_ratio;
-	fractal->aspect_ratio = (double)fractal->img.width / (double)fractal->img.height;
-
-
-	// Rendu haute qualité
+	setup_export_image(&export, fractal);
 	render_only_to_image(fractal);
-
-	// Création du nom de fichier
 	filename = generate_export_filename(fractal);
 	if (!filename)
 		malloc_error();
-	// Conversion en RGB + écriture du PNG
 	write_image_to_png(filename, &export);
 	free(filename);
-
 	restore_fractal(fractal, &backup, &orig_img);
 	mlx_destroy_image(fractal->mlx_ptr, export.img_ptr);
-	/**fractal = backup;*/
-	/*fractal->img = orig_img;*/
-	/*fractal->aspect_ratio = (double)fractal->img.width / (double)fractal->img.height;*/
-
 	ft_putstr_fd("✅ Export completed successfully !\n", 1);
 }
-
-

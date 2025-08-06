@@ -12,7 +12,6 @@ void	switch_render_mode(t_fractal *f)
 		f->render_mode = 'C';
 	else
 		f->render_mode = 'N';
-
 	ft_putstr_fd("Render mode switched to : ", 1);
 	if (f->render_mode == 'N')
 		ft_putstr_fd("Normal (exponential)\n", 1);
@@ -41,4 +40,3 @@ char	*get_render_mode_label(char mode)
 		return ("Cyclic");
 	return ("Unknown");
 }
-
