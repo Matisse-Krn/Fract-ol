@@ -40,7 +40,10 @@ static void	change_color_mode_four(char mode, t_fractal *fractal)
 	else if (mode == 'C')
 	{
 		ft_putstr_fd("Cyan color mode.\n", 1);
-		fractal->color_min = 0x000000;
+		if (fractal->range_color_mode == 'C')
+			fractal->color_min = 0xFF0000;
+		else
+			fractal->color_min = 0x000000;
 		fractal->color_max = 0x00FFFF;
 		fractal->color_mode = mode;
 	}
@@ -65,14 +68,20 @@ static void	change_color_mode_three(char mode, t_fractal *fractal)
 	else if (mode == 'O')
 	{
 		ft_putstr_fd("Orange color mode.\n", 1);
-		fractal->color_min = 0x000000;
+		if (fractal->range_color_mode == 'C')
+			fractal->color_min = 0x0080FF;
+		else
+			fractal->color_min = 0x000000;
 		fractal->color_max = 0xFF8000;
 		fractal->color_mode = mode;
 	}
 	else if (mode == 'P')
 	{
 		ft_putstr_fd("Pink color mode.\n", 1);
-		fractal->color_min = 0x000000;
+		if (fractal->range_color_mode == 'C')
+			fractal->color_min = 0x00FF00;
+		else
+			fractal->color_min = 0x000000;
 		fractal->color_max = 0xFF00FF;
 		fractal->color_mode = mode;
 	}
@@ -100,14 +109,20 @@ static void	change_color_mode_two(char mode, t_fractal *fractal)
 	else if (mode == 'R')
 	{
 		ft_putstr_fd("Red color mode.\n", 1);
-		fractal->color_min = 0x000000;
+		if (fractal->range_color_mode == 'C')
+			fractal->color_min = 0x00FFFF;
+		else
+			fractal->color_min = 0x000000;
 		fractal->color_max = 0xFF0000;
 		fractal->color_mode = mode;
 	}
 	else if (mode == 'G')
 	{
 		ft_putstr_fd("Green color mode.\n", 1);
-		fractal->color_min = 0x000000;
+		if (fractal->range_color_mode == 'C')
+			fractal->color_min = 0x8F8888;
+		else
+			fractal->color_min = 0x000000;
 		fractal->color_max = 0x00FF00;
 		fractal->color_mode = mode;
 	}
@@ -136,14 +151,20 @@ void	change_color_mode(char mode, t_fractal *fractal)
 	else if (mode == 'B')
 	{
 		ft_putstr_fd("Blue mode.\n", 1);
-		fractal->color_min = 0x000000;
+		if (fractal->range_color_mode == 'C')
+			fractal->color_min = 0xFFFF00;
+		else
+			fractal->color_min = 0x000000;
 		fractal->color_max = 0x0000FF;
 		fractal->color_mode = mode;
 	}
 	else if (mode == 'Y')
 	{
 		ft_putstr_fd("Yellow color mode.\n", 1);
-		fractal->color_min = 0x000000;
+		if (fractal->range_color_mode == 'C')
+			fractal->color_min = 0x000099;
+		else
+			fractal->color_min = 0x000000;
 		fractal->color_max = 0x999900;
 		fractal->color_mode = mode;
 	}

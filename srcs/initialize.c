@@ -82,9 +82,9 @@ void	data_init(t_fractal *fractal)
 	fractal->color_min = fractal->init_color_min;
 	fractal->color_max = fractal->init_color_max;
 	fractal->color_mode = 'N';
-	fractal->palette_mode = 'N';
+	fractal->render_mode = 'N';
 	fractal->contrast_exponent = 0.5;
-	fractal->psy = 'N';
+	fractal->range_color_mode = 'N';
 	position_init(fractal);
 }
 

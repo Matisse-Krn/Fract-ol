@@ -100,8 +100,7 @@ void	put_max_iterations(t_fractal *fractal)
  * 
  * Display:
 	- Prints "Color :" followed by the active color mode.
-	- If psychedelic mode is enabled, prints "Psych. : ON",
-		otherwise "Psych. : OFF".
+	- Prints "Range color mode :" followed by the active range color mode (PSYCHEDELIC, COMPLEMENTARY, NORMAL),
 	- Uses put_a_string() for rendering text.
 */
 void	put_color_mode(t_fractal *fractal)
@@ -124,8 +123,11 @@ void	put_color_mode(t_fractal *fractal)
 	else if (fractal->color_mode == 'C')
 		put_a_string(55, 40, "Cyan", fractal);
 	put_a_string(100, 40, "||", fractal);
-	if (fractal->psy == 'Y')
-		put_a_string(120, 40, "Psych. : ON", fractal);
-	else if (fractal->psy == 'N')
-		put_a_string(120, 40, "Psych. : OFF", fractal);
+	if (fractal->range_color_mode == 'Y')
+		put_a_string(120, 40, "Range color mode : PSYCHEDELIC", fractal);
+	else if (fractal->range_color_mode == 'N')
+		put_a_string(120, 40, "Range color mode : NORMAL", fractal);
+	else if (fractal->range_color_mode == 'C')
+		put_a_string(120, 40, "Range color mode : COMPLEMENTARY", fractal);
+
 }

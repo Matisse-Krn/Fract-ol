@@ -31,7 +31,7 @@ static void	handle_key_four(int keysym, t_fractal *fractal)
 	static int	preset_need = FALSE;
 
 	preset = -1;
-	if (keysym == XK_J || keysym == XK_j)
+	if ((keysym == XK_J || keysym == XK_j) && !ft_strcmp(fractal->name, "mandelbrot"))
 		preset_need = jump_menu();
 	if (preset_need == TRUE && keysym >= XK_1 && keysym <= XK_9)
 		preset_need = handle_jump_choice(fractal, keysym - XK_0);
@@ -45,7 +45,7 @@ static void	handle_key_four(int keysym, t_fractal *fractal)
 		export_image(fractal);
 	}
 	else if (keysym == XK_s || keysym == XK_S)
-		switch_palette_mode(fractal);
+		switch_render_mode(fractal);
 
 }
 
@@ -65,7 +65,7 @@ static void	handle_key_four(int keysym, t_fractal *fractal)
 void	handle_key_three(int keysym, t_fractal *fractal)
 {
 	if (keysym == XK_space)
-		swap_psy_mode(fractal);
+		swap_range_color_mode(fractal);
 	else if (keysym == XK_minus)
 		change_contrast('-', fractal);
 	else if (keysym == XK_equal)

@@ -3,7 +3,7 @@
 int	jump_menu(void)
 {
 	ft_putstr_fd("\n🌌 "BOLD"Jump-to Presets (Mandelbrot only)"RST"\n\n", 1);
-	ft_putstr_fd("\t[1] Main Cardioid       → x = -0.6,			  y = 0.0\n", 1);
+	ft_putstr_fd("\t[1] Main Cardioid       → x = -0.6,	  	  y = 0.0\n", 1);
 	ft_putstr_fd("\t[2] Seahorse Valley     → "
 		"x = -0.745,		  y = 0.115\n", 1);
 	ft_putstr_fd("\t[3] Elephant Valley     → "

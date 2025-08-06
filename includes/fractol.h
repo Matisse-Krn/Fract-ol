@@ -40,8 +40,8 @@ typedef struct s_fractal
 	char		*init_c_imag;
 	char		*last_pos;
 	char		color_mode;
-	char		psy;
-	char		palette_mode;
+	char		range_color_mode;
+	char		render_mode;
 	void		*mlx_ptr;
 	void		*win_ptr;
 	int			max_iterations;
@@ -160,10 +160,10 @@ int			distrib_colors(t_complex *z, t_pixel *pixel, t_fractal *f);
 void		change_color_mode(char mode, t_fractal *fractal);
 void		change_color_sierpinski(int keysym, t_fractal *fractal);
 void		swap_colors(t_fractal *fractal);
-void		swap_psy_mode(t_fractal *fractal);
+void		swap_range_color_mode(t_fractal *fractal);
 int			interpolate_color(int min, int max, int i, t_fractal *fractal);
-void		switch_palette_mode(t_fractal *f);
-char		*get_palette_mode_label(char mode);
+void		switch_render_mode(t_fractal *f);
+char		*get_render_mode_label(char mode);
 
 /* Iterations and contrast management */
 void		change_max_iterations(char sign, t_fractal *fractal);
