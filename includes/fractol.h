@@ -192,14 +192,26 @@ t_complex	julia_init_complex(t_pixel *pixel, t_fractal *fractal);
 /* Argument parsing and input handling */
 int			is_valid_number(const char *str);
 void		init_mandelbrot(char **argv, t_fractal *fractal);
-void		init_julia(char **argv, t_fractal *fractal);
+void		init_julia(int argc, char **argv, t_fractal *f);
 void		init_sierpinski(char **argv, t_fractal *fractal);
 void		init_sierpinski_depth(char **argv, t_fractal *fractal);
+
+/* Julia's presets */
+void		assign_params(int argc, char **argv, t_fractal *f);
+void		set_preset_by_number(char *arg, t_fractal *f);
+void		set_preset_by_number6(char *arg, t_fractal *f);
 
 /* Export image to PNG */
 void		setup_export_image(t_image *export, t_fractal *fractal);
 void		export_image(t_fractal *fractal);
 t_fractal	duplicate_fractal(t_fractal *src);
 void		restore_fractal(t_fractal *f, t_fractal *backup, t_image *export);
+
+/* Help, Man, Documentation */
+void		handle_help(char **argv);
+void		print_help(void);
+void		print_other_notes(void);
+void		print_reminder_shortcuts(void);
+void		print_mandelbrot_presets(void);
 
 #endif

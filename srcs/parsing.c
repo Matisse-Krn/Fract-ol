@@ -1,44 +1,6 @@
 #include "fractol.h"
 
 /*
- * Checks if the given string represents a valid numeric value.
- * Allows optional leading whitespace, a sign, and a single decimal separator.
- * 
- * @param str The string to validate.
- * @return Returns 1 if the string is a valid number, 0 otherwise.
- * @return If the string contains only a '-' or a '+' (or '-.', or '.-',...),
-	it will be valid and interpreted as a 1.
-*/
-int	is_valid_number(const char *str)
-{
-	int	has_dot;
-
-	if (!str)
-		return (FALSE);
-	while (*str == ' ' || *str == '\t' || *str == '\n' || \
-		*str == '\r' || *str == '\f' || *str == '\v')
-		str++;
-	if (*str == '-' || *str == '+')
-		str++;
-	has_dot = 0;
-	while (*str)
-	{
-		if (*str >= '0' && *str <= '9')
-			;
-		else if (*str == '.' || *str == ',')
-		{
-			if (has_dot)
-				return (FALSE);
-			has_dot = 1;
-		}
-		else
-			return (FALSE);
-		str++;
-	}
-	return (TRUE);
-}
-
-/*
  * Initializes the fractal structure for the Mandelbrot set and starts rendering.
  * Sets up the required resources and event handling for the display window.
  * 
@@ -69,7 +31,7 @@ void	init_mandelbrot(char **argv, t_fractal *f)
  * @param argv The array of command-line arguments.
  * @param fractal A pointer to the fractal structure to store parsed data.
 */
-void	init_julia(char **argv, t_fractal *f)
+void	init_julia(int argc, char **argv, t_fractal *f)
 {
 	f->name = argv[1];
 	f->mlx_ptr = mlx_init();
@@ -79,11 +41,7 @@ void	init_julia(char **argv, t_fractal *f)
 	is_fullscreen(argv, f);
 	mlx_get_screen_size(f->mlx_ptr, &f->img.full_width, &f->img.full_height);
 	set_real_screen_size(f);
-	check_valid_input_numbers(argv);
-	f->c.real = ft_atod(argv[2]);
-	f->c.imag = ft_atod(argv[3]);
-	f->init_c_real = argv[2];
-	f->init_c_imag = argv[3];
+	assign_params(argc, argv, f);
 	data_init(f);
 	init_mlx(f);
 	fractal_rendering(f);

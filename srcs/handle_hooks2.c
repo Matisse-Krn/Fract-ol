@@ -46,6 +46,8 @@ static void	handle_key_four(int keysym, t_fractal *f)
 	}
 	else if (keysym == XK_s || keysym == XK_S)
 		switch_render_mode(f);
+	else if (keysym == XK_H || keysym == XK_h)
+		print_help();
 }
 
 /*
