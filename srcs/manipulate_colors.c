@@ -45,24 +45,6 @@
 
 
 
-/*static int	get_complementary_color(int color)*/
-/*{*/
-/*	int	r;*/
-/*	int	g;*/
-/*	int	b;*/
-/**/
-/*	r = 255 - ((color >> 16) & 0xFF);*/
-/*	g = 255 - ((color >> 8) & 0xFF);*/
-/*	b = 255 - (color & 0xFF);*/
-/*	return ((r << 16) | (g << 8) | b);*/
-/*}*/
-
-/*
- * Applies a color gradient using either:
- * - contrast exponent (default mode),
- * - logarithmic scale (render_mode == 'L'),
- * - adaptive scale (render_mode == 'A'), based on max i reached.
- */
 int	interpolate_color(int min, int max, int i, t_fractal *f)
 {
 	t_rgb	color;
@@ -70,8 +52,6 @@ int	interpolate_color(int min, int max, int i, t_fractal *f)
 	double	adjusted;
 	/*double	base;*/
 
-	/*if (f->range_color_mode == 'C')*/
-		/*min = get_complementary_color(max);*/
 	if (f->render_mode == 'L')
 	{
 		if (i == 0)
@@ -172,13 +152,6 @@ control contrast or smoothing here.\nSo relax... Or try changing the \
 maximum number of iterations (keypad + or -).\nEnjoy the trip !\n\n", 1);
 	}
 	else if (fractal->range_color_mode == 'Y')
-	{
-		fractal->range_color_mode = 'C';
-		/*fractal->color_min = get_complementary_color(fractal->color_max);*/
-		ft_putstr_fd("Complementary mode : ON\n\
-Very good choice (even for [exports to PNG] = E)...\n\n", 1);
-	}
-	else if (fractal->range_color_mode == 'C')
 	{
 		fractal->range_color_mode = 'N';
 		ft_putstr_fd("Normal mode : ON\n\

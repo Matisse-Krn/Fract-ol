@@ -127,7 +127,5 @@ void	put_color_mode(t_fractal *fractal)
 		put_a_string(120, 40, "Range color mode : PSYCHEDELIC", fractal);
 	else if (fractal->range_color_mode == 'N')
 		put_a_string(120, 40, "Range color mode : NORMAL", fractal);
-	else if (fractal->range_color_mode == 'C')
-		put_a_string(120, 40, "Range color mode : COMPLEMENTARY", fractal);
 
 }
