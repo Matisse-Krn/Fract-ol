@@ -198,8 +198,8 @@ void		init_sierpinski_depth(char **argv, t_fractal *fractal);
 
 /* Julia's presets */
 void		assign_params(int argc, char **argv, t_fractal *f);
-void		set_preset_by_number(char *arg, t_fractal *f);
-void		set_preset_by_number6(char *arg, t_fractal *f);
+void		set_preset(char *arg, t_fractal *f);
+void		set_preset6(char *arg, t_fractal *f);
 
 /* Export image to PNG */
 void		setup_export_image(t_image *export, t_fractal *fractal);

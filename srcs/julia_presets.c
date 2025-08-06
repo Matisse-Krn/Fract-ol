@@ -52,7 +52,7 @@ void	assign_params(int argc, char **argv, t_fractal *f)
 	f->c.real = 0;
 	f->c.imag = 0;
 	ft_str_tolower(argv[2]);
-	set_preset_by_number(argv[2], f);
+	set_preset(argv[2], f);
 	if (f->c.real == 0 && f->c.imag == 0)
 	{
 		check_valid_input_numbers(argv);
