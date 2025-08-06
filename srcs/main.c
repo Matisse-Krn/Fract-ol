@@ -62,7 +62,7 @@ static int	parse_input(int argc, char **argv, t_fractal *fractal)
 	if (!ft_strcmp(argv[1], "mandelbrot"))
 		init_mandelbrot(argv, fractal);
 	else if (!ft_strcmp(argv[1], "julia") && argc > 2)
-		init_julia(argc, argv, fractal);
+		init_julia(argv, fractal);
 	else if (!ft_strcmp(argv[1], "sierpinski") && is_valid_number(argv[2]))
 		init_sierpinski_depth(argv, fractal);
 	else if (!ft_strcmp(argv[1], "sierpinski"))

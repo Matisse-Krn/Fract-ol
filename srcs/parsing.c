@@ -31,7 +31,7 @@ void	init_mandelbrot(char **argv, t_fractal *f)
  * @param argv The array of command-line arguments.
  * @param fractal A pointer to the fractal structure to store parsed data.
 */
-void	init_julia(int argc, char **argv, t_fractal *f)
+void	init_julia(char **argv, t_fractal *f)
 {
 	f->name = argv[1];
 	f->mlx_ptr = mlx_init();
@@ -41,7 +41,7 @@ void	init_julia(int argc, char **argv, t_fractal *f)
 	is_fullscreen(argv, f);
 	mlx_get_screen_size(f->mlx_ptr, &f->img.full_width, &f->img.full_height);
 	set_real_screen_size(f);
-	assign_params(argc, argv, f);
+	assign_params(argv, f);
 	data_init(f);
 	init_mlx(f);
 	fractal_rendering(f);

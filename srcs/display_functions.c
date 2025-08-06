@@ -1,20 +1,5 @@
 #include "fractol.h"
 
-static void	vertical_displacement(double move_amount_y,
-								char direction, t_fractal *f)
-{
-	if (direction == 'U')
-	{
-		ft_putstr_fd("Going up\n", 1);
-		f->shift_y += move_amount_y;
-	}
-	else if (direction == 'D')
-	{
-		ft_putstr_fd("Going down\n", 1);
-		f->shift_y -= move_amount_y;
-	}
-}
-
 void	displacement(char direction, t_fractal *f)
 {
 	double	move_amount_x;
@@ -23,16 +8,13 @@ void	displacement(char direction, t_fractal *f)
 	move_amount_x = (1.6 / f->zoom_rate) * f->aspect_ratio * 0.25;
 	move_amount_y = (1.6 / f->zoom_rate) * 0.25;
 	if (direction == 'L')
-	{
-		ft_putstr_fd("Going left\n", 1);
 		f->shift_x -= move_amount_x;
-	}
 	else if (direction == 'R')
-	{
-		ft_putstr_fd("Going right\n", 1);
 		f->shift_x += move_amount_x;
-	}
-	vertical_displacement(move_amount_y, direction, f);
+	else if (direction == 'U')
+		f->shift_y += move_amount_y;
+	else if (direction == 'D')
+		f->shift_y -= move_amount_y;
 	fractal_rendering(f);
 }
 

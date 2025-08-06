@@ -193,7 +193,7 @@ t_complex	julia_init_complex(t_pixel *pixel, t_fractal *fractal);
 /* Argument parsing and input handling */
 int			is_valid_number(const char *str);
 void		init_mandelbrot(char **argv, t_fractal *fractal);
-void		init_julia(int argc, char **argv, t_fractal *f);
+void		init_julia(char **argv, t_fractal *f);
 void		init_sierpinski(char **argv, t_fractal *fractal);
 void		init_sierpinski_depth(char **argv, t_fractal *fractal);
 

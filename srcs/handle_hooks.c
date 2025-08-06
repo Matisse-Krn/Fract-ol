@@ -131,25 +131,13 @@ void	handle_key_two(int keysym, t_fractal *fractal)
 int	handle_mouse(int button, int x, int y, t_fractal *fractal)
 {
 	if (button == Button5)
-	{
-		ft_putstr_fd("Zoom out\n", 1);
 		apply_zoom(fractal, x, y, 0.8);
-	}
 	else if (button == Button4)
-	{
-		ft_putstr_fd("Zoom in\n", 1);
 		apply_zoom(fractal, x, y, 1.2);
-	}
 	else if (button == Button3)
-	{	
-		ft_putstr_fd("Big zoom out\n", 1);
 		apply_zoom(fractal, x, y, 0.2);
-	}
 	else if (button == Button1)
-	{
-		ft_putstr_fd("Big zoom in\n", 1);
 		apply_zoom(fractal, x, y, 1.8);
-	}
 	return (0);
 }
 
