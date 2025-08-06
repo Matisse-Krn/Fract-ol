@@ -107,6 +107,7 @@ typedef struct s_thread_arg
 void		malloc_error(void);
 char		*if_malloc_error(char *s);
 void		check_valid_input_numbers(char **argv);
+void		usage_error(void);
 
 /* Program initialization */
 void		data_init(t_fractal *fractal);
@@ -197,7 +198,7 @@ void		init_sierpinski(char **argv, t_fractal *fractal);
 void		init_sierpinski_depth(char **argv, t_fractal *fractal);
 
 /* Julia's presets */
-void		assign_params(int argc, char **argv, t_fractal *f);
+void		assign_params(char **argv, t_fractal *f);
 void		set_preset(char *arg, t_fractal *f);
 void		set_preset6(char *arg, t_fractal *f);
 

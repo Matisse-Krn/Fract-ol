@@ -68,12 +68,33 @@ void	check_valid_input_numbers(char **argv)
 	{
 		ft_printf("\n\t\t⚠️  '%s' is not a valid first param... ⚠️\n"
 			"👋 Exit program 👋\n\n", argv[2]);
+		ft_putstr_fd(BOLD UNDERLINE"\tUse '--help' or '-h' to view the "
+			"manual anytime."RST"\n\n", 2);
 		exit(EXIT_FAILURE);
 	}
 	else if (!is_valid_number(argv[3]))
 	{
 		ft_printf("\n\t\t⚠️  '%s' is not a valid second param... ⚠️\n"
 			"👋 Exit program 👋\n\n", argv[3]);
+		ft_putstr_fd(BOLD UNDERLINE"\tUse '--help' or '-h' to view "
+			"the manual anytime."RST"\n\n", 2);
 		exit(EXIT_FAILURE);
 	}
+}
+
+void	usage_error(void)
+{
+	ft_putstr_fd(BOLD RED UNDERLINE"\nUsage :"RST"\n\n", 2);
+	ft_putstr_fd("\t\t./fractol mandelbrot [-f] [-mt=no]\n", 2);
+	ft_putstr_fd("\t\t./fractol julia <real> <imag> [-f] [-mt=no]\n", 2);
+	ft_putstr_fd("\t\t./fractol julia <preset> [-f] [-mt=no]\n", 2);
+	ft_putstr_fd("\t\t./fractol sierpinski [-f] [-mt=no]\n", 2);
+	ft_putstr_fd("\t\t./fractol sierpinski <depth> [-f] [-mt=no]\n\n", 2);
+	ft_putstr_fd(BOLD RED UNDERLINE"Parameters :"RST"\n\n", 2);
+	ft_putstr_fd("\t"BOLD"'-mt=no'"RST"        "
+		": Disable multi-threading\n", 2);
+	ft_putstr_fd("\t"BOLD"'-f'"RST"            "
+		": Fullscreen (slower but beautiful)\n\n", 2);
+	ft_putstr_fd(BOLD RED UNDERLINE"\tUse '--help' or '-h' to view "
+		"the manual anytime."RST"\n\n", 2);
 }

@@ -67,7 +67,7 @@ static int	parse_input(int argc, char **argv, t_fractal *fractal)
 		init_sierpinski_depth(argv, fractal);
 	else if (!ft_strcmp(argv[1], "sierpinski"))
 		init_sierpinski(argv, fractal);
-	else if (argc <= 2)
+	else
 		return (1);
 	return (0);
 }
@@ -86,25 +86,12 @@ int	main(int argc, char **argv)
 	t_fractal	fractal;
 
 	printf("%sDEBUG : TODO : Retirer le snprintf !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!%s\n", RED, RST);
-	printf("%sDEBUG : TODO : Ajouter print lorsqu'un bon preset a ete identifie/assigne%s\n", RED, RST);
-	printf("%sDEBUG : TODO : Proposer un menu --help + ajouter a 'usage' les presets de julia%s\n\n\n\n", RED, RST);
 	if (argc < 2)
-		return (1);
+		return (usage_error(), 1);
 	handle_help(argv);
 	ft_bzero(&fractal, sizeof(t_fractal));
 	ft_str_tolower(argv[1]);
 	if (parse_input(argc, argv, &fractal))
-	{
-		ft_putstr_fd(BOLD RED UNDERLINE"Usage :"RST"\n\n", 2);
-		ft_putstr_fd("\t\t./fractol mandelbrot [-f] [-mt=no]\n", 2);
-		ft_putstr_fd("\t\t./fractol julia <real> <imaginary> [-f] [-mt=no]\n", 2);
-		ft_putstr_fd("\t\t./fractol sierpinski [-f] [-mt=no]\n", 2);
-		ft_putstr_fd("\t\t./fractol sierpinski <depth> [-f] [-mt=no]\n\n", 2);
-		ft_putstr_fd(BOLD RED UNDERLINE"Parameters :"RST"\n\n", 2);
-		ft_putstr_fd("\t"BOLD"'-mt=no'"RST" =	Disable multi-threading\n", 2);
-		ft_putstr_fd("\t"BOLD"'-f'"RST" =		", 2);
-		ft_putstr_fd("Fullscreen (slower but beautifull)\n\n", 2);
-		return (1);
-	}
+		return (usage_error(), 1);
 	return (0);
 }
