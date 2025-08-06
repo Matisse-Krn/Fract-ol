@@ -12,8 +12,8 @@ t_fractal	duplicate_fractal(t_fractal *src)
 	copy.init_c_imag = src->init_c_imag;
 	copy.last_pos = src->last_pos;
 	copy.color_mode = src->color_mode;
-	copy.psy = src->psy;
-	copy.palette_mode = src->palette_mode;
+	copy.range_color_mode = src->range_color_mode;
+	copy.render_mode = src->render_mode;
 	copy.max_iterations = src->max_iterations;
 	copy.i_max = src->i_max;
 	copy.tick_iterations = src->tick_iterations;
@@ -56,8 +56,8 @@ void	restore_fractal(t_fractal *f, t_fractal *backup, t_image *orig_img)
 	f->color = backup->color;
 	f->color_min = backup->color_min;
 	f->color_max = backup->color_max;
-	f->palette_mode = backup->palette_mode;
-	f->psy = backup->psy;
+	f->render_mode = backup->render_mode;
+	f->range_color_mode = backup->range_color_mode;
 	f->aspect_ratio = (double)orig_img->width / (double)orig_img->height;
 	f->img = *orig_img;
 }

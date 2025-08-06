@@ -45,13 +45,23 @@
 
 
 
-
+/*static int	get_complementary_color(int color)*/
+/*{*/
+/*	int	r;*/
+/*	int	g;*/
+/*	int	b;*/
+/**/
+/*	r = 255 - ((color >> 16) & 0xFF);*/
+/*	g = 255 - ((color >> 8) & 0xFF);*/
+/*	b = 255 - (color & 0xFF);*/
+/*	return ((r << 16) | (g << 8) | b);*/
+/*}*/
 
 /*
  * Applies a color gradient using either:
  * - contrast exponent (default mode),
- * - logarithmic scale (palette_mode == 'L'),
- * - adaptive scale (palette_mode == 'A'), based on max i reached.
+ * - logarithmic scale (render_mode == 'L'),
+ * - adaptive scale (render_mode == 'A'), based on max i reached.
  */
 int	interpolate_color(int min, int max, int i, t_fractal *f)
 {
@@ -60,28 +70,27 @@ int	interpolate_color(int min, int max, int i, t_fractal *f)
 	double	adjusted;
 	/*double	base;*/
 
-	if (f->palette_mode == 'L')
+	/*if (f->range_color_mode == 'C')*/
+		/*min = get_complementary_color(max);*/
+	if (f->render_mode == 'L')
 	{
 		if (i == 0)
 			adjusted = 0;
 		else
 			adjusted = log((double)i + 1) / log((double)f->max_iterations);
 	}
-
-
-	else if (f->palette_mode == 'F')
+	else if (f->render_mode == 'F')
 		adjusted = log(i + 1) / log(1000); // Toujours fixe
-	else if (f->palette_mode == 'C')
-		adjusted = (double)(i % 256) / 255.0;
-
-
-	else if (f->palette_mode == 'A' && f->i_max > 0)
+	else if (f->render_mode == 'C')
+		adjusted = (double)((i * 15) % 256) / 255.0;
+	else if (f->render_mode == 'A' && f->i_max > 0)
 		adjusted = (double)i / (double)f->i_max;
 	else
 	{
 		ratio = (double)i / (double)f->max_iterations;
 		adjusted = pow(ratio, f->contrast_exponent);
 	}
+	/*printf("DEBUG : adjusted = %f\n", adjusted);*/
 	color.r_min = (min >> 16) & 0xFF;
 	color.g_min = (min >> 8) & 0xFF;
 	color.b_min = min & 0xFF;
@@ -143,7 +152,7 @@ void	swap_colors(t_fractal *fractal)
 }
 
 /*
- * Toggles psychedelic mode on or off.
+ * Toggles psychedelic/complementary modes on or off.
  * In psychedelic mode, color transitions are unpredictable,
 	and contrast or smoothing adjustments are disabled.
  * Changing the maximum number of iterations ('max_iterations') will change
@@ -151,21 +160,28 @@ void	swap_colors(t_fractal *fractal)
  * 
  * @param fractal A pointer to the fractal structure.
 */
-void	swap_psy_mode(t_fractal *fractal)
+void	swap_range_color_mode(t_fractal *fractal)
 {
-	if (fractal->psy == 'N')
+	if (fractal->range_color_mode == 'N')
 	{
-		fractal->psy = 'Y';
-		ft_putstr_fd("Psychedelic mode ON.\n\
+		fractal->range_color_mode = 'Y';
+		ft_putstr_fd("Psychedelic mode : ON\n\
 You can change colors by the usuals shortcuts,\nbut don't rely on \
 the names (initials) of the shortcuts.\nAnd, by the way : you can't \
 control contrast or smoothing here.\nSo relax... Or try changing the \
 maximum number of iterations (keypad + or -).\nEnjoy the trip !\n\n", 1);
 	}
-	else if (fractal->psy == 'Y')
+	else if (fractal->range_color_mode == 'Y')
 	{
-		fractal->psy = 'N';
-		ft_putstr_fd("Psychedelic mode OFF.\n\
+		fractal->range_color_mode = 'C';
+		/*fractal->color_min = get_complementary_color(fractal->color_max);*/
+		ft_putstr_fd("Complementary mode : ON\n\
+Very good choice (even for [exports to PNG] = E)...\n\n", 1);
+	}
+	else if (fractal->range_color_mode == 'C')
+	{
+		fractal->range_color_mode = 'N';
+		ft_putstr_fd("Normal mode : ON\n\
 You're such an ordinary person...\n\n", 1);
 	}
 	fractal_rendering(fractal);

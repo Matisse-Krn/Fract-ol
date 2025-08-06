@@ -14,7 +14,7 @@ static char	*build_filename(t_fractal *f, int suffix)
 	char	buffer[512];
 	char	name_part[256];
 
-	snprintf(name_part, sizeof(name_part), "fractol_%s_x=%.5f_y=%.5f_z=%.5f_iter=%d_mode=%s", f->name, f->shift_x, f->shift_y, f->zoom_rate, f->max_iterations, get_palette_mode_label(f->palette_mode));
+	snprintf(name_part, sizeof(name_part), "fractol_%s_x=%.5f_y=%.5f_z=%.5f_iter=%d_mode=%s", f->name, f->shift_x, f->shift_y, f->zoom_rate, f->max_iterations, get_render_mode_label(f->render_mode));
 	if (suffix == 0)
 		snprintf(buffer, sizeof(buffer), "exports/%s.png", name_part);
 	else
@@ -69,7 +69,7 @@ static void	write_image_to_png(const char *filename, t_image *img)
 
 static void	render_only_to_image(t_fractal *fractal)
 {
-	if (fractal->palette_mode == 'A')
+	if (fractal->render_mode == 'A')
 		fractal->i_max = 0;
 	if (fractal->mt == FALSE)
 	{
@@ -116,7 +116,7 @@ void	export_image(t_fractal *fractal)
 	fractal->img = export;
 
 	// Augmentation des iterations
-	fractal->max_iterations = 10000;
+	fractal->max_iterations = 100000;
 	// Modification aspect_ratio;
 	fractal->aspect_ratio = (double)fractal->img.width / (double)fractal->img.height;
 

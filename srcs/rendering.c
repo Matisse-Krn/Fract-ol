@@ -47,17 +47,17 @@
 
 
 /*
- * In distrib_colors, on mesure i_max si palette_mode == 'A'
+ * In distrib_colors, on mesure i_max si render_mode == 'A'
  */
 int	distrib_colors(t_complex *z, t_pixel *pixel, t_fractal *f)
 {
 	if ((z->real * z->real) + (z->imag * z->imag) > f->escape_value)
 	{
-		if (f->palette_mode == 'A' && pixel->i > f->i_max)
+		if (f->render_mode == 'A' && pixel->i > f->i_max)
 			f->i_max = pixel->i;
-		if (f->psy == 'N')
+		if (f->range_color_mode == 'N')
 			f->color = interpolate_color(f->color_min, f->color_max, pixel->i, f);
-		else if (f->psy == 'Y')
+		else if (f->range_color_mode == 'Y')
 			f->color = scale_map(pixel->i, f->color_min, f->color_max, f->max_iterations);
 		my_mlx_pixel_put(&f->img, pixel->x, pixel->y, f->color);
 		return (1);
@@ -202,7 +202,7 @@ void	pixel_loop(char type, t_fractal *fractal)
 */
 void	fractal_rendering(t_fractal *fractal)
 {
-	if (fractal->palette_mode == 'A')
+	if (fractal->render_mode == 'A')
 		fractal->i_max = 0;
 	if (fractal->mt == FALSE)
 	{
