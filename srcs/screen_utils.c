@@ -26,7 +26,7 @@ void	set_real_screen_size(t_fractal *f)
 	}
 	else
 	{
-		f->img.height = 960;
-		f->img.width = 960;
+		f->img.height = 1440;
+		f->img.width = 3440;
 	}
 }

@@ -17,7 +17,7 @@ void	setup_export_image(t_image *export, t_fractal *fractal)
 	if (!export->px_ptr)
 		malloc_error();
 	fractal->img = *export;
-	fractal->max_iterations = 100000;
+	// fractal->max_iterations = 100000;
 	fractal->aspect_ratio = (double)fractal->img.width
 		/ (double)fractal->img.height;
 }
