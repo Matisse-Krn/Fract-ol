@@ -11,7 +11,7 @@
 	- from_x, from_y: Top-left corner of the box.
 	- to_x, to_y: Bottom-right corner of the box.
 */
-void	draw_a_box(t_box *box, t_fractal *fractal)
+void	draw_a_box(t_box *box, t_fractal *fractal, int color)
 {
 	int	init_y;
 
@@ -21,8 +21,37 @@ void	draw_a_box(t_box *box, t_fractal *fractal)
 	{
 		box->from_y = init_y - 1;
 		while (++(box->from_y) < box->to_y && box->from_y < fractal->img.height)
-			my_mlx_pixel_put(&fractal->img, box->from_x, box->from_y, 0x000000);
+			my_mlx_pixel_put(&fractal->img, box->from_x, box->from_y, color);
 	}
+}
+
+static void	put_shortcuts(t_fractal *f, t_box *box)
+{
+	box->from_x = 0;
+	box->from_y = f->img.height - 80;
+	box->to_x = f->img.width;
+	box->to_y = f->img.height;
+	draw_a_box(box, f, 0x000000);
+	box->from_x = 0;
+	box->from_y = f->img.height - 80 - 5;
+	box->to_y = f->img.height - 80;
+	draw_a_box(box, f, 0xFFFFFF);
+}
+
+static void	put_live_infos(t_fractal *f, t_box *box)
+{
+	box->from_x = 0;
+	box->from_y = 0;
+	box->to_x = 220;
+	box->to_y = 90;
+	draw_a_box(box, f, 0x000000);
+	box->from_x = box->to_x - 5;
+	box->from_y = 0;
+	draw_a_box(box, f, 0xFFFFFF);
+	box->from_x = 0;
+	box->from_y = 90;
+	box->to_y = 95;
+	draw_a_box(box, f, 0xFFFFFF);
 }
 
 /*
@@ -35,16 +64,8 @@ void	draw_text_boxes(t_fractal *fractal)
 {
 	t_box	box;
 
-	box.from_x = 0;
-	box.from_y = 0;
-	box.to_x = 220;
-	box.to_y = 80;
-	draw_a_box(&box, fractal);
-	box.from_x = 0;
-	box.from_y = fractal->img.height - 80;
-	box.to_x = fractal->img.width;
-	box.to_y = fractal->img.height;
-	draw_a_box(&box, fractal);
+	put_live_infos(fractal, &box);
+	put_shortcuts(fractal, &box);
 	mlx_put_image_to_window(fractal->mlx_ptr, fractal->win_ptr,
 		fractal->img.img_ptr, 0, 0);
 }

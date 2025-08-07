@@ -85,7 +85,7 @@ int	main(int argc, char **argv)
 {
 	t_fractal	fractal;
 
-	printf("%sDEBUG : TODO : Retirer le snprintf !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!%s\n", RED, RST);
+	printf("%sDEBUG : TODO :\n\n\t- Mettre a jour le HUD (avec tous les nouveaux raccourcis (S, E, J, H)\n\t- Rendre le HUD dynamique en fonction de la taille de la fenetre\n\t- Comprendre pourquoi 'mlx_get_screen_size()' renvoit une hauteur plus\n\t  importante que la taille reelle de l'ecran ?\n\t- Retirer le snprintf !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!%s\n\n\n", RED, RST);
 	if (argc < 2)
 		return (usage_error(), 1);
 	handle_help(argv);

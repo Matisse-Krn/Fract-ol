@@ -10,9 +10,20 @@ static char	*build_filename(t_fractal *f, int suffix)
 	char	buffer[512];
 	char	name_part[256];
 
-	snprintf(name_part, sizeof(name_part), "fractol_%s_x=%.5f_y=%.5f"
-		"_z=%.5f_iter=%d_mode=%s", f->name, f->shift_x, f->shift_y,
-		f->zoom_rate, f->max_iterations, get_render_mode_label(f->render_mode));
+	if (f->range_color_mode == 'Y')
+	{
+		snprintf(name_part, sizeof(name_part), "fractol_%s_x=%.5f_y=%.5f"
+			"_z=%.5f_iter=%d_mode=%s_psy=on_color=%c", f->name, f->shift_x,
+			f->shift_y, f->zoom_rate, f->max_iterations,
+			get_render_mode_label(f->render_mode), f->color_mode);
+	}
+	else if (f->range_color_mode == 'N')
+	{
+		snprintf(name_part, sizeof(name_part), "fractol_%s_x=%.5f_y=%.5f"
+			"_z=%.5f_iter=%d_mode=%s_psy=off_color=%c", f->name, f->shift_x,
+			f->shift_y, f->zoom_rate, f->max_iterations,
+			get_render_mode_label(f->render_mode), f->color_mode);
+	}
 	if (suffix == 0)
 		snprintf(buffer, sizeof(buffer), "exports/%s.png", name_part);
 	else
@@ -83,7 +94,6 @@ static void	render_only_to_image(t_fractal *fractal)
 		if (init_threads(fractal) == FALSE)
 			return ;
 	}
-	manage_text(fractal);
 }
 
 void	export_image(t_fractal *fractal)

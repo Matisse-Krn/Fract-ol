@@ -66,7 +66,7 @@ static void	put_position(t_fractal *f)
 	line = str_append(line, y_str);
 	free(y_str);
 	if_malloc_error(line);
-	put_a_string(5, 70, line, f);
+	put_a_string(5, 85, line, f);
 	free(line);
 }
 
@@ -80,7 +80,7 @@ void	put_zoom_and_position(t_fractal *f)
 	line = ft_strjoin("Zoom : x", zoom);
 	free(zoom);
 	if_malloc_error(line);
-	put_a_string(5, 55, line, f);
+	put_a_string(5, 70, line, f);
 	free(line);
 	put_position(f);
 }
@@ -105,5 +105,6 @@ void	manage_text(t_fractal *fractal)
 	print_shortcuts(fractal);
 	put_a_string(5, 25, fractal->last_pos, fractal);
 	put_color_mode(fractal);
+	put_render_mode(fractal);
 	put_max_iterations(fractal);
 }

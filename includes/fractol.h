@@ -176,10 +176,11 @@ char		*get_window_name(t_fractal *fractal);
 void		manage_text(t_fractal *fractal);
 void		put_a_string( int x, int y, char *s, t_fractal *fractal);
 void		put_color_mode(t_fractal *fractal);
+void		put_render_mode(t_fractal *f);
 void		put_max_iterations(t_fractal *fractal);
 void		print_shortcuts(t_fractal *fractal);
 void		draw_text_boxes(t_fractal *fractal);
-void		draw_a_box(t_box *box, t_fractal *fractal);
+void		draw_a_box(t_box *box, t_fractal *fractal, int color);
 void		set_real_screen_size(t_fractal *f);
 
 /* Mathematical utilities and complex number operations */

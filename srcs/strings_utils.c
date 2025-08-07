@@ -125,7 +125,22 @@ void	put_color_mode(t_fractal *fractal)
 		put_a_string(55, 40, "Cyan", fractal);
 	put_a_string(100, 40, "||", fractal);
 	if (fractal->range_color_mode == 'Y')
-		put_a_string(120, 40, "Range color mode : PSYCHEDELIC", fractal);
+		put_a_string(120, 40, "Psych. : ON", fractal);
 	else if (fractal->range_color_mode == 'N')
-		put_a_string(120, 40, "Range color mode : NORMAL", fractal);
+		put_a_string(120, 40, "Psych. : OFF", fractal);
+}
+
+void	put_render_mode(t_fractal *f)
+{
+	put_a_string(5, 55, "Render mode :", f);
+	if (f->render_mode == 'N')
+		put_a_string(90, 55, "Exponential", f);
+	else if (f->render_mode == 'L')
+		put_a_string(90, 55, "Logarithmic", f);
+	else if (f->render_mode == 'A')
+		put_a_string(90, 55, "Adaptive", f);
+	else if (f->render_mode == 'F')
+		put_a_string(90, 55, "Fixed log.", f);
+	else if (f->render_mode == 'C')
+		put_a_string(90, 55, "Cyclic modulo", f);
 }

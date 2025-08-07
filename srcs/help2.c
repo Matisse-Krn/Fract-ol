@@ -51,7 +51,7 @@ void	print_reminder_shortcuts(void)
 	ft_putstr_fd(BOLD BLUE UNDERLINE"\n\nShortcuts (while running):"RST"\n", 2);
 	ft_putstr_fd("\t\tArrow keys : Pan/Move\n", 2);
 	ft_putstr_fd("\t\tScroll Up : Zoom in\n", 2);
-	ft_putstr_fd("\t\tScroll Dow : Zoom out\n", 2);
+	ft_putstr_fd("\t\tScroll Down : Zoom out\n", 2);
 	ft_putstr_fd("\t\tLClick / RClick : Big zoom in/out\n", 2);
 	ft_putstr_fd("\t\tBackspace : Reset view\n", 2);
 	ft_putstr_fd("\t\tTab : Reverse color mode\n", 2);
