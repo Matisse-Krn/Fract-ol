@@ -295,11 +295,11 @@ Projet centré sur l’algorithmique, la maîtrise de la programmation bas-nivea
 <tr>
 <td align="center" width="50%">
   <img src="assets/fractol_julia_x=-0.00827_y=0.01902_z=1.52882_iter=100000_mode=Cyclic_1.png" width="420" alt="Export 1"><br>
-  <em>fractol_julia_x=-0.00827_y=0.01902_z=1.52882_iter=100000_mode=Cyclic_1.png</em>
+  <em>Export 1</em>
 </td>
 <td align="center" width="50%">
   <img src="assets/fractol_julia_x=-0.48738_y=-0.18523_z=3471993472.50087_iter=100000_mode=Cyclic.png" width="420" alt="Export 2"><br>
-  <em>fractol_julia_x=-0.48738_y=-0.18523_z=3471993472.50087_iter=100000_mode=Cyclic.png</em>
+  <em>Export 2</em>
 </td>
 </tr>
 <tr>
