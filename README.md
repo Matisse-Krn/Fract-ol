@@ -1,177 +1,177 @@
-# 🦠 Fractol — Visualisation interactive de fractales en C avec MiniLibX
+[![English](https://img.shields.io/badge/lang-English-blue)](README_en.md)
+[![Français](https://img.shields.io/badge/lang-Français-red)](README_fr.md)
+
+# 🦠 Fractol — Interactive fractal visualization in C with MiniLibX
 
 <p align="center">
-  <img src="assets/Preview.png" alt="Aperçu Fractol" width="100%">
+  <img src="assets/Preview.png" alt="Fractol Preview" width="100%">
 </p>
 
-Visualisation interactive et temps réel de fractales mathématiques (Mandelbrot, Julia, Sierpiński Carpet) en C.  
-Rendu graphique natif via la **MiniLibX (MLX)**.  
-Deux architectures internes : version séquentielle et version optimisée multi-threading (choix laissé à l'utilisateur de le désactiver au lancement).
+Real-time, interactive visualization of mathematical fractals (**Mandelbrot**, **Julia**, **Sierpiński Carpet**) in C.  
+Native graphic rendering through **MiniLibX (MLX)**.  
+Two internal architectures: sequential version and optimized multi-threaded version (user can disable multi-threading at launch).
 
 ---
 
-## 🖥️ Particularités techniques : MLX et bas niveau
+## 🖥️ Technical specifics: MLX, X11, and low-level graphics
 
-**Fractol** s’appuie exclusivement sur la **MiniLibX (MLX)** :  
-- Manipulation directe du framebuffer.
-- Contrôle manuel de la fenêtre, des événements clavier et souris, du rafraîchissement.
-- Aucun moteur graphique ni framework intermédiaire : gestion explicite des pixels, buffers, et cycles de rendu.
-- Portabilité sur Unix (Linux, macOS selon la version MLX).
+**Fractol** is built exclusively on **MiniLibX (MLX)**:  
+- Direct manipulation of the framebuffer.
+- Manual control over the window, keyboard and mouse events, and refresh cycles.
+- No graphics engine or framework in between: explicit handling of pixels, buffers, and render loops.
+- Portable on Unix systems (Linux, macOS depending on the MLX version).
 
+💡 **Technical note:**  
+On Linux, MLX relies on **X11** (*X Window System*), the historical graphics API for Unix systems.  
+This implies:
+- Implicit understanding of how events and window refresh are handled in a **very low-level** environment.
+- Exposure to concepts used by countless graphic tools, desktop environments, and professional applications for decades.
+- Broad, proven compatibility: any program using X11 can run on virtually any Linux distribution (standard graphics server).
+- A simple, minimalistic architecture — ideal for learning the basics of 2D rendering without unnecessary overhead.
 
-💡 **Note technique :**  
-Sur Linux, la MLX repose sur **X11** (*X Window System*), l’API graphique historique des systèmes Unix.  
-Cela implique :
-- Une compréhension implicite du fonctionnement des événements et du rafraîchissement de fenêtres dans un environnement **très bas niveau**.
-- Une exposition aux concepts utilisés par de nombreux outils graphiques, environnements de bureau et applications professionnelles depuis des décennies.
-- Une compatibilité large et éprouvée : tout programme maîtrisant X11 peut fonctionner sur la quasi-totalité des distributions Linux (serveur graphique standard).
-- Une architecture simple et minimaliste, idéale pour comprendre les bases du rendu 2D sans surcouche inutile.
-  
-  
-En résumé, même si l’on code avec la MLX, on **touche indirectement aux fondamentaux d’X11** — ce qui donne une meilleure compréhension des couches logicielles basses qui font tourner la majorité des applications graphiques Unix/Linux.
-
+In short, even though you code with MLX, you are **indirectly working with the fundamentals of X11**, which provides deeper insight into the low-level software layers that power most Unix/Linux graphical applications.
 
 ---
 
-## 🚀 Concepts & compétences déployés
+## 🚀 Concepts & skills demonstrated
 
-- **Mathématiques appliquées :** manipulation d’ensembles fractals, arithmétique complexe, calcul itératif précis.
-- **Programmation C bas-niveau :** gestion de la mémoire, structuration modulaire, gestion fine des buffers et des accès concurrents.
-- **Rendu graphique natif :** écriture et lecture directe dans le buffer MLX, contrôle total du rendu pixel par pixel.
-- **Conception interactive :** gestion avancée des entrées (clavier, souris), interface réactive et modifiable à la volée.
-- **Parallélisation :** utilisation manuelle de POSIX threads pour accélérer le rendu sur multi-cœurs.
-- **Optimisation :** séparation stricte entre logique de calcul, rendu graphique, gestion des threads et des entrées.
-- **Robustesse :** contrôle des erreurs, stabilité mémoire, gestion des cas limites et prévention des races conditions.
+- **Applied mathematics:** manipulation of fractal sets, complex arithmetic, precise iterative computation.
+- **Low-level C programming:** memory management, modular structuring, fine control over buffers and concurrent access.
+- **Native graphics rendering:** direct pixel write/read in the MLX buffer, full control over per-pixel rendering.
+- **Interactive design:** advanced handling of inputs (keyboard, mouse), responsive interface, real-time adjustments.
+- **Parallelization:** manual use of POSIX threads to speed up rendering on multi-core CPUs.
+- **Optimization:** strict separation between computation logic, rendering, thread management, and input handling.
+- **Robustness:** error handling, memory stability, edge case management, and race condition prevention.
 
 ---
 
-## 🎨 Fonctionnalités et interactions
+## 🎨 Features and interactions
 
-- **Choix de la fractale** au lancement :  
+- **Fractal selection** at launch:  
     - `mandelbrot`, `julia`, `sierpinski` (Sierpiński carpet).
-    - **Paramètres de lancement** :
-        - `-f` : Active le mode plein écran (*fullscreen*).  
-          ⚠️ Sur une configuration multi-écrans, la taille totale des écrans sera utilisée (limitation de la MLX).  
-          Sans ce paramètre, la taille de la fenêtre est codée en dur dans le programme.
-        - Multi-threading activé par défaut. Pour le désactiver : `-mt=no`.
-        - `-h` ou `--help` : Affiche la documentation complète dans le terminal.
+    - **Launch parameters**:
+        - `-f`: Enable *fullscreen* mode.  
+          ⚠️ On multi-screen setups, the total resolution across all screens will be used (MLX limitation).  
+          Without this flag, the window size is hardcoded in the program.
+        - Multi-threading is enabled by default. To disable: `-mt=no`.
+        - `-h` or `--help`: Show full documentation in the terminal.
 
-- **Contrôle total du rendu en temps réel :**
-    - Zoom fin ou rapide (molette, clic).
-    - Zoom centré sur le curseur.
-    - Déplacement par clic/molette ou flèches.
-    - Ajustement dynamique du nombre d’itérations.
-    - Réglage dynamique du contraste et du lissage.
+- **Full real-time rendering control:**
+    - Smooth or fast zoom (mouse wheel, click).
+    - Zoom centered on the cursor.
+    - Move using click/wheel or arrow keys.
+    - Dynamically adjust the number of iterations.
+    - Dynamic contrast and smoothing control.
 
-- **Modes de calcul des couleurs :**
-	Plusieurs méthodes de calcul des couleurs sont disponibles, modifiant l’apparence visuelle des fractales.  
-	Elles sont changeables à tout moment via le raccourci clavier dédié (`S`).
+- **Color rendering modes:**  
+	Several rendering methods are available, changing the fractal's visual appearance.  
+	They can be switched at any time using the dedicated keyboard shortcut (`S`).
 
-	- **Logarithmic** :  
-	  Accentue les variations de couleur dans les zones proches de la frontière en appliquant un logarithme sur le nombre d’itérations.
-	- **Adaptive** :  
-	  Ajuste dynamiquement l’échelle des couleurs en fonction du nombre d’itérations réellement rencontré à l’écran, optimisant le contraste global.
-	- **Fixed Log** :  
-	  Variante logarithmique utilisant une base fixe et constante, produisant un rendu plus homogène quelle que soit la zone explorée.
-	- **Cyclic Modulo** :  
-	  Applique un cycle répétitif de couleurs basé sur un modulo, créant des motifs visuels périodiques et très marqués.
-	- **Exponential** :  
-	  Amplifie les différences de couleur en utilisant une progression exponentielle, générant des dégradés plus vifs et contrastés.
+	- **Logarithmic**:  
+	  Enhances color variations near the set's boundary by applying a logarithmic scale to the iteration count.
+	- **Adaptive**:  
+	  Dynamically adjusts the color scale based on the actual iteration range present on screen, optimizing global contrast.
+	- **Fixed Log**:  
+	  Logarithmic variant using a fixed base, producing a more uniform look regardless of zoom depth.
+	- **Cyclic Modulo**:  
+	  Applies a repeating color cycle based on modulo arithmetic, creating strong, periodic visual patterns.
+	- **Exponential**:  
+	  Amplifies color differences using exponential progression, generating vivid, high-contrast gradients.
 
-- **Palette et affichage interactifs :**
-    - Changement de gamme de couleurs (R/G/B/Y/...).
-    - Inversion instantanée des couleurs.
-    - Activation du mode "psychédélique".
+- **Interactive palette and display:**
+    - Change color schemes (R/G/B/Y/...).
+    - Instant color inversion.
+    - Activate psychedelic mode.
 
-- **Affichage d’informations en direct (HUD) :**
-    - Itérations maximales.
-    - Coordonnées de la souris.
-    - Mode de couleur actif.
-    - Mode de rendu actif.
-    - Niveau de zoom actuel.
-    - Position courante dans le plan complexe.
+- **Live information display (HUD):**
+    - Max iterations.
+    - Mouse coordinates.
+    - Active color mode.
+    - Active rendering mode.
+    - Current zoom level.
+    - Current position in the complex plane.
 
-- **Navigation et raccourcis :**
-    - `J` + `[1-9]` : Accès direct à des zones célèbres de Mandelbrot  
-      (*ex. : Elephant Valley, Seahorse Valley…*).
-    - **Presets Julia** : lancement rapide avec alias prédéfinis.  
-      Ex. : `./fractol julia dendrite`, `./fractol julia 1`, `./fractol julia d`.
+- **Navigation and shortcuts:**
+    - `J` + `[1-9]`: Direct access to famous Mandelbrot locations  
+      (*e.g.: Elephant Valley, Seahorse Valley…*).
+    - **Julia presets**: quick launch with predefined aliases.  
+      Example: `./fractol julia dendrite`, `./fractol julia 1`, `./fractol julia d`.
 
-- **Export d’images :**
-    - `E` : Exporte la fractale courante en **PNG** plein écran,  
-      même si le programme est lancé en mode fenêtré.
-    - Le nom du fichier inclut automatiquement les paramètres actuels  
-      (fractal, coordonnées, zoom, mode couleur…).
+- **Image export:**
+    - `E`: Export the current fractal as a **fullscreen PNG**,  
+      even if running in windowed mode.
+    - The filename automatically includes the current parameters  
+      (fractal type, coordinates, zoom, color mode…).
 
 ---
 
-## 🛠️ Exemples de lancement
+## 🛠️ Launch examples
 
 ```bash
 # Mandelbrot
 ./fractol mandelbrot
 
-# Mandelbrot en plein écran
+# Mandelbrot fullscreen
 ./fractol mandelbrot -f
 
-# Mandelbrot sans multi-threading
+# Mandelbrot without multi-threading
 ./fractol mandelbrot -mt=no
 
 # Julia standard
 ./fractol julia
 
-# Julia avec preset "dendrite"
+# Julia with "dendrite" preset
 ./fractol julia dendrite
 
-# Sierpinski carpet (mono-thread uniquement)
+# Sierpiński carpet (single-thread only)
 ./fractol sierpinski
 
-# Aide / manuel
+# Help / manual
 ./fractol --help
 ```
 
 ---
 
-## 📋 Prérequis
+## 📋 Requirements
 
 - C99+
 - MiniLibX (MLX)
-- POSIX Threads (pour l’option multi-thread)
-- Linux ou macOS (selon la version de la MLX)
+- POSIX Threads (for the multi-thread option)
+- Linux or macOS (depending on the MLX version)
 
 ---
 
-## 🎯 Objectifs atteints
+## 🎯 Achievements
 
-- Moteur de rendu fractal interactif, rapide (compte-tenu de la MLX), optimisé et flexible.
-- Maîtrise de la MLX et du rendu graphique bas-niveau.
-- Implémentation robuste de l’arithmétique complexe.
-- Optimisation concrète via multi-threading (pool de threads manuel).
-- Interface contrôlée en temps réel, avec de multiples options.
-- Extension des fonctionnalités interactives :
-export PNG, navigation vers des points d’intérêt prédéfinis, presets Julia,
-et affichage temps réel des paramètres de rendu.
-- Structuration modulaire du code C, orientée maintenabilité et performance.
+- Interactive fractal rendering engine, fast (given MLX constraints), optimized and flexible.
+- Mastery of MLX and low-level graphics rendering.
+- Robust implementation of complex arithmetic.
+- Practical optimization through multi-threading (manual thread pool).
+- Real-time controlled interface with multiple options.
+- Extended interactive features:
+  PNG export, navigation to predefined points of interest, Julia presets,
+  and real-time display of rendering parameters.
+- Modular C code architecture focused on maintainability and performance.
 
 ---
 
-Aucune dépendance à d’autres frameworks que la MiniLibX.
-Projet centré sur l’algorithmique, la maîtrise de la programmation bas-niveau, et l’optimisation des rendus mathématiques en temps réel.
+No dependencies on any frameworks other than MiniLibX.  
+Project focused on algorithmics, mastery of low-level programming, and optimization of real-time mathematical rendering.
 
 ----
 
-## 🖼 Galerie
+## 🖼 Gallery
 
-> Cliquez pour dérouler chaque volet. Les médias sont stockés dans `assets/`.
+> Click to expand each section. Media are stored in `assets/`.
 
 <details>
-  <summary><b>Mandelbrot — zooms & régions célèbres</b></summary>
+  <summary><b>Mandelbrot — zooms & famous regions</b></summary>
 
 <table>
 <tr>
 <td align="center" width="50%">
-  <img src="assets/fractol_mandelbrot_x=-0.73536_y=0.00085_z=0.78276_iter=200_mode=Normal_psy=off_color=B.png" width="420" alt="Vue d'ensemble Mandelbrot"><br>
-  <em>Vue d'ensemble Mandelbrot</em>
+  <img src="assets/fractol_mandelbrot_x=-0.73536_y=0.00085_z=0.78276_iter=200_mode=Normal_psy=off_color=B.png" width="420" alt="Mandelbrot Overview"><br>
+  <em>Mandelbrot Overview</em>
 </td>
 <td align="center" width="50%">
   <img src="assets/fractol_mandelbrot_x=0.28470_y=-0.01180_z=500.00000_iter=200_mode=Cyclic_psy=on_color=C.png" width="420" alt="Elephant Valley"><br>
@@ -184,17 +184,17 @@ Projet centré sur l’algorithmique, la maîtrise de la programmation bas-nivea
   <em>Seahorse Valley</em>
 </td>
 <td align="center" width="50%">
-  <img src="assets/fractol_mandelbrot_x=-1.60944_y=0.00158_z=14.36038_iter=200_mode=Cyclic_psy=on_color=Y.png" width="420" alt="Zoom profond"><br>
-  <em>Zoom profond</em>
+  <img src="assets/fractol_mandelbrot_x=-1.60944_y=0.00158_z=14.36038_iter=200_mode=Cyclic_psy=on_color=Y.png" width="420" alt="Deep Zoom"><br>
+  <em>Deep Zoom</em>
 </td>
 </tr>
 </table>
 
-<p><i>Astuce :</i> utilisez <code>J</code> + <code>[1-9]</code> pour sauter vers certaines zones en un clic.</p>
+<p><i>Tip:</i> Use <code>J</code> + <code>[1-9]</code> to jump to certain zones in one click.</p>
 </details>
 
 <details>
-  <summary><b>Julia — presets & alias</b></summary>
+  <summary><b>Julia — presets & aliases</b></summary>
 
 <table>
 <tr>
@@ -219,11 +219,11 @@ Projet centré sur l’algorithmique, la maîtrise de la programmation bas-nivea
 </tr>
 </table>
 
-<p>Exemples : <code>./fractol julia dendrite</code>, <code>./fractol julia 1</code>, <code>./fractol julia d</code></p>
+<p>Examples: <code>./fractol julia dendrite</code>, <code>./fractol julia 1</code>, <code>./fractol julia d</code></p>
 </details>
 
 <details>
-  <summary><b>Modes de rendu (Logarithmic / Adaptive / Fixed Log / Cyclic Modulo / Exponential)</b></summary>
+  <summary><b>Rendering modes (Logarithmic / Adaptive / Fixed Log / Cyclic Modulo / Exponential)</b></summary>
 
 <table>
 <tr>
@@ -256,13 +256,13 @@ Projet centré sur l’algorithmique, la maîtrise de la programmation bas-nivea
 
 <p>
   <small>
-  Les modes modifient l’échelle et la progression du dégradé en fonction du nombre d’itérations.
+  Modes change the gradient's scale and progression based on the number of iterations.
   </small>
 </p>
 </details>
 
 <details>
-  <summary><b>HUD — infos en direct & raccourcis</b></summary>
+  <summary><b>HUD — live info & shortcuts</b></summary>
 
 <table>
 <tr>
@@ -274,34 +274,34 @@ Projet centré sur l’algorithmique, la maîtrise de la programmation bas-nivea
 </table>
 
 <ul>
-  <li>Nombre max d'itérations</li>
-  <li>Coordonnées de la souris</li>
-  <li>Mode de couleur actif</li>
-  <li>Mode de rendu actif</li>
-  <li>Niveau de zoom</li>
-  <li>Position dans le plan complexe</li>
+  <li>Max iterations</li>
+  <li>Mouse coordinates</li>
+  <li>Active color mode</li>
+  <li>Active rendering mode</li>
+  <li>Zoom level</li>
+  <li>Position in the complex plane</li>
 </ul>
 </details>
 
 <details>
-  <summary><b>Sierpiński Carpet — profondeurs</b></summary>
+  <summary><b>Sierpiński Carpet — depths</b></summary>
 
 <table>
 <tr>
 <td align="center" width="50%">
-  <img src="assets/fractol_sierpinski_1042x1042_depth=4_color=N.png" width="420" alt="Profondeur 4"><br>
-  <em>Profondeur 4</em>
+  <img src="assets/fractol_sierpinski_1042x1042_depth=4_color=N.png" width="420" alt="Depth 4"><br>
+  <em>Depth 4</em>
 </td>
 <td align="center" width="50%">
-  <img src="assets/fractol_sierpinski_1042x1042_depth=6_color=N.png" width="420" alt="Profondeur 6"><br>
-  <em>Profondeur 6</em>
+  <img src="assets/fractol_sierpinski_1042x1042_depth=6_color=N.png" width="420" alt="Depth 6"><br>
+  <em>Depth 6</em>
 </td>
 </tr>
 </table>
 </details>
 
 <details>
-  <summary><b>Export PNG (touche <code>E</code>) — exemples</b></summary>
+  <summary><b>PNG Export (key <code>E</code>) — examples</b></summary>
 
 <table>
 <tr>
@@ -347,7 +347,7 @@ Projet centré sur l’algorithmique, la maîtrise de la programmation bas-nivea
 </table>
 
 <p>
-  Chaque export est en <b>plein écran</b> (même si la fenêtre ne l’est pas), et le nom du fichier contient les paramètres
-  (fractal, coordonnées, zoom, itérations, mode, etc.).
+  Each export is <b>fullscreen</b> (even if the window is not), and the filename contains the parameters
+  (fractal, coordinates, zoom, iterations, mode, etc.).
 </p>
 </details>
