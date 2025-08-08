@@ -7,10 +7,10 @@
 
 ---
 
-## 📑 Table of Contents
+## 📑 Table of contents
 - [Preview](#-fractol--interactive-fractal-visualization-in-c-with-minilibx)
 - [Technical specifics](#️-technical-specifics-mlx-x11-and-low-level-graphics)
-- [Concepts & skills](#-concepts--skills-demonstrated)
+- [Concepts & skills](#-concepts--skills)
 - [Features](#-features-and-interactions)
 - [Installation](#%EF%B8%8F-installation)
 - [Launch examples](#️-launch-examples)
@@ -54,7 +54,7 @@ In short, even though you code with MLX, you are **indirectly working with the f
 
 ---
 
-## 🚀 Concepts & skills demonstrated
+## 🚀 Concepts & skills
 
 - **Applied mathematics:** manipulation of fractal sets, complex arithmetic, precise iterative computation.
 - **Low-level C programming:** memory management, modular structuring, fine control over buffers and concurrent access.
