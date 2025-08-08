@@ -26,9 +26,8 @@ Cela implique :
 - Une exposition aux concepts utilisés par de nombreux outils graphiques, environnements de bureau et applications professionnelles depuis des décennies.
 - Une compatibilité large et éprouvée : tout programme maîtrisant X11 peut fonctionner sur la quasi-totalité des distributions Linux (serveur graphique standard).
 - Une architecture simple et minimaliste, idéale pour comprendre les bases du rendu 2D sans surcouche inutile.
-
---
-
+ 
+ 
 En résumé, même si l’on code avec la MLX, on **touche indirectement aux fondamentaux d’X11** — ce qui donne une meilleure compréhension des couches logicielles basses qui font tourner la majorité des applications graphiques Unix/Linux.
 
 
