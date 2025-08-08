@@ -25,7 +25,7 @@
 # 🦠 Fractol — Visualisation interactive de fractales en C avec MiniLibX
 
 <p align="center">
-  <img src="assets/GIF/animation.gif" alt="Aperçu animé Fractol" width="720">
+  <img src="assets/GIF/animation.gif" alt="Aperçu animé Fractol" width="100%">
 </p>
 
 Visualisation interactive et temps réel de fractales mathématiques (Mandelbrot, Julia, Sierpiński Carpet) en C.  
