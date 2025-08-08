@@ -34,35 +34,13 @@ Utilisation de la MLX implique :
 
 ---
 
-## 🎨 Fonctionnalités et Interactions
-
-- **Choix de la fractale** au lancement :  
-    - `mandelbrot`, `julia`, `sierpinski` (Serpinski carpet).
-    - Option d’activation/désactivation du multi-threading.
-- **Contrôle total du rendu en temps réel :**
-    - Zoom fin ou rapide (molette, clic).
-    - Zoom suivant le curseur.
-    - Déplacement par clic/molette ou flèches.
-    - Ajustement du nombre d’itérations (définition/calcul).
-    - Réglage dynamique du contraste et du lissage.
-- **Palette et affichage interactifs :**
-    - Changement de gamme de couleurs (raccourcis clavier R/G/B/Y/...).
-    - Inversion instantanée des couleurs.
-    - Activation du mode "psychédélique".
-    - Affichage d’informations : nombre d’itérations max, coordonnées souris, mode actif, palette courante.
-- **Navigation fluide :**
-    - Réactivité garantie par le moteur graphique natif.
-    - Pas de latence lors des zooms ou déplacements, même en multi-thread.
-
----
-
-## 🎨 Fonctionnalités et Interactions
+## 🎨 Fonctionnalités et interactions
 
 - **Choix de la fractale** au lancement :  
     - `mandelbrot`, `julia`, `sierpinski` (Sierpiński carpet).
     - **Paramètres de lancement** :
         - `-f` : Active le mode plein écran (*fullscreen*).  
-          ⚠️ Non compatible avec les configurations multi-écrans (limitation de la MLX).  
+          ⚠️ Sur une configuration multi-écrans, la taille totale des écrans sera utilisée (limitation de la MLX).  
           Sans ce paramètre, la taille de la fenêtre est codée en dur dans le programme.
         - Multi-threading activé par défaut. Pour le désactiver : `-mt=no`.
         - `-h` ou `--help` : Affiche la documentation complète dans le terminal.
