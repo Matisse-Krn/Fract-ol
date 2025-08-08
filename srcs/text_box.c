@@ -25,20 +25,20 @@ void	draw_a_box(t_box *box, t_fractal *fractal, int color)
 	}
 }
 
-static void	put_shortcuts(t_fractal *f, t_box *box)
+static void	put_shortcuts_box(t_fractal *f, t_box *box)
 {
 	box->from_x = 0;
-	box->from_y = f->img.height - 80;
+	box->from_y = f->img.height - 100;
 	box->to_x = f->img.width;
 	box->to_y = f->img.height;
 	draw_a_box(box, f, 0x000000);
 	box->from_x = 0;
-	box->from_y = f->img.height - 80 - 5;
-	box->to_y = f->img.height - 80;
+	box->from_y = f->img.height - 100 - 5;
+	box->to_y = f->img.height - 100;
 	draw_a_box(box, f, 0xFFFFFF);
 }
 
-static void	put_live_infos(t_fractal *f, t_box *box)
+static void	put_live_infos_box(t_fractal *f, t_box *box)
 {
 	box->from_x = 0;
 	box->from_y = 0;
@@ -64,8 +64,8 @@ void	draw_text_boxes(t_fractal *fractal)
 {
 	t_box	box;
 
-	put_live_infos(fractal, &box);
-	put_shortcuts(fractal, &box);
+	put_live_infos_box(fractal, &box);
+	put_shortcuts_box(fractal, &box);
 	mlx_put_image_to_window(fractal->mlx_ptr, fractal->win_ptr,
 		fractal->img.img_ptr, 0, 0);
 }

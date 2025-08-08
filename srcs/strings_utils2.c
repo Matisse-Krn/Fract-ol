@@ -35,17 +35,20 @@ void	put_a_string(int x, int y, char *s, t_fractal *fractal)
 */
 void	print_shortcuts(t_fractal *fractal)
 {
-	put_a_string(5, fractal->img.height - 64, "Scrool Up : zoom in       \
+	put_a_string(5, fractal->img.height - 82, "Scrool Up : zoom in       \
 Scroll Down : zoom out       LClick : big zoom in       RClick : big zoom out\
        BackSpace : reset view\
        Space : psychedelic", fractal);
-	put_a_string(5, fractal->img.height - 46, "+ (keypad) : increase definition\
-       - (keypad) : reduce definition       + : smoothen       \
-- : contrast", fractal);
+	put_a_string(5, fractal->img.height - 64, "+ (keypad) : increase definition"
+		"       - (keypad) : reduce definition       + : smoothen       "
+		"- : contrast       S : change render mode", fractal);
+	put_a_string(5, fractal->img.height - 46, "E : export to PNG       "
+		"J + [1-9] : jump-to preset (Mandelbrot)       "
+		"H : help menu in terminal", fractal);
 	put_a_string(5, fractal->img.height - 28, "COLORS :", fractal);
 	put_a_string(5, fractal->img.height - 10, "N : Normal       R : Red       \
 G : Green       B : Blue       Y : Yellow       O : Orange       P : Pink       \
-C : Cyan    ||    TAB : Reverse color mode", fractal);
+C : Cyan    ||    TAB : reverse color mode", fractal);
 }
 
 static void	put_position(t_fractal *f)
