@@ -8,12 +8,13 @@
 ---
 
 ## 📑 Table des matières
-- [Aperçu](#-aperçu)
-- [Particularités techniques](#-particularités-techniques-mlx-x11-et-bas-niveau)
+- [Particularités techniques](#-particularités-techniques-:-mlx-,-x11-et-bas-niveau)
 - [Concepts et compétences](#-concepts--compétences-déployés)
 - [Fonctionnalités](#-fonctionnalités-et-interactions)
 - [Installation](#%EF%B8%8F-installation)
 - [Exemples de lancement](#-exemples-de-lancement)
+- [Prérequis](#-prérequis)
+- [Objectifs atteints](#-objectifs-atteints)
 - [Galerie](#-galerie)
 - [Améliorations futures](#-améliorations-futures)
 - [Licence](#-licence)
@@ -131,8 +132,8 @@ En résumé, même si l’on code avec la MLX, on **touche indirectement aux fon
 
 Cloner et compiler :
 ```bash
-git clone https://github.com/<your_user>/fractol.git
-cd fractol
+git clone https://github.com/Matisse-Krn/Fract-ol.git
+cd Fract-ol
 make
 ```
 

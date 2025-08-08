@@ -128,8 +128,8 @@ In short, even though you code with MLX, you are **indirectly working with the f
 
 Clone and compile:
 ```bash
-git clone https://github.com/<your_user>/fractol.git
-cd fractol
+git clone https://github.com/Matisse-Krn/Fract-ol.git
+cd Fract-ol
 make
 ```
 
