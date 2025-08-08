@@ -263,14 +263,15 @@ Projet centré sur l’algorithmique, la maîtrise de la programmation bas-nivea
 <details>
   <summary><b>Modes de rendu (Logarithmic / Adaptive / Fixed Log / Cyclic Modulo / Exponential)</b></summary>
 
-<td style="vertical-align:middle;">
-  <img src="assets/GIF/Render_modes/animation.gif"
-       alt="Aperçu des différents modes de rendu"
-       width="720">
-</td>
-
 <table>
 <tr>
+<td align="center" width="50%">
+  <img src="assets/GIF/Render_modes/animation.gif"
+       alt="Aperçu des différents modes de rendu"
+       width="420"
+       style="display:block; margin:auto;"><br>
+  <em>Animation — Aperçu des modes</em>
+</td>
 <td align="center" width="50%">
   <img src="assets/fractol_julia_x=0.17329_y=0.48554_z=14.12109_iter=200_mode=Logarithmic_psy=off_color=G.png" width="420" alt="Logarithmic"><br>
   <em>Logarithmic</em>
