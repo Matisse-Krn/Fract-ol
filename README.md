@@ -56,14 +56,52 @@ Utilisation de la MLX implique :
 
 ---
 
-## 🧮 Fractales implémentées
+## 🎨 Fonctionnalités et Interactions
 
-- **Mandelbrot**  
-    - Zoom extrême sur la frontière, réglage d’itération, rendu couleur dynamique.
-- **Julia**  
-    - Modification en temps réel des paramètres par la souris, visualisation instantanée.
-- **Sierpinski Carpet**  
-    - Algorithme récursif, ajustement du niveau de profondeur, contrôle du détail.
+- **Choix de la fractale** au lancement :  
+    - `mandelbrot`, `julia`, `sierpinski` (Sierpiński carpet).
+    - **Paramètres de lancement** :
+        - `-f` : Active le mode plein écran (*fullscreen*).  
+          ⚠️ Non compatible avec les configurations multi-écrans (limitation de la MLX).  
+          Sans ce paramètre, la taille de la fenêtre est codée en dur dans le programme.
+        - Multi-threading activé par défaut. Pour le désactiver : `-mt=no`.
+        - `-h` ou `--help` : Affiche la documentation complète dans le terminal.
+
+- **Contrôle total du rendu en temps réel :**
+    - Zoom fin ou rapide (molette, clic).
+    - Zoom centré sur le curseur.
+    - Déplacement par clic/molette ou flèches.
+    - Ajustement dynamique du nombre d’itérations.
+    - Réglage dynamique du contraste et du lissage.
+
+- **Modes de calcul des couleurs :**
+    - **Logarithmic**, **Adaptive**, **Fixed Log**, **Cyclic Modulo**, **Exponential**.
+    - Chaque mode influence différemment l’apparence du rendu.
+    - Changement immédiat via raccourcis clavier.
+
+- **Palette et affichage interactifs :**
+    - Changement de gamme de couleurs (R/G/B/Y/...).
+    - Inversion instantanée des couleurs.
+    - Activation du mode "psychédélique".
+
+- **Affichage d’informations en direct (HUD) :**
+    - Position courante dans le plan complexe.
+    - Niveau de zoom actuel.
+    - Mode de rendu couleur actif.
+    - Itérations maximales.
+    - Coordonnées de la souris.
+
+- **Navigation et raccourcis :**
+    - `J` + [1-9] : Accès direct à des zones célèbres de Mandelbrot  
+      (*ex. : Elephant Valley, Seahorse Valley…*).
+    - **Presets Julia** : lancement rapide avec alias prédéfinis.  
+      Ex. : `./fractol julia dendrite`, `./fractol julia 1`, `./fractol julia d`.
+
+- **Export d’images :**
+    - `E` : Exporte la fractale courante en **PNG** plein écran,  
+      même si le programme est lancé en mode fenêtré.
+    - Le nom du fichier inclut automatiquement les paramètres actuels  
+      (fractal, coordonnées, zoom, mode couleur…).
 
 ---
 
@@ -73,12 +111,23 @@ Utilisation de la MLX implique :
 # Mandelbrot
 ./fractol mandelbrot
 
-# Julia
+# Mandelbrot en plein écran
+./fractol mandelbrot -f
+
+# Mandelbrot sans multi-threading
+./fractol mandelbrot -mt=no
+
+# Julia standard
 ./fractol julia
 
-# Sierpinski carpet (mono-thread seulement)
+# Julia avec preset "dendrite"
+./fractol julia dendrite
+
+# Sierpinski carpet (mono-thread uniquement)
 ./fractol sierpinski
-```
+
+# Aide / manuel
+./fractol --help```
 
 ---
 
@@ -97,7 +146,10 @@ Utilisation de la MLX implique :
 - Maîtrise de la MLX et du rendu graphique bas-niveau.
 - Implémentation robuste de l’arithmétique complexe.
 - Optimisation concrète via multi-threading (pool de threads manuel).
-- Interface riche, contrôlée en temps réel, avec de multiples options.
+- Interface contrôlée en temps réel, avec de multiples options.
+- Extension des fonctionnalités interactives :  
+  export PNG, navigation vers des points d’intérêt prédéfinis, presets Julia,  
+  et affichage temps réel des paramètres de rendu.
 - Structuration modulaire du code C, orientée maintenabilité et performance.
 
 ---
