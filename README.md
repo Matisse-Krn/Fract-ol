@@ -18,11 +18,19 @@ Deux architectures internes : version séquentielle et version optimisée multi
 - Aucun moteur graphique ni framework intermédiaire : gestion explicite des pixels, buffers, et cycles de rendu.
 - Portabilité sur Unix (Linux, macOS selon la version MLX).
 
-L'utilisation de la MLX implique :  
-- Écriture manuelle de chaque pixel de l’image.
-- Gestion fine des événements utilisateur et de la réactivité.
-- Optimisation obligatoire pour garantir la performance, surtout lors de zooms et changements de paramètres en temps réel.
-- Traitement asynchrone et synchronisation des threads (dans la version multi-threadée).
+
+💡 **Note technique :**  
+Sur Linux, la MLX repose sur **X11** (*X Window System*), l’API graphique historique des systèmes Unix.  
+Cela implique :
+- Une compréhension implicite du fonctionnement des événements et du rafraîchissement de fenêtres dans un environnement **très bas niveau**.
+- Une exposition aux concepts utilisés par de nombreux outils graphiques, environnements de bureau et applications professionnelles depuis des décennies.
+- Une compatibilité large et éprouvée : tout programme maîtrisant X11 peut fonctionner sur la quasi-totalité des distributions Linux (serveur graphique standard).
+- Une architecture simple et minimaliste, idéale pour comprendre les bases du rendu 2D sans surcouche inutile.
+
+--
+
+En résumé, même si l’on code avec la MLX, on **touche indirectement aux fondamentaux d’X11** — ce qui donne une meilleure compréhension des couches logicielles basses qui font tourner la majorité des applications graphiques Unix/Linux.
+
 
 ---
 
