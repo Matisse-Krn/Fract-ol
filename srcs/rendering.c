@@ -39,8 +39,6 @@ int	distrib_colors(t_complex *z, t_pixel *pixel, t_fractal *f)
 {
 	if ((z->real * z->real) + (z->imag * z->imag) > f->escape_value)
 	{
-		if (f->render_mode == 'A' && pixel->i > f->i_max)
-			f->i_max = pixel->i;
 		if (f->range_color_mode == 'N')
 			f->color = interpolate_color(f->color_min,
 					f->color_max, pixel->i, f);
@@ -157,14 +155,14 @@ void	pixel_loop(char type, t_fractal *fractal)
 		while (++(pixel.y) <= fractal->img.height)
 		{
 			pixel.x = -1;
-			while (++(pixel.x) <= fractal->img.width)
+			while (++(pixel.x) < fractal->img.width)
 				handle_pixel_mandelbrot(&pixel, fractal);
 		}
 	}
 	else if (type == 'J')
 	{
 		ft_putstr_fd("Rendering Julia...\n\n", 1);
-		while (++(pixel.y) <= fractal->img.height)
+		while (++(pixel.y) < fractal->img.height)
 		{
 			pixel.x = -1;
 			while (++(pixel.x) <= fractal->img.width)
@@ -191,7 +189,15 @@ void	pixel_loop(char type, t_fractal *fractal)
 void	fractal_rendering(t_fractal *fractal)
 {
 	if (fractal->render_mode == 'A')
-		fractal->i_max = 0;
+	{
+		if (fractal->mt == FALSE)
+			find_imax_frame(ft_toupper(*fractal->name), fractal);
+		else
+		{
+			if (find_imax_frame_mt(fractal) == FALSE)
+				return ;
+		}
+	}
 	if (fractal->mt == FALSE)
 	{
 		if (!ft_strcmp(fractal->name, "mandelbrot"))

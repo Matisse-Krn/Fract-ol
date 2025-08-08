@@ -13,7 +13,8 @@ SRC				= srcs/maths_functions.c srcs/rendering.c srcs/errors.c \
 				  srcs/sierpinski_utils_bonus.c srcs/multithreading.c srcs/init_utils.c \
 				  srcs/screen_utils.c srcs/jump_to.c srcs/export_image.c srcs/export_utils.c \
 				  srcs/render_colors_mode.c srcs/julia_presets.c srcs/julia_presets_handler1.c \
-				  srcs/julia_presets_handler2.c srcs/help.c srcs/help2.c
+				  srcs/julia_presets_handler2.c srcs/help.c srcs/help2.c srcs/adaptive_mode.c \
+				  srcs/adaptive_mode_multithreading.c
 
 INCLUDE			= -I/usr/include -Ilibft -Imlx_linux -Iincludes
 

@@ -101,6 +101,7 @@ typedef struct s_thread_arg
 	char		type;
 	int			y_start;
 	int			y_end;
+	int			local_max;
 }				t_thread_args;
 
 /* Memory and error handling */
@@ -165,6 +166,12 @@ void		swap_range_color_mode(t_fractal *fractal);
 int			interpolate_color(int min, int max, int i, t_fractal *fractal);
 void		switch_render_mode(t_fractal *f);
 char		*get_render_mode_label(char mode);
+
+/* Adaptive mode utils */
+void		find_imax_frame(char type, t_fractal *f);
+int			find_imax_frame_mt(t_fractal *f);
+int			iters_to_diverge_mandelbrot(t_pixel *p, t_fractal *f);
+int			iters_to_diverge_julia(t_pixel *p, t_fractal *f);
 
 /* Iterations and contrast management */
 void		change_max_iterations(char sign, t_fractal *fractal);
