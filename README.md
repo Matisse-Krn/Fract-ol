@@ -161,8 +161,8 @@ Projet centré sur l’algorithmique, la maîtrise de la programmation bas-nivea
   </p>
 
   <p>
-    <img src="assets/mandelbrot_seahorse_valley.png" width="420" alt="Seahorse Valley">
-    <img src="assets/mandelbrot_deep_zoom.png" width="420" alt="Zoom profond">
+    <img src="assets/fractol_mandelbrot_x=-0.74402_y=0.11768_z=343.98536_iter=10000_mode=Normal_psy=on_color=Y.png" width="420" alt="Seahorse Valley">
+    <img src="assets/fractol_mandelbrot_x=-1.60944_y=0.00158_z=14.36038_iter=200_mode=Cyclic_psy=on_color=Y.png" width="420" alt="Zoom profond">
   </p>
 
   <p><i>Astuce :</i> utilisez <code>J</code> + <code>[1-9]</code> pour sauter vers certaines zones en un clic.</p>
