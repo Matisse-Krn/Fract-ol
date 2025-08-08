@@ -1,5 +1,22 @@
-[![English](https://img.shields.io/badge/lang-English-blue)](README.md)
+[![Made with C](https://img.shields.io/badge/Made%20with-C-blue.svg)](#)
+[![MiniLibX](https://img.shields.io/badge/Lib-MiniLibX-lightgrey.svg)](#)
+[![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS-brightgreen.svg)](#)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![English](https://img.shields.io/badge/lang-English-blue)](README_en.md)
 [![Français](https://img.shields.io/badge/lang-Français-red)](README_fr.md)
+
+---
+
+## 📑 Table of Contents
+- [Preview](#-preview)
+- [Technical Specifics](#-technical-specifics-mlx-x11-and-low-level-graphics)
+- [Concepts & Skills](#-concepts--skills-demonstrated)
+- [Features](#-features-and-interactions)
+- [Installation](#%EF%B8%8F-installation)
+- [Launch Examples](#-launch-examples)
+- [Gallery](#-gallery)
+- [Future Improvements](#-future-improvements)
+- [License](#-license)
 
 # 🦠 Fractol — Interactive fractal visualization in C with MiniLibX
 
