@@ -8,6 +8,7 @@
 ---
 
 ## 📑 Table des matières
+- [Aperçu](#-fractol--visualisation-interactive-de-fractales-en-c-avec-minilibx)
 - [Particularités techniques](#️-particularités-techniques-mlx-x11-et-bas-niveau)
 - [Concepts et compétences](#-concepts--compétences-déployés)
 - [Fonctionnalités](#-fonctionnalités-et-interactions)

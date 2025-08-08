@@ -8,12 +8,14 @@
 ---
 
 ## 📑 Table of Contents
-- [Preview](#-preview)
-- [Technical specifics](#-technical-specifics-mlx-x11-and-low-level-graphics)
+- [Preview](#-fractol--interactive-fractal-visualization-in-c-with-minilibx)
+- [Technical specifics](#️-technical-specifics-mlx-x11-and-low-level-graphics)
 - [Concepts & skills](#-concepts--skills-demonstrated)
 - [Features](#-features-and-interactions)
 - [Installation](#%EF%B8%8F-installation)
-- [Launch examples](#-launch-examples)
+- [Launch examples](#️-launch-examples)
+- [Requirements](#-requirements)
+- [Achievements](#-achievements)
 - [Gallery](#-gallery)
 - [Future improvements](#-future-improvements)
 - [License](#-license)
