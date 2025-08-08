@@ -145,3 +145,101 @@ et affichage temps réel des paramètres de rendu.
 
 Aucune dépendance à d’autres frameworks que la MiniLibX.
 Projet centré sur l’algorithmique, la maîtrise de la programmation bas-niveau, et l’optimisation des rendus mathématiques en temps réel.
+
+----
+
+## 🖼 Galerie
+
+> Cliquez pour dérouler chaque volet. Les médias sont stockés dans `assets/`.
+
+<details>
+  <summary><b>Mandelbrot — zooms & régions célèbres</b></summary>
+
+  <p>
+    <img src="assets/mandelbrot_overview.png" width="420" alt="Vue d'ensemble Mandelbrot">
+    <img src="assets/mandelbrot_elephant_valley.png" width="420" alt="Elephant Valley">
+  </p>
+
+  <p>
+    <img src="assets/mandelbrot_seahorse_valley.png" width="420" alt="Seahorse Valley">
+    <img src="assets/mandelbrot_deep_zoom.png" width="420" alt="Zoom profond">
+  </p>
+
+  <p><i>Astuce :</i> utilisez <code>J</code> + <code>[1-9]</code> pour sauter vers certaines zones en un clic.</p>
+</details>
+
+<details>
+  <summary><b>Julia — presets & alias</b></summary>
+
+  <p>
+    <img src="assets/julia_dendrite.png" width="420" alt="Julia - Dendrite">
+    <img src="assets/julia_preset1.png" width="420" alt="Julia - Preset 1">
+  </p>
+
+  <p>
+    <img src="assets/julia_preset2.png" width="420" alt="Julia - Preset 2">
+    <img src="assets/julia_interactive.png" width="420" alt="Julia - Interaction">
+  </p>
+
+  <p>Exemples : <code>./fractol julia dendrite</code>, <code>./fractol julia 1</code>, <code>./fractol julia d</code></p>
+</details>
+
+<details>
+  <summary><b>Modes de rendu (Logarithmic / Adaptive / Fixed Log / Cyclic Modulo / Exponential)</b></summary>
+
+  <p>
+    <img src="assets/mode_logarithmic.png" width="420" alt="Logarithmic">
+    <img src="assets/mode_adaptive.png"   width="420" alt="Adaptive">
+  </p>
+  <p>
+    <img src="assets/mode_fixedlog.png"   width="420" alt="Fixed Log">
+    <img src="assets/mode_cyclic.png"     width="420" alt="Cyclic Modulo">
+  </p>
+  <p>
+    <img src="assets/mode_exponential.png" width="420" alt="Exponential">
+  </p>
+
+  <p>
+    <small>
+    Les modes modifient l’échelle et la progression du dégradé en fonction du nombre d’itérations.
+    </small>
+  </p>
+</details>
+
+<details>
+  <summary><b>HUD — infos en direct & raccourcis</b></summary>
+
+  <p>
+    <img src="assets/hud_live_info.png" width="840" alt="HUD - Live info">
+  </p>
+
+  <ul>
+    <li>Position dans le plan complexe</li>
+    <li>Niveau de zoom</li>
+    <li>Mode de rendu couleur actif</li>
+    <li>Itérations & coordonnées souris</li>
+  </ul>
+</details>
+
+<details>
+  <summary><b>Sierpiński Carpet — profondeurs</b></summary>
+
+  <p>
+    <img src="assets/sierpinski_depth4.png" width="420" alt="Profondeur 4">
+    <img src="assets/sierpinski_depth6.png" width="420" alt="Profondeur 6">
+  </p>
+</details>
+
+<details>
+  <summary><b>Export PNG (touche <code>E</code>) — exemples</b></summary>
+
+  <p>
+    <img src="assets/export_example_1.png" width="420" alt="Export 1">
+    <img src="assets/export_example_2.png" width="420" alt="Export 2">
+  </p>
+
+  <p>
+    Chaque export est en <b>plein écran</b> (même si la fenêtre ne l’est pas), et le nom du fichier contient les paramètres
+    (fractal, coordonnées, zoom, itérations, mode, etc.).
+  </p>
+</details>
