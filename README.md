@@ -262,6 +262,10 @@ Project focused on algorithmics, mastery of low-level programming, and optimizat
 <details>
   <summary><b>Rendering modes (Logarithmic / Adaptive / Fixed Log / Cyclic Modulo / Exponential)</b></summary>
 
+<p align="center">
+  <img src="assets/GIF/Render_modes/animation.gif" alt="Overview of the different rendering modes" width="720">
+</p>
+
 <table>
 <tr>
 <td align="center" width="50%">
@@ -290,10 +294,6 @@ Project focused on algorithmics, mastery of low-level programming, and optimizat
 </td>
 </tr>
 </table>
-
-<p align="center">
-  <img src="assets/GIF/Render_modes/animation.gif" alt="Overview of the different rendering modes" width="720">
-</p>
 
 <p>
   <small>
