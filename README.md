@@ -172,8 +172,8 @@ Projet centré sur l’algorithmique, la maîtrise de la programmation bas-nivea
   <summary><b>Julia — presets & alias</b></summary>
 
   <p>
-    <img src="assets/julia_dendrite.png" width="420" alt="Julia - Dendrite">
-    <img src="assets/julia_preset1.png" width="420" alt="Julia - Preset 1">
+    <img src="assets/fractol_julia_x=0.07929_y=-0.00118_z=1.27402_iter=200_mode=Fixed_Log_psy=off_color=R.png" width="420" alt="Julia - Dendrite">
+    <img src="assets/fractol_julia_x=-0.00779_y=0.02024_z=1.20000_iter=300_mode=Cyclic_psy=off_color=P.png" width="420" alt="Julia - Airplane">
   </p>
 
   <p>
