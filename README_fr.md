@@ -1,4 +1,4 @@
-[![English](https://img.shields.io/badge/lang-English-blue)](README_en.md)
+[![English](https://img.shields.io/badge/lang-English-blue)](README.md)
 [![Français](https://img.shields.io/badge/lang-Français-red)](README_fr.md)
 
 # 🦠 Fractol — Visualisation interactive de fractales en C avec MiniLibX
