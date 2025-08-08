@@ -11,7 +11,7 @@
 - [Particularités techniques](#-particularités-techniques-mlx-x11-et-bas-niveau)
 - [Concepts et compétences](#-concepts--compétences-déployés)
 - [Fonctionnalités](#-fonctionnalités-et-interactions)
-- [Installation](#-installation)
+- [Installation](#%EF%B8%8F-installation)
 - [Exemples de lancement](#-exemples-de-lancement)
 - [Prérequis](#-prérequis)
 - [Objectifs atteints](#-objectifs-atteints)
