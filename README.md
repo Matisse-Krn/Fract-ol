@@ -262,39 +262,43 @@ Project focused on algorithmics, mastery of low-level programming, and optimizat
 <details>
   <summary><b>Rendering modes (Logarithmic / Adaptive / Fixed Log / Cyclic Modulo / Exponential)</b></summary>
 
-<p align="center">
-  <img src="assets/GIF/Render_modes/animation.gif" alt="Overview of the different rendering modes" width="720">
-</p>
-
 <table>
-<tr>
-<td align="center" width="50%">
-  <img src="assets/fractol_julia_x=0.17329_y=0.48554_z=14.12109_iter=200_mode=Logarithmic_psy=off_color=G.png" width="420" alt="Logarithmic"><br>
-  <em>Logarithmic</em>
-</td>
-<td align="center" width="50%">
-  <img src="assets/fractol_julia_x=0.17329_y=0.48554_z=14.12109_iter=200_mode=Adaptive_psy=off_color=G.png" width="420" alt="Adaptive"><br>
-  <em>Adaptive</em>
-</td>
-</tr>
-<tr>
-<td align="center" width="50%">
-  <img src="assets/fractol_julia_x=0.17329_y=0.48554_z=14.12109_iter=200_mode=Fixed_Log_psy=off_color=G.png" width="420" alt="Fixed Log"><br>
-  <em>Fixed Log</em>
-</td>
-<td align="center" width="50%">
-  <img src="assets/fractol_julia_x=0.17329_y=0.48554_z=14.12109_iter=200_mode=Cyclic_psy=off_color=G.png" width="420" alt="Cyclic Modulo"><br>
-  <em>Cyclic Modulo</em>
-</td>
-</tr>
-<tr>
-<td align="center" colspan="2">
-  <img src="assets/fractol_julia_x=0.17329_y=0.48554_z=14.12109_iter=200_mode=Normal_psy=off_color=G.png" width="420" alt="Exponential"><br>
-  <em>Exponential</em>
-</td>
-</tr>
+  <tr>
+    <td align="center" colspan="2">
+      <img src="assets/GIF/Render_modes/animation.gif"
+           alt="Aperçu des différents modes de rendu"
+           width="720"
+           style="display:block; margin:auto;"><br>
+      <em>Animation — Overview of the different modes</em>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="assets/fractol_julia_x=0.17329_y=0.48554_z=14.12109_iter=200_mode=Logarithmic_psy=off_color=G.png" width="420" alt="Logarithmic"><br>
+      <em>Logarithmic</em>
+    </td>
+    <td align="center" width="50%">
+      <img src="assets/fractol_julia_x=0.17329_y=0.48554_z=14.12109_iter=200_mode=Adaptive_psy=off_color=G.png" width="420" alt="Adaptive"><br>
+      <em>Adaptive</em>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="assets/fractol_julia_x=0.17329_y=0.48554_z=14.12109_iter=200_mode=Fixed_Log_psy=off_color=G.png" width="420" alt="Fixed Log"><br>
+      <em>Fixed Log</em>
+    </td>
+    <td align="center" width="50%">
+      <img src="assets/fractol_julia_x=0.17329_y=0.48554_z=14.12109_iter=200_mode=Cyclic_psy=off_color=G.png" width="420" alt="Cyclic Modulo"><br>
+      <em>Cyclic Modulo</em>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" colspan="2">
+      <img src="assets/fractol_julia_x=0.17329_y=0.48554_z=14.12109_iter=200_mode=Normal_psy=off_color=G.png" width="420" alt="Exponential"><br>
+      <em>Exponential</em>
+    </td>
+  </tr>
 </table>
-
 <p>
   <small>
   Modes change the gradient's scale and progression based on the number of iterations.

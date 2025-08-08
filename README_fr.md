@@ -270,7 +270,7 @@ Projet centré sur l’algorithmique, la maîtrise de la programmation bas-nivea
            alt="Aperçu des différents modes de rendu"
            width="720"
            style="display:block; margin:auto;"><br>
-      <em>Animation — Aperçu des modes</em>
+      <em>Animation — Aperçu des différents modes</em>
     </td>
   </tr>
   <tr>
