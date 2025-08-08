@@ -148,7 +148,6 @@ Projet centré sur l’algorithmique, la maîtrise de la programmation bas-nivea
 
 ----
 
-
 ## 🖼 Galerie
 
 > Cliquez pour dérouler chaque volet. Les médias sont stockés dans `assets/`.
@@ -168,11 +167,11 @@ Projet centré sur l’algorithmique, la maîtrise de la programmation bas-nivea
 </td>
 </tr>
 <tr>
-<td align="center">
+<td align="center" width="50%">
   <img src="assets/fractol_mandelbrot_x=-0.74402_y=0.11768_z=343.98536_iter=10000_mode=Normal_psy=on_color=Y.png" width="420" alt="Seahorse Valley"><br>
   <em>Seahorse Valley</em>
 </td>
-<td align="center">
+<td align="center" width="50%">
   <img src="assets/fractol_mandelbrot_x=-1.60944_y=0.00158_z=14.36038_iter=200_mode=Cyclic_psy=on_color=Y.png" width="420" alt="Zoom profond"><br>
   <em>Zoom profond</em>
 </td>
@@ -197,11 +196,11 @@ Projet centré sur l’algorithmique, la maîtrise de la programmation bas-nivea
 </td>
 </tr>
 <tr>
-<td align="center">
+<td align="center" width="50%">
   <img src="assets/fractol_julia_x=0.00875_y=-0.00503_z=1.06168_iter=200_mode=Cyclic_psy=off_color=O.png" width="420" alt="Julia - Tuning Fork"><br>
   <em>Julia - Tuning Fork</em>
 </td>
-<td align="center">
+<td align="center" width="50%">
   <img src="assets/fractol_julia_x=0.00875_y=-0.00503_z=1.06168_iter=200_mode=Cyclic_psy=on_color=G.png" width="420" alt="Julia - Tuning Fork psychedelic"><br>
   <em>Julia - Tuning Fork psychedelic</em>
 </td>
@@ -211,3 +210,116 @@ Projet centré sur l’algorithmique, la maîtrise de la programmation bas-nivea
 <p>Exemples : <code>./fractol julia dendrite</code>, <code>./fractol julia 1</code>, <code>./fractol julia d</code></p>
 </details>
 
+<details>
+  <summary><b>Modes de rendu (Logarithmic / Adaptive / Fixed Log / Cyclic Modulo / Exponential)</b></summary>
+
+<table>
+<tr>
+<td align="center" width="50%">
+  <img src="assets/fractol_julia_x=0.17329_y=0.48554_z=14.12109_iter=200_mode=Logarithmic_psy=off_color=G.png" width="420" alt="Logarithmic"><br>
+  <em>Logarithmic</em>
+</td>
+<td align="center" width="50%">
+  <img src="assets/fractol_julia_x=0.17329_y=0.48554_z=14.12109_iter=200_mode=Adaptive_psy=off_color=G.png" width="420" alt="Adaptive"><br>
+  <em>Adaptive</em>
+</td>
+</tr>
+<tr>
+<td align="center" width="50%">
+  <img src="assets/fractol_julia_x=0.17329_y=0.48554_z=14.12109_iter=200_mode=Fixed_Log_psy=off_color=G.png" width="420" alt="Fixed Log"><br>
+  <em>Fixed Log</em>
+</td>
+<td align="center" width="50%">
+  <img src="assets/fractol_julia_x=0.17329_y=0.48554_z=14.12109_iter=200_mode=Cyclic_psy=off_color=G.png" width="420" alt="Cyclic Modulo"><br>
+  <em>Cyclic Modulo</em>
+</td>
+</tr>
+<tr>
+<td align="center" colspan="2">
+  <img src="assets/fractol_julia_x=0.17329_y=0.48554_z=14.12109_iter=200_mode=Normal_psy=off_color=G.png" width="420" alt="Exponential"><br>
+  <em>Exponential</em>
+</td>
+</tr>
+</table>
+
+<p>
+  <small>
+  Les modes modifient l’échelle et la progression du dégradé en fonction du nombre d’itérations.
+  </small>
+</p>
+</details>
+
+<details>
+  <summary><b>HUD — infos en direct & raccourcis</b></summary>
+
+<table>
+<tr>
+<td align="center">
+  <img src="assets/hud_live_info.png" width="840" alt="HUD - Live info"><br>
+  <em>HUD - Live info</em>
+</td>
+</tr>
+</table>
+
+<ul>
+  <li>Position dans le plan complexe</li>
+  <li>Niveau de zoom</li>
+  <li>Mode de rendu couleur actif</li>
+  <li>Itérations & coordonnées souris</li>
+</ul>
+</details>
+
+<details>
+  <summary><b>Sierpiński Carpet — profondeurs</b></summary>
+
+<table>
+<tr>
+<td align="center" width="50%">
+  <img src="assets/fractol_sierpinski_1042x1042_depth=4_color=N.png" width="420" alt="Profondeur 4"><br>
+  <em>Profondeur 4</em>
+</td>
+<td align="center" width="50%">
+  <img src="assets/fractol_sierpinski_1042x1042_depth=6_color=N.png" width="420" alt="Profondeur 6"><br>
+  <em>Profondeur 6</em>
+</td>
+</tr>
+</table>
+</details>
+
+<details>
+  <summary><b>Export PNG (touche <code>E</code>) — exemples</b></summary>
+
+<table>
+<tr>
+<td align="center" width="50%">
+  <img src="assets/fractol_mandelbrot_x=-0.74500_y=0.11500_z=500.00000_iter=10000.png" width="420" alt="Export 1"><br>
+  <em>Export 1</em>
+</td>
+<td align="center" width="50%">
+  <img src="assets/fractol_julia_x=-0.48738_y=-0.18523_z=3471993472.50087_iter=100000_mode=Cyclic.png" width="420" alt="Export 2"><br>
+  <em>Export 2</em>
+</td>
+</tr>
+<tr>
+<td align="center" width="50%">
+  <img src="assets/fractol_julia_x=-0.00852_y=0.02971_z=1.65888_iter=10000_mode=Logarithmic.png" width="420" alt="Export 3"><br>
+  <em>Export 3</em>
+</td>
+<td align="center" width="50%">
+  <img src="assets/fractol_mandelbrot_x=-1.60944_y=0.00158_z=14.36038_iter=200_mode=Cyclic_psy=on_color=C.png" width="420" alt="Export 4"><br>
+  <em>Export 4</em>
+</td>
+</tr>
+<tr>
+<td align="center" colspan="2">
+  <img src="assets/fractol_mandelbrot_x=-0.14731_y=1.03374_z=36.69177_iter=200_mode=Cyclic_psy=off_color=R.png" width="420" alt="Export 5"><br>
+  <em>Export 5</em>
+</td>
+</tr>
+</table>
+
+<p>
+  Chaque export est en <b>plein écran</b> (même si la fenêtre ne l’est pas), et le nom du fichier contient les paramètres
+  (fractal, coordonnées, zoom, itérations, mode, etc.).
+</p>
+</details>
