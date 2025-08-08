@@ -2,7 +2,7 @@
 
 Visualisation interactive et temps réel de fractales mathématiques (Mandelbrot, Julia, Sierpiński Carpet) en C.  
 Rendu graphique natif via la **MiniLibX (MLX)**.  
-Deux architectures internes : version séquentielle et version optimisée multi-threading (choix laissé à l'utilisateur au lancement).
+Deux architectures internes : version séquentielle et version optimisée multi-threading (choix laissé à l'utilisateur de le désactiver au lancement).
 
 ---
 
@@ -14,7 +14,7 @@ Deux architectures internes : version séquentielle et version optimisée multi
 - Aucun moteur graphique ni framework intermédiaire : gestion explicite des pixels, buffers, et cycles de rendu.
 - Portabilité sur Unix (Linux, macOS selon la version MLX).
 
-Utilisation de la MLX implique :  
+L'utilisation de la MLX implique :  
 - Écriture manuelle de chaque pixel de l’image.
 - Gestion fine des événements utilisateur et de la réactivité.
 - Optimisation obligatoire pour garantir la performance, surtout lors de zooms et changements de paramètres en temps réel.
@@ -22,7 +22,7 @@ Utilisation de la MLX implique :
 
 ---
 
-## 🚀 Concepts & Compétences déployés
+## 🚀 Concepts & compétences déployés
 
 - **Mathématiques appliquées :** manipulation d’ensembles fractals, arithmétique complexe, calcul itératif précis.
 - **Programmation C bas-niveau :** gestion de la mémoire, structuration modulaire, gestion fine des buffers et des accès concurrents.
@@ -80,7 +80,7 @@ Utilisation de la MLX implique :
     - Coordonnées de la souris.
 
 - **Navigation et raccourcis :**
-    - `J` + [1-9] : Accès direct à des zones célèbres de Mandelbrot  
+    - `J` + `[1-9]` : Accès direct à des zones célèbres de Mandelbrot  
       (*ex. : Elephant Valley, Seahorse Valley…*).
     - **Presets Julia** : lancement rapide avec alias prédéfinis.  
       Ex. : `./fractol julia dendrite`, `./fractol julia 1`, `./fractol julia d`.
