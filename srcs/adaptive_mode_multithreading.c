@@ -91,3 +91,22 @@ int	find_imax_frame_mt(t_fractal *f)
 	}
 	return (free(threads), free(args), TRUE);
 }
+
+void	compute_imax_for_export(t_fractal *f)
+{
+	if (f->render_mode != 'A')
+		return ;
+	f->i_max = 0;
+	if (f->mt == FALSE)
+	{
+		if (!ft_strcmp(f->name, "mandelbrot"))
+			find_imax_frame('M', f);
+		else if (!ft_strcmp(f->name, "julia"))
+			find_imax_frame('J', f);
+	}
+	else
+	{
+		if (find_imax_frame_mt(f) == FALSE)
+			return ;
+	}
+}

@@ -152,7 +152,7 @@ void	pixel_loop(char type, t_fractal *fractal)
 	if (type == 'M')
 	{
 		ft_putstr_fd("Rendering Mandelbrot...\n\n", 1);
-		while (++(pixel.y) <= fractal->img.height)
+		while (++(pixel.y) < fractal->img.height)
 		{
 			pixel.x = -1;
 			while (++(pixel.x) < fractal->img.width)
@@ -165,7 +165,7 @@ void	pixel_loop(char type, t_fractal *fractal)
 		while (++(pixel.y) < fractal->img.height)
 		{
 			pixel.x = -1;
-			while (++(pixel.x) <= fractal->img.width)
+			while (++(pixel.x) < fractal->img.width)
 				handle_pixel_julia(&pixel, fractal);
 		}
 	}

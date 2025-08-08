@@ -156,8 +156,8 @@ Projet centré sur l’algorithmique, la maîtrise de la programmation bas-nivea
   <summary><b>Mandelbrot — zooms & régions célèbres</b></summary>
 
   <p>
-    <img src="assets/mandelbrot_overview.png" width="420" alt="Vue d'ensemble Mandelbrot">
-    <img src="assets/mandelbrot_elephant_valley.png" width="420" alt="Elephant Valley">
+    <img src="assets/fractol_mandelbrot_x=-0.73536_y=0.00085_z=0.78276_iter=200_mode=Normal_psy=off_color=B.png" width="420" alt="Vue d'ensemble Mandelbrot">
+    <img src="assets/fractol_mandelbrot_x=0.28470_y=-0.01180_z=500.00000_iter=200_mode=Cyclic_psy=on_color=C.png" width="420" alt="Elephant Valley">
   </p>
 
   <p>

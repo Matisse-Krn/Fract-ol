@@ -40,15 +40,9 @@ static char	*generate_export_filename(t_fractal *f)
 
 	suffix = 0;
 	if (!ft_strcmp("sierpinski", f->name))
-	{
-		ft_putstr_fd("DEBUG : Exporting sierpinski\n", 2);
 		filename = build_sierpinski_filename(f, suffix);
-	}
 	else
-	{
-		ft_putstr_fd("DEBUG : Exporting julia or mandelbrot\n", 2);
 		filename = build_filename(f, suffix);
-	}
 	while (access(filename, F_OK) == 0)
 	{
 		free(filename);
@@ -93,7 +87,7 @@ static int	write_image_to_png(const char *name, t_image *img)
 static void	render_only_to_image(t_fractal *fractal)
 {
 	if (fractal->render_mode == 'A')
-		fractal->i_max = 0;
+		compute_imax_for_export(fractal);
 	if (fractal->mt == FALSE)
 	{
 		if (!ft_strcmp(fractal->name, "mandelbrot"))
