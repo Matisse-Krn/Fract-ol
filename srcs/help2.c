@@ -20,7 +20,8 @@ static void	print_other_notes2(void)
 		"(manipulate [S], [TAB], [SPACE],...).\n", 2);
 	ft_putstr_fd("\t\t- For bug reports or feedback, contact the "
 		"author via github (https://github.com/Matisse-Krn).\n", 2);
-	ft_putstr_fd("\t\t- Use '--help' for this manual anytime.\n\n", 2);
+	ft_putstr_fd("\t\t- Use '--help' or '-h' in param for this manual "
+		"or press 'H' anytime.\n\n", 2);
 }
 
 void	print_other_notes(void)
@@ -58,7 +59,11 @@ void	print_reminder_shortcuts(void)
 	ft_putstr_fd("\t\tSpace : Psychedelic mode ON/OFF\n", 2);
 	ft_putstr_fd("\t\t+ / - : Change contrast\n", 2);
 	ft_putstr_fd("\t\tKp+ / Kp- : Change max iterations\n", 2);
-	ft_putstr_fd("\t\tN : Normal Colors\n", 2);
+	ft_putstr_fd("\t\tE : Export PNG\n", 2);
+	ft_putstr_fd("\t\tJ + [1-9] : (in Mandelbrot only) Jump to preset"
+		" [1-9]\n", 2);
+	ft_putstr_fd("\t\tS : Change render mode\n", 2);
+	ft_putstr_fd("\t\tN : Normal colors\n", 2);
 	ft_putstr_fd("\t\tR : Red\n", 2);
 	ft_putstr_fd("\t\tG : Green\n", 2);
 	ft_putstr_fd("\t\tB : Blue\n", 2);
@@ -66,7 +71,7 @@ void	print_reminder_shortcuts(void)
 	ft_putstr_fd("\t\tO : Orange\n", 2);
 	ft_putstr_fd("\t\tP : Pink\n", 2);
 	ft_putstr_fd("\t\tC : Cyan\n", 2);
-	ft_putstr_fd("\t\tE : Export PNG\n", 2);
+	ft_putstr_fd("\t\tH : "UNDERLINE"Print this manual page\n"RST, 2);
 }
 
 void	print_mandelbrot_presets(void)
