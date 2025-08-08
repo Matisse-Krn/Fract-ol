@@ -54,7 +54,7 @@ L'utilisation de la MLX implique :
 
 - **Modes de calcul des couleurs :**
 	Plusieurs méthodes de calcul des couleurs sont disponibles, modifiant l’apparence visuelle des fractales.  
-	Elles sont changeables à tout moment via les raccourcis clavier dédiés.
+	Elles sont changeables à tout moment via le raccourci clavier dédié (`S`).
 
 	- **Logarithmic** :  
 	  Accentue les variations de couleur dans les zones proches de la frontière en appliquant un logarithme sur le nombre d’itérations.
@@ -73,11 +73,12 @@ L'utilisation de la MLX implique :
     - Activation du mode "psychédélique".
 
 - **Affichage d’informations en direct (HUD) :**
-    - Position courante dans le plan complexe.
-    - Niveau de zoom actuel.
-    - Mode de rendu couleur actif.
     - Itérations maximales.
     - Coordonnées de la souris.
+    - Mode de couleur actif.
+    - Mode de rendu actif.
+    - Niveau de zoom actuel.
+    - Position courante dans le plan complexe.
 
 - **Navigation et raccourcis :**
     - `J` + `[1-9]` : Accès direct à des zones célèbres de Mandelbrot  
