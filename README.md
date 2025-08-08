@@ -317,6 +317,20 @@ Projet centré sur l’algorithmique, la maîtrise de la programmation bas-nivea
   <img src="assets/fractol_mandelbrot_x=-0.14731_y=1.03374_z=36.69177_iter=200_mode=Cyclic_psy=off_color=R.png" width="420" alt="Export 5"><br>
   <em>Export 5</em>
 </td>
+<td align="center" colspan="2">
+  <img src="assets/fractol_mandelbrot_x=0.28470_y=-0.01180_z=500.00000_iter=10000_mode=Logarithmic_4.png" width="420" alt="Elephant Valley"><br>
+  <em>Elephant Valley</em>
+</td>
+</tr>
+<tr>
+<td align="center" width="50%">
+  <img src="assets/fractol_julia_x=-0.00827_y=0.01902_z=1.52882_iter=100000_mode=Cyclic_1.png" width="420" alt="Export 7"><br>
+  <em>Export 7</em>
+</td>
+<td align="center" width="50%">
+  <img src="assets/fractol_julia_x=-0.00546_y=0.03935_z=1.44000_iter=100000_mode=Cyclic.png" width="420" alt="Export 8"><br>
+  <em>Export 8</em>
+</td>
 </tr>
 </table>
 
