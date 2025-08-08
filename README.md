@@ -115,7 +115,8 @@ Utilisation de la MLX implique :
 ./fractol sierpinski
 
 # Aide / manuel
-./fractol --help```
+./fractol --help
+```
 
 ---
 
@@ -135,12 +136,12 @@ Utilisation de la MLX implique :
 - Implémentation robuste de l’arithmétique complexe.
 - Optimisation concrète via multi-threading (pool de threads manuel).
 - Interface contrôlée en temps réel, avec de multiples options.
-- Extension des fonctionnalités interactives :  
-  export PNG, navigation vers des points d’intérêt prédéfinis, presets Julia,  
-  et affichage temps réel des paramètres de rendu.
+- Extension des fonctionnalités interactives :
+export PNG, navigation vers des points d’intérêt prédéfinis, presets Julia,
+et affichage temps réel des paramètres de rendu.
 - Structuration modulaire du code C, orientée maintenabilité et performance.
 
 ---
 
-Aucune dépendance à d’autres frameworks que la MiniLibX.  
+Aucune dépendance à d’autres frameworks que la MiniLibX.
 Projet centré sur l’algorithmique, la maîtrise de la programmation bas-niveau, et l’optimisation des rendus mathématiques en temps réel.
