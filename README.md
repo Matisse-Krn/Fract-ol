@@ -262,10 +262,12 @@ Projet centré sur l’algorithmique, la maîtrise de la programmation bas-nivea
 </table>
 
 <ul>
-  <li>Position dans le plan complexe</li>
+  <li>Nombre max d'itérations</li>
+  <li>Coordonnées de la souris</li>
+  <li>Mode de couleur actif</li>
+  <li>Mode de rendu actif</li>
   <li>Niveau de zoom</li>
-  <li>Mode de rendu couleur actif</li>
-  <li>Itérations & coordonnées souris</li>
+  <li>Position dans le plan complexe</li>
 </ul>
 </details>
 
