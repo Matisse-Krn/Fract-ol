@@ -263,7 +263,7 @@ Projet centré sur l’algorithmique, la maîtrise de la programmation bas-nivea
 <details>
   <summary><b>Modes de rendu (Logarithmic / Adaptive / Fixed Log / Cyclic Modulo / Exponential)</b></summary>
 
-<td style="text-align:center; vertical-align:middle;">
+<td style="vertical-align:middle;">
   <img src="assets/GIF/Render_modes/animation.gif"
        alt="Aperçu des différents modes de rendu"
        width="720">
