@@ -264,39 +264,41 @@ Projet centré sur l’algorithmique, la maîtrise de la programmation bas-nivea
   <summary><b>Modes de rendu (Logarithmic / Adaptive / Fixed Log / Cyclic Modulo / Exponential)</b></summary>
 
 <table>
-<tr>
-<td align="center" width="50%">
-  <img src="assets/GIF/Render_modes/animation.gif"
-       alt="Aperçu des différents modes de rendu"
-       width="420"
-       style="display:block; margin:auto;"><br>
-  <em>Animation — Aperçu des modes</em>
-</td>
-<td align="center" width="50%">
-  <img src="assets/fractol_julia_x=0.17329_y=0.48554_z=14.12109_iter=200_mode=Logarithmic_psy=off_color=G.png" width="420" alt="Logarithmic"><br>
-  <em>Logarithmic</em>
-</td>
-<td align="center" width="50%">
-  <img src="assets/fractol_julia_x=0.17329_y=0.48554_z=14.12109_iter=200_mode=Adaptive_psy=off_color=G.png" width="420" alt="Adaptive"><br>
-  <em>Adaptive</em>
-</td>
-</tr>
-<tr>
-<td align="center" width="50%">
-  <img src="assets/fractol_julia_x=0.17329_y=0.48554_z=14.12109_iter=200_mode=Fixed_Log_psy=off_color=G.png" width="420" alt="Fixed Log"><br>
-  <em>Fixed Log</em>
-</td>
-<td align="center" width="50%">
-  <img src="assets/fractol_julia_x=0.17329_y=0.48554_z=14.12109_iter=200_mode=Cyclic_psy=off_color=G.png" width="420" alt="Cyclic Modulo"><br>
-  <em>Cyclic Modulo</em>
-</td>
-</tr>
-<tr>
-<td align="center" colspan="2">
-  <img src="assets/fractol_julia_x=0.17329_y=0.48554_z=14.12109_iter=200_mode=Normal_psy=off_color=G.png" width="420" alt="Exponential"><br>
-  <em>Exponential</em>
-</td>
-</tr>
+  <tr>
+    <td align="center" colspan="2">
+      <img src="assets/GIF/Render_modes/animation.gif"
+           alt="Aperçu des différents modes de rendu"
+           width="720"
+           style="display:block; margin:auto;"><br>
+      <em>Animation — Aperçu des modes</em>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="assets/fractol_julia_x=0.17329_y=0.48554_z=14.12109_iter=200_mode=Logarithmic_psy=off_color=G.png" width="420" alt="Logarithmic"><br>
+      <em>Logarithmic</em>
+    </td>
+    <td align="center" width="50%">
+      <img src="assets/fractol_julia_x=0.17329_y=0.48554_z=14.12109_iter=200_mode=Adaptive_psy=off_color=G.png" width="420" alt="Adaptive"><br>
+      <em>Adaptive</em>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="assets/fractol_julia_x=0.17329_y=0.48554_z=14.12109_iter=200_mode=Fixed_Log_psy=off_color=G.png" width="420" alt="Fixed Log"><br>
+      <em>Fixed Log</em>
+    </td>
+    <td align="center" width="50%">
+      <img src="assets/fractol_julia_x=0.17329_y=0.48554_z=14.12109_iter=200_mode=Cyclic_psy=off_color=G.png" width="420" alt="Cyclic Modulo"><br>
+      <em>Cyclic Modulo</em>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" colspan="2">
+      <img src="assets/fractol_julia_x=0.17329_y=0.48554_z=14.12109_iter=200_mode=Normal_psy=off_color=G.png" width="420" alt="Exponential"><br>
+      <em>Exponential</em>
+    </td>
+  </tr>
 </table>
 
 <p>
