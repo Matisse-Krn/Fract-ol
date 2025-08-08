@@ -1,5 +1,24 @@
+[![Développé en C](https://img.shields.io/badge/Made%20with-C-blue.svg)](#)
+[![MiniLibX](https://img.shields.io/badge/Lib-MiniLibX-lightgrey.svg)](#)
+[![Plateforme](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS-brightgreen.svg)](#)
+[![Licence](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![English](https://img.shields.io/badge/lang-English-blue)](README.md)
 [![Français](https://img.shields.io/badge/lang-Français-red)](README_fr.md)
+
+---
+
+## 📑 Table des matières
+- [Aperçu](#-aperçu)
+- [Particularités techniques](#-particularités-techniques-mlx-x11-et-bas-niveau)
+- [Concepts et compétences](#-concepts--compétences-déployés)
+- [Fonctionnalités](#-fonctionnalités-et-interactions)
+- [Installation](#%EF%B8%8F-installation)
+- [Exemples de lancement](#-exemples-de-lancement)
+- [Galerie](#-galerie)
+- [Améliorations futures](#-améliorations-futures)
+- [Licence](#-licence)
+
+---
 
 # 🦠 Fractol — Visualisation interactive de fractales en C avec MiniLibX
 
@@ -107,6 +126,20 @@ En résumé, même si l’on code avec la MLX, on **touche indirectement aux fon
       (fractal, coordonnées, zoom, mode couleur…).
 
 ---
+
+## ⚙️ Installation
+
+Cloner et compiler :
+```bash
+git clone https://github.com/<your_user>/fractol.git
+cd fractol
+make
+```
+
+Exécuter:
+```bash
+./fractol mandelbrot
+```
 
 ## 🛠️ Exemples de lancement
 
@@ -354,3 +387,20 @@ Projet centré sur l’algorithmique, la maîtrise de la programmation bas-nivea
   (fractal, coordonnées, zoom, itérations, mode, etc.).
 </p>
 </details>
+
+---
+
+## 🔮 Améliorations futures
+
+- Support pour d’autres fractales (Burning Ship, Newton, Buddhabrot…)
+- Anti-aliasing pour des contours plus lisses
+- Fichier de configuration pour les paramètres de lancement
+- Personnalisation avancée de la palette de couleurs
+- HUD multilingue intégré
+- Mode benchmark optionnel pour mesurer les performances de rendu
+
+---
+
+## 📜 Licence
+
+Ce projet est sous licence MIT — voir le fichier [LICENSE](LICENSE) pour plus de détails.

@@ -2,21 +2,23 @@
 [![MiniLibX](https://img.shields.io/badge/Lib-MiniLibX-lightgrey.svg)](#)
 [![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS-brightgreen.svg)](#)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![English](https://img.shields.io/badge/lang-English-blue)](README_en.md)
+[![English](https://img.shields.io/badge/lang-English-blue)](README.md)
 [![Français](https://img.shields.io/badge/lang-Français-red)](README_fr.md)
 
 ---
 
 ## 📑 Table of Contents
 - [Preview](#-preview)
-- [Technical Specifics](#-technical-specifics-mlx-x11-and-low-level-graphics)
-- [Concepts & Skills](#-concepts--skills-demonstrated)
+- [Technical specifics](#-technical-specifics-mlx-x11-and-low-level-graphics)
+- [Concepts & skills](#-concepts--skills-demonstrated)
 - [Features](#-features-and-interactions)
 - [Installation](#%EF%B8%8F-installation)
-- [Launch Examples](#-launch-examples)
+- [Launch examples](#-launch-examples)
 - [Gallery](#-gallery)
-- [Future Improvements](#-future-improvements)
+- [Future improvements](#-future-improvements)
 - [License](#-license)
+
+---
 
 # 🦠 Fractol — Interactive fractal visualization in C with MiniLibX
 
@@ -119,6 +121,22 @@ In short, even though you code with MLX, you are **indirectly working with the f
       even if running in windowed mode.
     - The filename automatically includes the current parameters  
       (fractal type, coordinates, zoom, color mode…).
+
+---
+
+## ⚙️ Installation
+
+Clone and compile:
+```bash
+git clone https://github.com/<your_user>/fractol.git
+cd fractol
+make
+```
+
+Run:
+```bash
+./fractol mandelbrot
+```
 
 ---
 
@@ -368,3 +386,21 @@ Project focused on algorithmics, mastery of low-level programming, and optimizat
   (fractal, coordinates, zoom, iterations, mode, etc.).
 </p>
 </details>
+
+---
+
+## 🔮 Future Improvements
+
+- Support for additional fractals (Burning Ship, Newton…)
+- Anti-aliasing for smoother edges
+- Configuration file for startup parameters
+- Enhanced color palette customization
+- Multi-language in-app HUD
+- Optional benchmark mode to measure render performance
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+
