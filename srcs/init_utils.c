@@ -57,7 +57,8 @@ void	set_multi_threading(char **argv, t_fractal *fractal)
 	fractal->mt = TRUE;
 	while (argv[++i])
 	{
-		if (!ft_strncmp(argv[i], "-mt=no", 6))
+		if (!ft_strncmp(argv[i], "-mt=no", 6)
+			|| !ft_strcmp("sierpinski", argv[1]))
 			fractal->mt = FALSE;
 	}
 }

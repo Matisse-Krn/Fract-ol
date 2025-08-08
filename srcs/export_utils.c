@@ -6,6 +6,11 @@ void	setup_export_image(t_image *export, t_fractal *fractal)
 {
 	export->width = fractal->img.full_width;
 	export->height = fractal->img.full_height;
+	if (!ft_strcmp("sierpinski", fractal->name))
+	{
+		export->width = fractal->img.width;
+		export->height = fractal->img.height;
+	}
 	export->img_ptr = mlx_new_image(fractal->mlx_ptr,
 			export->width, export->height);
 	if (!export->img_ptr)
@@ -17,7 +22,6 @@ void	setup_export_image(t_image *export, t_fractal *fractal)
 	if (!export->px_ptr)
 		malloc_error();
 	fractal->img = *export;
-	// fractal->max_iterations = 100000;
 	fractal->aspect_ratio = (double)fractal->img.width
 		/ (double)fractal->img.height;
 }
@@ -84,4 +88,21 @@ void	restore_fractal(t_fractal *f, t_fractal *backup, t_image *orig_img)
 	f->range_color_mode = backup->range_color_mode;
 	f->aspect_ratio = (double)orig_img->width / (double)orig_img->height;
 	f->img = *orig_img;
+}
+
+char	*build_sierpinski_filename(t_fractal *f, int suffix)
+{
+	char	*filename;
+	char	buffer[512];
+	char	name_part[256];
+
+	snprintf(name_part, sizeof(name_part), "fractol_%s_%dx%d_depth=%d_color=%c",
+		f->name, f->img.width, f->img.height, f->depth, f->color_mode);
+	if (suffix == 0)
+		snprintf(buffer, sizeof(buffer), "exports/%s.png", name_part);
+	else
+		snprintf(buffer, sizeof(buffer), "exports/%s_%d.png", name_part,
+			suffix);
+	filename = ft_strdup(buffer);
+	return (filename);
 }

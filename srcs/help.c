@@ -28,11 +28,13 @@ static void	print_julia_presets2(void)
 
 static void	print_julia_presets(void)
 {
-	ft_putstr_fd(BOLD BLUE UNDERLINE"\nJulia presets (quick access) :"RST"\n", 2);
+	ft_putstr_fd(BOLD BLUE UNDERLINE"\nJulia presets "
+		"(quick access):"RST"\n", 2);
 	ft_putstr_fd("\t\tExample : ./fractol julia d\n", 2);
 	ft_putstr_fd("\t\t         ./fractol julia 1\n", 2);
 	ft_putstr_fd("\t\t         ./fractol julia dendrite\n\n", 2);
-	ft_putstr_fd("\t\t"ITALIC"Presets list (by number, alias or name):"RST"\n", 2);
+	ft_putstr_fd("\t\t"ITALIC"Presets list "
+		"(by number, alias or name):"RST"\n", 2);
 	ft_putstr_fd("\t\t1 / d  / dendrite      : Dendrite            "
 		"[-0.70176, -0.3842]\n", 2);
 	ft_putstr_fd("\t\t2 / r  / rabbit        : Douady Rabbit       "
@@ -67,7 +69,8 @@ static void	print_usage_params(void)
 		": Fullscreen (slower but beautiful)\n\n", 2);
 	ft_putstr_fd(BOLD BLUE UNDERLINE"\nFractals available :"RST"\n", 2);
 	ft_putstr_fd("\t\t🦠 Mandelbrot     : Classic escape-time set\n", 2);
-	ft_putstr_fd("\t\t🔮 Julia          : Parameterized quadratic Julia sets\n", 2);
+	ft_putstr_fd("\t\t🔮 Julia          : Parameterized quadratic Julia "
+		"sets\n", 2);
 	ft_putstr_fd("\t\t🧊 Sierpinski     "
 		": Sierpinski Carpet (depth param. optional)\n\n", 2);
 }

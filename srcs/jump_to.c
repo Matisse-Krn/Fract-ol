@@ -12,8 +12,10 @@ int	jump_menu(void)
 		"x = -0.7477,		  y = 0.1002\n", 1);
 	ft_putstr_fd("\t[5] Tendrils (Neuron)   → "
 		"x = -0.74364388703, y = 0.13182590421\n", 1);
-	ft_putstr_fd("\t[6] Mandelbrot Fault	→ x = -0.093,		  y = 0.651\n", 1);
-	ft_putstr_fd("\t[7] Period-3 Bulb       → x = -1.75,		  y = 0.0\n", 1);
+	ft_putstr_fd("\t[6] Mandelbrot Fault	→ x = -0.093,		  "
+		"y = 0.651\n", 1);
+	ft_putstr_fd("\t[7] Period-3 Bulb       → x = -1.75,		  "
+		"y = 0.0\n", 1);
 	ft_putstr_fd("\t[8] Near the End        → "
 		"x = -1.9075,		  y = -0.0002\n", 1);
 	ft_putstr_fd("\t[9] Antennae            → "

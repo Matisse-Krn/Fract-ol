@@ -93,12 +93,17 @@ int	handle_key_sierpinski(int keysym, t_fractal *fractal)
 {
 	if (keysym == XK_Escape)
 		handle_exit(fractal);
-	else if (keysym == XK_0 || keysym == XK_1 || keysym == XK_2 \
+	else if (keysym == XK_0 || keysym == XK_1 || keysym == XK_2
 		|| keysym == XK_3 || keysym == XK_4 || keysym == XK_5 || keysym == XK_6)
 		change_depth_sierpinski(keysym, fractal);
-	if (keysym == XK_n || keysym == XK_r || keysym == XK_g || keysym == XK_b \
-		|| keysym == XK_y || keysym == XK_o || keysym == XK_p || keysym == XK_c)
+	else if (keysym == XK_n || keysym == XK_r || keysym == XK_g
+		|| keysym == XK_b || keysym == XK_y || keysym == XK_o
+		|| keysym == XK_p || keysym == XK_c)
 		change_color_sierpinski(keysym, fractal);
+	else if (keysym == XK_h || keysym == XK_H)
+		print_help();
+	else if (keysym == XK_e || keysym == XK_E)
+		export_image(fractal);
 	else
 		return (1);
 	return (0);

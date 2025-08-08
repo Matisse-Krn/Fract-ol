@@ -206,6 +206,7 @@ void		set_preset6(char *arg, t_fractal *f);
 /* Export image to PNG */
 void		setup_export_image(t_image *export, t_fractal *fractal);
 void		export_image(t_fractal *fractal);
+char		*build_sierpinski_filename(t_fractal *f, int suffix);
 t_fractal	duplicate_fractal(t_fractal *src);
 void		restore_fractal(t_fractal *f, t_fractal *backup, t_image *export);
 
