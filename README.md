@@ -294,7 +294,7 @@ Projet centré sur l’algorithmique, la maîtrise de la programmation bas-nivea
 <table>
 <tr>
 <td align="center" width="50%">
-  <img src="assets/fractol_mandelbrot_x=-0.74500_y=0.11500_z=500.00000_iter=10000.png" width="420" alt="Export 1"><br>
+  <img src="assets/fractol_julia_x=-0.00827_y=0.01902_z=1.52882_iter=100000_mode=Cyclic_1.png" width="420" alt="Export 1"><br>
   <em>Export 1</em>
 </td>
 <td align="center" width="50%">
@@ -304,11 +304,11 @@ Projet centré sur l’algorithmique, la maîtrise de la programmation bas-nivea
 </tr>
 <tr>
 <td align="center" width="50%">
-  <img src="assets/fractol_julia_x=-0.00852_y=0.02971_z=1.65888_iter=10000_mode=Logarithmic.png" width="420" alt="Export 3"><br>
+  <img src="assets/fractol_mandelbrot_x=-1.60944_y=0.00158_z=14.36038_iter=200_mode=Cyclic_psy=on_color=C.png" width="420" alt="Export 3"><br>
   <em>Export 3</em>
 </td>
 <td align="center" width="50%">
-  <img src="assets/fractol_mandelbrot_x=-1.60944_y=0.00158_z=14.36038_iter=200_mode=Cyclic_psy=on_color=C.png" width="420" alt="Export 4"><br>
+  <img src="assets/fractol_julia_x=-0.00852_y=0.02971_z=1.65888_iter=10000_mode=Logarithmic.png" width="420" alt="Export 4"><br>
   <em>Export 4</em>
 </td>
 </tr>
@@ -318,17 +318,17 @@ Projet centré sur l’algorithmique, la maîtrise de la programmation bas-nivea
   <em>Export 5</em>
 </td>
 <td align="center" width="50%">
-  <img src="assets/fractol_mandelbrot_x=0.28470_y=-0.01180_z=500.00000_iter=10000_mode=Logarithmic_4.png" width="420" alt="Elephant Valley"><br>
-  <em>Elephant Valley</em>
+  <img src="assets/fractol_julia_x=-0.00546_y=0.03935_z=1.44000_iter=100000_mode=Cyclic.png" width="420" alt="Export 6"><br>
+  <em>Export 6</em>
 </td>
 </tr>
 <tr>
 <td align="center" width="50%">
-  <img src="assets/fractol_julia_x=-0.00827_y=0.01902_z=1.52882_iter=100000_mode=Cyclic_1.png" width="420" alt="Export 7"><br>
+  <img src="assets/fractol_mandelbrot_x=-0.74500_y=0.11500_z=500.00000_iter=10000.png" width="420" alt="Export 7"><br>
   <em>Export 7</em>
 </td>
 <td align="center" width="50%">
-  <img src="assets/fractol_julia_x=-0.00546_y=0.03935_z=1.44000_iter=100000_mode=Cyclic.png" width="420" alt="Export 8"><br>
+  <img src="assets/fractol_mandelbrot_x=0.28470_y=-0.01180_z=500.00000_iter=10000_mode=Logarithmic_4.png" width="420" alt="Export 8"><br>
   <em>Export 8</em>
 </td>
 </tr>
