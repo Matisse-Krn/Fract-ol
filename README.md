@@ -75,9 +75,19 @@ Utilisation de la MLX implique :
     - Réglage dynamique du contraste et du lissage.
 
 - **Modes de calcul des couleurs :**
-    - **Logarithmic**, **Adaptive**, **Fixed Log**, **Cyclic Modulo**, **Exponential**.
-    - Chaque mode influence différemment l’apparence du rendu.
-    - Changement immédiat via raccourcis clavier.
+	Plusieurs méthodes de calcul des couleurs sont disponibles, modifiant l’apparence visuelle des fractales.  
+	Elles sont changeables à tout moment via les raccourcis clavier dédiés.
+
+	- **Logarithmic** :  
+	  Accentue les variations de couleur dans les zones proches de la frontière en appliquant un logarithme sur le nombre d’itérations.
+	- **Adaptive** :  
+	  Ajuste dynamiquement l’échelle des couleurs en fonction du nombre d’itérations réellement rencontré à l’écran, optimisant le contraste global.
+	- **Fixed Log** :  
+	  Variante logarithmique utilisant une base fixe et constante, produisant un rendu plus homogène quelle que soit la zone explorée.
+	- **Cyclic Modulo** :  
+	  Applique un cycle répétitif de couleurs basé sur un modulo, créant des motifs visuels périodiques et très marqués.
+	- **Exponential** :  
+	  Amplifie les différences de couleur en utilisant une progression exponentielle, générant des dégradés plus vifs et contrastés.
 
 - **Palette et affichage interactifs :**
     - Changement de gamme de couleurs (R/G/B/Y/...).
