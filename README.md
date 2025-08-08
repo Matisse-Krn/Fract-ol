@@ -177,8 +177,8 @@ Projet centré sur l’algorithmique, la maîtrise de la programmation bas-nivea
   </p>
 
   <p>
-    <img src="assets/julia_preset2.png" width="420" alt="Julia - Preset 2">
-    <img src="assets/julia_interactive.png" width="420" alt="Julia - Interaction">
+    <img src="assets/fractol_julia_x=0.00875_y=-0.00503_z=1.06168_iter=200_mode=Cyclic_psy=off_color=O.png" width="420" alt="Julia - Tuning Fork">
+    <img src="assets/fractol_julia_x=0.00875_y=-0.00503_z=1.06168_iter=200_mode=Cyclic_psy=on_color=G.png" width="420" alt="Julia - Tuning Fork psychedelic">
   </p>
 
   <p>Exemples : <code>./fractol julia dendrite</code>, <code>./fractol julia 1</code>, <code>./fractol julia d</code></p>
@@ -188,15 +188,15 @@ Projet centré sur l’algorithmique, la maîtrise de la programmation bas-nivea
   <summary><b>Modes de rendu (Logarithmic / Adaptive / Fixed Log / Cyclic Modulo / Exponential)</b></summary>
 
   <p>
-    <img src="assets/mode_logarithmic.png" width="420" alt="Logarithmic">
-    <img src="assets/mode_adaptive.png"   width="420" alt="Adaptive">
+    <img src="assets/fractol_julia_x=0.17329_y=0.48554_z=14.12109_iter=200_mode=Logarithmic_psy=off_color=G.png" width="420" alt="Logarithmic">
+    <img src="assets/fractol_julia_x=0.17329_y=0.48554_z=14.12109_iter=200_mode=Adaptive_psy=off_color=G.png"   width="420" alt="Adaptive">
   </p>
   <p>
-    <img src="assets/mode_fixedlog.png"   width="420" alt="Fixed Log">
-    <img src="assets/mode_cyclic.png"     width="420" alt="Cyclic Modulo">
+    <img src="assets/fractol_julia_x=0.17329_y=0.48554_z=14.12109_iter=200_mode=Fixed_Log_psy=off_color=G.png"   width="420" alt="Fixed Log">
+    <img src="assets/fractol_julia_x=0.17329_y=0.48554_z=14.12109_iter=200_mode=Cyclic_psy=off_color=G.png"     width="420" alt="Cyclic Modulo">
   </p>
   <p>
-    <img src="assets/mode_exponential.png" width="420" alt="Exponential">
+    <img src="assets/fractol_julia_x=0.17329_y=0.48554_z=14.12109_iter=200_mode=Normal_psy=off_color=G.png" width="420" alt="Exponential">
   </p>
 
   <p>
@@ -225,8 +225,8 @@ Projet centré sur l’algorithmique, la maîtrise de la programmation bas-nivea
   <summary><b>Sierpiński Carpet — profondeurs</b></summary>
 
   <p>
-    <img src="assets/sierpinski_depth4.png" width="420" alt="Profondeur 4">
-    <img src="assets/sierpinski_depth6.png" width="420" alt="Profondeur 6">
+    <img src="assets/fractol_sierpinski_1042x1042_depth=4_color=N.png" width="420" alt="Profondeur 4">
+    <img src="assets/fractol_sierpinski_1042x1042_depth=6_color=N.png" width="420" alt="Profondeur 6">
   </p>
 </details>
 
