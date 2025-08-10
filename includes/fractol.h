@@ -4,8 +4,8 @@
 # define TRUE 1
 # define FALSE 0
 
-# define STB_IMAGE_WRITE_IMPLEMENTATION
-
+// # define STB_IMAGE_WRITE_IMPLEMENTATION
+// # include "stb_image_write.h"
 # include "mlx.h"
 # include "mlx_int.h"
 # include "libft.h"
@@ -26,16 +26,17 @@ typedef struct s_complex_nb
 
 typedef struct s_image
 {
-	void	*img_ptr;
-	char	*px_ptr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	int		full_width;
-	int		full_height;
-	int		height;
-	int		width;
-}			t_image;
+	void			*img_ptr;
+	char			*px_ptr;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
+	int				full_width;
+	int				full_height;
+	int				height;
+	int				width;
+	pthread_mutex_t	lock;
+}					t_image;
 
 typedef struct s_fractal
 {
@@ -128,9 +129,9 @@ struct s_bb_args
 	unsigned int		seed;
 	int					samples;
 	int					local_max;
-	int					tid;        /* id du thread 0..n-1 */
-	int					nthreads;   /* nombre de threads */
-	t_bb_args			*all;  /* pointeur sur le tableau complet 'args' */
+	int					tid;
+	int					nthreads;
+	t_bb_args			*all;
 	pthread_barrier_t	*barrier;
 };
 
@@ -330,5 +331,18 @@ int			bb_run_samples_local(t_fractal *f, int n, unsigned int *seed, t_bb_accum *
 
 /* palette_utils.c */
 int			bb_palette_ramp5(double t);
+
+/* buddhabrot_export_view.c */
+int			export_view_auto(t_fractal *f);
+
+/* buddhabrot_export_utils.c */
+int			ensure_exports_dir(void);
+char		*generate_view_export_filename(t_fractal *f);
+
+/* buddhabrot_mutex.c */
+void		img_lock_init(t_image *img);
+void		img_lock_destroy(t_image *img);
+int			snap_lock(t_image *img);
+void		snap_unlock(t_image *img);
 
 #endif

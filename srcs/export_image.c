@@ -1,4 +1,5 @@
 #include "fractol.h"
+#define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
 
 /**
@@ -195,5 +196,6 @@ void	export_image(t_fractal *fractal)
 		ft_putstr_fd("✅ Export completed successfully !\n", 1);
 	free(filename);
 	restore_fractal(fractal, &backup, &orig_img);
+	img_lock_destroy(&fractal->img);
 	mlx_destroy_image(fractal->mlx_ptr, export.img_ptr);
 }

@@ -20,7 +20,8 @@ SRC				= srcs/maths_functions.c srcs/rendering.c srcs/errors.c \
 				  srcs/buddhabrot_draw.c srcs/buddhabrot_histogram_mem.c \
 				  srcs/buddhabrot_mt_sampling_core.c srcs/buddhabrot_mt_sampling_runner.c \
 				  srcs/buddhabrot_mt_hist_local.c srcs/buddhabrot_mt_thread.c \
-				  srcs/buddhabrot_mt_ctx.c
+				  srcs/buddhabrot_mt_ctx.c srcs/buddhabrot_export_view.c \
+				  srcs/buddhabrot_export_utils.c srcs/buddhabrot_mutex.c
 
 INCLUDE			= -I/usr/include -Ilibft -Imlx_linux -Iincludes
 
