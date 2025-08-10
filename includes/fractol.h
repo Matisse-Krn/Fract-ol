@@ -11,6 +11,10 @@
 # include "libft.h"
 # include <math.h>
 # include <float.h>
+# include <time.h>
+# include <stdint.h>
+# include <sys/time.h>
+# include <sys/stat.h>
 
 # include <pthread.h>
 
@@ -66,6 +70,18 @@ typedef struct s_fractal
 	double		init_color_min;
 	double		init_color_max;
 	double		contrast_exponent;
+	/* -------- Buddhabrot -------- */
+	int				bb_min_iter;
+	int				bb_max_iter;
+	int				bb_samples_per_tick;
+	char			bb_nebula;          /* 'N' = off, 'Y' = Nebulabrot (plus tard) */
+	unsigned int	bb_seed;
+	uint64_t		bb_samples_total;
+	uint32_t		bb_max_count;
+	uint32_t		*bb_hist;           /* simple mode */
+	uint32_t		*bb_hist_r;         /* Nebulabrot (optionnel, plus tard) */
+	uint32_t		*bb_hist_g;
+	uint32_t		*bb_hist_b;
 	t_image		img;
 	t_complex	c;
 }				t_fractal;
@@ -103,6 +119,44 @@ typedef struct s_thread_arg
 	int			y_end;
 	int			local_max;
 }				t_thread_args;
+
+typedef struct s_bb_args t_bb_args;
+struct s_bb_args
+{
+	t_fractal			*f;
+	uint32_t			*local_hist;
+	unsigned int		seed;
+	int					samples;
+	int					local_max;
+	int					tid;        /* id du thread 0..n-1 */
+	int					nthreads;   /* nombre de threads */
+	t_bb_args			*all;  /* pointeur sur le tableau complet 'args' */
+	pthread_barrier_t	*barrier;
+};
+
+typedef struct s_bounds
+{
+	double			xmin;
+	double			xmax;
+	double			ymin;
+	double			ymax;
+}					t_bounds;
+
+typedef struct s_bb_accum
+{
+	uint32_t		*hist;
+	uint32_t		*max;
+}					t_bb_accum;
+
+typedef struct s_bb_mt_ctx
+{
+	int					n;
+	int					count;
+	int					spt;
+	pthread_t			*th;
+	t_bb_args			*args;
+	pthread_barrier_t	barrier;
+}						t_bb_mt_ctx;
 
 /* Memory and error handling */
 void		malloc_error(void);
@@ -224,5 +278,57 @@ void		print_help(void);
 void		print_other_notes(void);
 void		print_reminder_shortcuts(void);
 void		print_mandelbrot_presets(void);
+
+
+
+/* buddhabrot_init.c */
+void		init_buddhabrot(char **argv, t_fractal *f);
+int			bb_alloc_histograms(t_fractal *f);
+void		bb_reset_histograms(t_fractal *f);
+void		bb_free_histograms(t_fractal *f);
+
+/* buddhabrot.c */
+int			buddhabrot_loop(void *param);
+// void		buddhabrot_render_once(t_fractal *f);
+void		bb_draw_from_histogram(t_fractal *f);
+
+/* buddhabrot_histogram.c */
+void		bb_hist_zero(uint32_t *hist, int count);
+void		bb_hist_merge(uint32_t *dst, uint32_t *src, int count, uint32_t *max_out);
+int			bb_world_to_screen(const t_fractal *f, double x_real, double y_imag, t_pixel *screen);
+int			bb_reject_cardioid_bulb(double real_c, double imag_c);
+
+/* buddhabrot_mt_sampling_core.c */
+double	bb_rand_range(unsigned int *seed, double lo, double hi);
+void	bb_orbit_accumulate(const t_fractal *f, t_complex c, int esc, t_bb_accum *acc);
+
+/* buddhabrot_mt_ctx.c */
+int		bb_mt_prepare_ctx(const t_fractal *f, t_bb_mt_ctx *ctx);
+void	bb_mt_fill_arg_common(t_fractal *f, t_bb_mt_ctx *ctx, int i);
+void	bb_mt_cleanup_partial(t_bb_mt_ctx *ctx, int upto);
+void	bb_mt_finalize(t_fractal *f, t_bb_mt_ctx *ctx, uint32_t max_after_merge);
+
+/* buddhabrot_color.c */
+double	bb_normalize_iteration_count(uint32_t iteration_count, uint32_t iteration_max, t_fractal *fractal);
+
+/* buddhabrot_sampling.c */
+int				bb_run_samples_single(t_fractal *f, int n);
+unsigned int	bb_xorshift(unsigned int *state);
+
+/* Orchestration MT */
+// void		bb_render_tick_single(t_fractal *f);
+void		bb_render_tick_mt(t_fractal *f);
+
+/* Routine thread */
+void		*bb_thread_routine(void *arg);
+
+/* Utils MT */
+int			bb_alloc_local_hist(uint32_t **hist, int count);
+void		bb_free_local_hist(uint32_t **hist);
+int			bb_escape_iter(const t_fractal *f, t_complex c);
+int			bb_run_samples_local(t_fractal *f, int n, unsigned int *seed, t_bb_accum *acc);
+
+/* palette_utils.c */
+int			bb_palette_ramp5(double t);
 
 #endif
