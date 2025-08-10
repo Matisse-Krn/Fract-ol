@@ -1,5 +1,5 @@
 CC				= cc
-CFLAGS			= -g3 -O3 #-Wall -Wextra -Werror
+CFLAGS			= -g3 -O3 -Wall -Wextra -Werror
 NAME			= fractol 
 
 LIBPATH 		= -Lmlx_linux -Llibft -L/usr/lib
@@ -14,7 +14,13 @@ SRC				= srcs/maths_functions.c srcs/rendering.c srcs/errors.c \
 				  srcs/screen_utils.c srcs/jump_to.c srcs/export_image.c srcs/export_utils.c \
 				  srcs/render_colors_mode.c srcs/julia_presets.c srcs/julia_presets_handler1.c \
 				  srcs/julia_presets_handler2.c srcs/help.c srcs/help2.c srcs/adaptive_mode.c \
-				  srcs/adaptive_mode_multithreading.c
+				  srcs/adaptive_mode_multithreading.c srcs/buddhabrot_init.c srcs/buddhabrot.c \
+				  srcs/buddhabrot_histogram.c srcs/buddhabrot_sampling.c srcs/buddhabrot_color.c \
+				  srcs/buddhabrot_mt_orchestrator.c srcs/buddhabrot_palette_utils.c \
+				  srcs/buddhabrot_draw.c srcs/buddhabrot_histogram_mem.c \
+				  srcs/buddhabrot_mt_sampling_core.c srcs/buddhabrot_mt_sampling_runner.c \
+				  srcs/buddhabrot_mt_hist_local.c srcs/buddhabrot_mt_thread.c \
+				  srcs/buddhabrot_mt_ctx.c
 
 INCLUDE			= -I/usr/include -Ilibft -Imlx_linux -Iincludes
 
@@ -27,7 +33,7 @@ bonus			: $(NAME)
 %.o 			: %.c
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@ >>/dev/null
 
-$(NAME)			: $(OBJ)
+$(NAME)			: $(OBJ) includes/fractol.h
 	@make -sC libft/ >>/dev/null
 	@make -sC mlx_linux/ >>/dev/null
 	@$(CC) $(CFLAGS) $(OBJ) $(LIBPATH) $(LIBNAME) $(INCLUDE) -o $(NAME) >>/dev/null
