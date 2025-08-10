@@ -1,5 +1,19 @@
 #include "fractol.h"
 
+/**
+ * @brief  Map a numeric keypad keysym to a preset index.
+ *
+ * Converts specific X11 key symbols from the numeric keypad
+ * (KP_0–KP_9) into corresponding preset numbers for fractal navigation.
+ * Returns -1 if the key is not a recognized keypad digit.
+ *
+ * @param  keysym  Key symbol from the X11 event.
+ * @return Preset index (0–9) if recognized, or -1 if invalid.
+ *
+ * @note   The mapping follows X11 keypad key codes (65429–65438).
+ * @pre    None.
+ * @post   No changes to program state.
+ */
 static int	keypad_to_preset(int keysym)
 {
 	if (keysym == 65436)
@@ -25,6 +39,25 @@ static int	keypad_to_preset(int keysym)
 	return (-1);
 }
 
+/**
+ * @brief  Handle advanced keyboard inputs for jumps, export, and mode switching.
+ *
+ * Processes keys for:
+ * - Jump menu activation ('J'/'j') when in Mandelbrot mode.
+ * - Jump choice selection from top-row digits or numeric keypad.
+ * - Exporting the current fractal view to PNG ('E'/'e').
+ * - Switching rendering mode ('S'/'s').
+ * - Displaying help ('H'/'h').
+ *
+ * @param  keysym  Key symbol from the X11 event.
+ * @param  f       Pointer to the fractal context (`t_fractal`).
+ * @return None.
+ *
+ * @note   Maintains a static `preset_need` flag to determine if a jump choice
+ *         is expected after opening the jump menu.
+ * @pre    `f` must be initialized with valid fractal data.
+ * @post   The fractal may be updated, exported, or its mode switched.
+ */
 static void	handle_key_four(int keysym, t_fractal *f)
 {
 	int			preset;
@@ -50,19 +83,23 @@ static void	handle_key_four(int keysym, t_fractal *f)
 		print_help();
 }
 
-/*
- * Handles the last set of keyboard inputs for contrast changes,
-	psychedelic mode toggling, and resetting the view.
- * 
- * @param keysym The key code of the pressed key.
- * @param fractal A pointer to the fractal structure.
+/**
+ * @brief  Handle tertiary keyboard inputs for rendering adjustments and jumps.
  *
- * Keyboard shortcuts:
-	- `Space` (XK_space) → Toggle psychedelic mode
-	- `-` (XK_minus) → Decrease contrast
-	- `=` (XK_equal) → Increase contrast
-	- `Backspace` (XK_BackSpace) → Reset view
-*/
+ * Processes keys for:
+ * - Switching range color mode (Space).
+ * - Adjusting contrast ('-' / '=').
+ * - Resetting the view (Backspace).
+ * - Delegating other actions to `handle_key_four()`.
+ *
+ * @param  keysym    Key symbol from the X11 event.
+ * @param  fractal   Pointer to the fractal context (`t_fractal`).
+ * @return None.
+ *
+ * @note   Contrast changes affect the `contrast_exponent` parameter.
+ * @pre    `fractal` must be initialized with valid rendering parameters.
+ * @post   The fractal state or appearance may change and trigger re-rendering.
+ */
 void	handle_key_three(int keysym, t_fractal *fractal)
 {
 	if (keysym == XK_space)
@@ -77,18 +114,25 @@ void	handle_key_three(int keysym, t_fractal *fractal)
 		handle_key_four(keysym, fractal);
 }
 
-/*
- * Handles keyboard inputs specific to the Sierpinski Carpet fractal.
- * Allows users to adjust depth and change colors.
- * 
- * @param keysym The key code of the pressed key.
- * @param fractal A pointer to the fractal structure.
- * @return Returns 0 if the key is handled, 1 otherwise.
+/**
+ * @brief  Handle keyboard inputs specific to the Sierpinski fractal.
  *
- * Sierpinski-specific keys:
-	- `0-6` (XK_0 - XK_6) → Change depth
-	- `N, R, G, B, Y, O, P, C` → Change colors
-*/
+ * Processes keys for:
+ * - Exiting the program (Escape).
+ * - Changing fractal depth (0–6).
+ * - Changing fractal color mode ('n', 'r', 'g', 'b', 'y', 'o', 'p', 'c').
+ * - Displaying help ('H'/'h').
+ * - Exporting the current fractal view ('E'/'e').
+ *
+ * @param  keysym    Key symbol from the X11 event.
+ * @param  fractal   Pointer to the fractal context (`t_fractal`).
+ * @return 0 if the key was handled, 1 if unrecognized.
+ *
+ * @note   This function is only used when rendering the Sierpinski fractal.
+ * @pre    `fractal` must be initialized for Sierpinski mode.
+ * @post   The fractal state or appearance may be modified,
+ *		   or an export may occur.
+ */
 int	handle_key_sierpinski(int keysym, t_fractal *fractal)
 {
 	if (keysym == XK_Escape)

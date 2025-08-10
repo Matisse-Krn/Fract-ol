@@ -1,63 +1,28 @@
 #include "fractol.h"
 
-/*
-	* ✅Implementer Mandelbrot
-	* ✅Implementer Julia
-	* ✅ Implementer une autre fractale (bonus)
-	* ✅ Handle hooks pour sierpinski
-		* ✅ entrer la depth en parametre ?
-		* ✅ modifier la depth
-		* ✅ switch color
-	* ✅ Parser input
-	* ✅ Afficher les coordonnees du curseur de la souris sur la fenetre
-	* ✅ Afficher le mode de couleurs actuellement selectionne + psy ou non ?
-	* ✅ Afficher les coordonnees initiales (parametres) pour Julia
-	* ✅ Ecrire dans le terminal a CHAQUE action
-	* ✅ Ajouter ft_printf() a la libft
-	* ✅ Ajout raccourcis : 
-		* ✅ tab = switch min/max (colors)
-		* ✅ + = +smooth
-		* ✅ - = -smooth
-		* ✅ BackSpace = reset zoom
-	* ✅ Faire en sorte de pouvoir changer la palette de couleurs
-	* ✅ Passage en mode psychedelique
-	* ✅ Recenter la fractale Mandelbrot
-	* ✅ Ajouter une text-box avec raccourcis pour interagir avec le programme
-	* ✅ Refaire les commentaires descriptifs de chaque fonction
-	* ✅ Verifier avec des inputs bizarres ('sierpinski 65' 'sierpinski .')
-		* ✅ Sierpinski
-		* ✅ Julia
-		* ✅ Mandelbrot
-	* ✅ Ajout d'une fonction pour recuperer la depth_max en fonction
-		de la taille de la fenetre, et adapter la depth en consequence
-	* ✅ Protection du changement de depth par l'utilisateur en fonction
-		de fractal->max_depth
-	* ✅ Sortie propre du programme quand taille de fenetre insuffisante
-	* Ajouter des 'alias' dans le programme afin de proposer des parametres
-		predefinis pour Julia
-	* Rediger man pour explications alias et autres (comportement
-		attendu, limites,...)
-	* Retravailler Makefile
-	* Verifier qu'il ne reste pas de 'printf()' (+ tester d'en executer un
-		dans chaque fichier sans ajouter le header <stdio.h> localement)
-	* Suivre et verifier la check-list (toto before push)
-	* Supprimer tous les fichiers et dossiers inutiles du dosier de rendu
-*/
-
-/*
- * Parses user input to determine which fractal should be rendered.
- * Calls up the appropriate initialization function according to the
-	arguments supplied.
+/**
+ * @brief  Parses program arguments to initialize the chosen fractal.
  *
- * @param argc The number of command-line arguments.
- * @param argv The array of command-line arguments.
- * @param fractal A pointer to the fractal structure to store parsed data.
- * @return Returns 0 on success, 1 if the input does not match any valid
-	fractal type.
-*/
+ * Determines which fractal type to initialize based on the command-line
+ * arguments, and calls the appropriate initialization function for
+ * Mandelbrot, Julia, Sierpinski (with or without depth), or Buddhabrot.
+ * Also configures multi-threading settings before initialization.
+ *
+ * @param  argc     The number of command-line arguments.
+ * @param  argv     Array of command-line argument strings.
+ * @param  fractal  Pointer to the fractal structure to initialize.
+ * @return Returns 0 on success (recognized fractal type and initialized),
+ *         or 1 if the input is invalid or unrecognized.
+ *
+ * @note   Ignores `argc` directly via `(void)argc` except for cases where
+ *         additional arguments are required (e.g., Julia presets).
+ * @warning Providing invalid arguments will prevent initialization and
+ *          result in a usage error in the caller.
+ * @pre    `argv` must contain at least one valid fractal name at index 1.
+ * @post   On success, the fractal structure is configured for rendering.
+ */
 static int	parse_input(int argc, char **argv, t_fractal *fractal)
 {
-	(void)argc;
 	set_multi_threading(argv, fractal);
 	if (!ft_strcmp(argv[1], "mandelbrot"))
 		init_mandelbrot(argv, fractal);
@@ -67,24 +32,38 @@ static int	parse_input(int argc, char **argv, t_fractal *fractal)
 		init_sierpinski_depth(argv, fractal);
 	else if (!ft_strcmp(argv[1], "sierpinski"))
 		init_sierpinski(argv, fractal);
+	else if (!ft_strcmp(argv[1], "buddhabrot"))
+		init_buddhabrot(argv, fractal);
 	else
 		return (1);
 	return (0);
 }
 
-/*
- * Entry point of the fractal rendering program.
- * Calls the main parsing function and checks its return value.
- * Displays usage instructions if input is invalid.
- * 
- * @param argc The number of command-line arguments.
- * @param argv The array of command-line arguments.
- * @return Returns 0 on success, 1 if the input is invalid.
-*/
+/**
+ * @brief  Program entry point.
+ *
+ * Handles argument validation, help display, fractal initialization,
+ * and starts execution. Exits with an error message if arguments are
+ * invalid or insufficient.
+ *
+ * @param  argc  The number of command-line arguments.
+ * @param  argv  Array of command-line argument strings.
+ * @return Returns 0 on successful initialization and execution, or 1
+ *         on failure (invalid arguments or initialization error).
+ *
+ * @note   Automatically lowercases the fractal name for easier matching.
+ * @warning If `argc < 2`, usage instructions are printed and the program
+ *          exits with a non-zero code.
+ * @pre    Program must be launched with at least one fractal type name
+ *         (e.g., "mandelbrot", "julia", "sierpinski", or "buddhabrot").
+ * @post   The specified fractal is initialized; rendering starts if
+ *         initialization succeeds.
+ */
 int	main(int argc, char **argv)
 {
 	t_fractal	fractal;
 
+	// Benchmark le Buddhabrot afin de trouver le nombre de threads ideal
 	if (argc < 2)
 		return (usage_error(), 1);
 	handle_help(argv);
