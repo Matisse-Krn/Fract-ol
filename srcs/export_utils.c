@@ -1,7 +1,21 @@
 #include "fractol.h"
 
-#include "fractol.h"
-
+/**
+ * @brief  Initialize an export image buffer for fractal rendering.
+ *
+ * Sets up an image buffer (`t_image`) for high-resolution export based on
+ * the fractal's full resolution. For Sierpinski fractals, uses the current
+ * window dimensions instead. Allocates the image via MLX, retrieves its
+ * pixel data address, and updates the fractal's image and aspect ratio.
+ *
+ * @param  export    Pointer to the image structure to initialize.
+ * @param  fractal   Pointer to the fractal context (`t_fractal`).
+ * @return None.
+ *
+ * @note   On allocation failure, calls `malloc_error()` and terminates.
+ * @pre    `fractal->mlx_ptr` must be valid and initialized.
+ * @post   `export` and `fractal->img` are initialized for rendering.
+ */
 void	setup_export_image(t_image *export, t_fractal *fractal)
 {
 	export->width = fractal->img.full_width;
@@ -26,6 +40,20 @@ void	setup_export_image(t_image *export, t_fractal *fractal)
 		/ (double)fractal->img.height;
 }
 
+/**
+ * @brief  Copy selected fractal parameters into another structure (part 2).
+ *
+ * Helper function for `duplicate_fractal()` that copies rendering, color,
+ * geometry, and image size parameters from a source fractal to a copy.
+ *
+ * @param  src   Pointer to the source fractal context.
+ * @param  copy  Pointer to the destination fractal structure to fill.
+ * @return None.
+ *
+ * @note   Does not copy MLX pointers or image pixel data.
+ * @pre    `src` and `copy` must be valid pointers.
+ * @post   The `copy` structure contains cloned rendering parameters.
+ */
 static void	duplicate_fractal2(t_fractal *src, t_fractal *copy)
 {
 	copy->aspect_ratio = src->aspect_ratio;
@@ -52,6 +80,19 @@ static void	duplicate_fractal2(t_fractal *src, t_fractal *copy)
 	copy->img.px_ptr = NULL;
 }
 
+/**
+ * @brief  Create a duplicate of a fractal context.
+ *
+ * Produces a shallow copy of most fractal parameters so that rendering
+ * state can be restored later. Image and MLX pointers are not duplicated.
+ *
+ * @param  src  Pointer to the source fractal context.
+ * @return A `t_fractal` structure containing the copied data.
+ *
+ * @note   Uses `duplicate_fractal2()` to copy geometry and image size data.
+ * @pre    `src` must be initialized with valid fractal parameters.
+ * @post   The returned copy can be used to restore the fractal state.
+ */
 t_fractal	duplicate_fractal(t_fractal *src)
 {
 	t_fractal	copy;
@@ -77,6 +118,22 @@ t_fractal	duplicate_fractal(t_fractal *src)
 	return (copy);
 }
 
+/**
+ * @brief  Restore fractal state from a backup after export.
+ *
+ * Replaces the fractal's rendering parameters and image buffer with those
+ * stored in a backup and the original image reference.
+ *
+ * @param  f         Pointer to the fractal context to restore.
+ * @param  backup    Pointer to the backup fractal containing saved parameters.
+ * @param  orig_img  Pointer to the original image structure to restore.
+ * @return None.
+ *
+ * @note   Typically used after an export to restore the fractal's
+ *		   on-screen state.
+ * @pre    `backup` and `orig_img` must be initialized with valid data.
+ * @post   `f` matches the rendering state prior to export.
+ */
 void	restore_fractal(t_fractal *f, t_fractal *backup, t_image *orig_img)
 {
 	f->max_iterations = backup->max_iterations;
@@ -90,6 +147,20 @@ void	restore_fractal(t_fractal *f, t_fractal *backup, t_image *orig_img)
 	f->img = *orig_img;
 }
 
+/**
+ * @brief  Build a descriptive export filename for a Sierpinski fractal.
+ *
+ * Creates a filename string containing the fractal's type, resolution,
+ * depth, and color mode. Optionally appends a numeric suffix for uniqueness.
+ *
+ * @param  f       Pointer to the fractal context (`t_fractal`).
+ * @param  suffix  Numeric suffix for filename uniqueness (0 = no suffix).
+ * @return A newly allocated string containing the filename.
+ *
+ * @note   The returned string must be freed by the caller.
+ * @pre    `f` must contain valid fractal parameters.
+ * @post   The filename points to the `exports/` directory and ends with `.png`.
+ */
 char	*build_sierpinski_filename(t_fractal *f, int suffix)
 {
 	char	*filename;
