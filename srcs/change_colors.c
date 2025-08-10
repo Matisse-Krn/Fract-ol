@@ -1,13 +1,22 @@
 #include "fractol.h"
 
-/*
- * Checks if the given color mode is already active or if it should reset 
-	to the default black-and-white mode.
- * 
- * @param mode The requested color mode.
- * @param fractal A pointer to the fractal structure.
- * @return Returns 1 if no changes are needed, 0 otherwise.
-*/
+/**
+ * @brief  Check and reset the fractal's color mode to Normal if applicable.
+ *
+ * Determines whether the requested color mode is already active or if the
+ * requested mode is 'N' (Normal black & white). If so, it resets the fractal's
+ * colors to the initial values, sets the mode to 'N', and triggers rendering
+ * unless the fractal is Sierpinski.
+ *
+ * @param  mode     The requested color mode character.
+ * @param  fractal  Pointer to the fractal context (`t_fractal`).
+ * @return 1 if the mode was applied or no change was necessary, 0 otherwise.
+ *
+ * @note   This is a helper function used by all other color mode change
+ *         functions to handle the Normal mode and redundant mode changes.
+ * @pre    `fractal` must be initialized with valid color and rendering data.
+ * @post   If applicable, the fractal is rendered in Normal mode.
+ */
 int	check_color_mode(char mode, t_fractal *fractal)
 {
 	if (mode == fractal->color_mode && mode == 'N')
@@ -25,14 +34,22 @@ int	check_color_mode(char mode, t_fractal *fractal)
 	return (0);
 }
 
-/*
- * Handles the final color mode change for Cyan.
- * If the requested color mode is not recognized, 
-	no changes are applied.
- * 
- * @param mode The requested color mode.
- * @param fractal A pointer to the fractal structure.
-*/
+/**
+ * @brief  Apply the Cyan color mode or delegate to the next mode handler.
+ *
+ * Sets the fractal's colors to a Cyan gradient if requested, otherwise
+ * delegates to `change_color_mode()` for other modes. Triggers rendering
+ * unless the fractal is Sierpinski.
+ *
+ * @param  mode     The requested color mode character.
+ * @param  fractal  Pointer to the fractal context (`t_fractal`).
+ * @return None.
+ *
+ * @note   Uses `check_color_mode()` to handle Normal mode or redundant
+ *         mode changes before applying Cyan.
+ * @pre    `fractal` must be initialized with valid color and rendering data.
+ * @post   The fractal color range is updated to Cyan if applicable.
+ */
 static void	change_color_mode_four(char mode, t_fractal *fractal)
 {
 	if (check_color_mode(mode, fractal))
@@ -50,14 +67,22 @@ static void	change_color_mode_four(char mode, t_fractal *fractal)
 		fractal_rendering(fractal);
 }
 
-/*
- * Handles additional color mode changes for Orange and Pink.
- * If the requested color mode is not handled here, 
-	passes control to change_color_mode_four().
- * 
- * @param mode The requested color mode.
- * @param fractal A pointer to the fractal structure.
-*/
+/**
+ * @brief  Apply the Orange or Pink color mode, or delegate further.
+ *
+ * Sets the fractal's colors to an Orange or Pink gradient if requested,
+ * otherwise delegates to `change_color_mode_four()` for other modes.
+ * Triggers rendering unless the fractal is Sierpinski.
+ *
+ * @param  mode     The requested color mode character.
+ * @param  fractal  Pointer to the fractal context (`t_fractal`).
+ * @return None.
+ *
+ * @note   Uses `check_color_mode()` to handle Normal mode or redundant
+ *         mode changes before applying new colors.
+ * @pre    `fractal` must be initialized with valid color and rendering data.
+ * @post   The fractal color range is updated to Orange or Pink if applicable.
+ */
 static void	change_color_mode_three(char mode, t_fractal *fractal)
 {
 	if (check_color_mode(mode, fractal))
@@ -85,14 +110,22 @@ static void	change_color_mode_three(char mode, t_fractal *fractal)
 		fractal_rendering(fractal);
 }
 
-/*
- * Handles additional color mode changes for Red and Green.
- * If the requested color mode is not handled here, 
-	passes control to change_color_mode_three().
- * 
- * @param mode The requested color mode.
- * @param fractal A pointer to the fractal structure.
-*/
+/**
+ * @brief  Apply the Red or Green color mode, or delegate further.
+ *
+ * Sets the fractal's colors to a Red or Green gradient if requested,
+ * otherwise delegates to `change_color_mode_three()` for other modes.
+ * Triggers rendering unless the fractal is Sierpinski.
+ *
+ * @param  mode     The requested color mode character.
+ * @param  fractal  Pointer to the fractal context (`t_fractal`).
+ * @return None.
+ *
+ * @note   Uses `check_color_mode()` to handle Normal mode or redundant
+ *         mode changes before applying new colors.
+ * @pre    `fractal` must be initialized with valid color and rendering data.
+ * @post   The fractal color range is updated to Red or Green if applicable.
+ */
 static void	change_color_mode_two(char mode, t_fractal *fractal)
 {
 	if (check_color_mode(mode, fractal))
@@ -120,15 +153,22 @@ static void	change_color_mode_two(char mode, t_fractal *fractal)
 		fractal_rendering(fractal);
 }
 
-/*
- * Changes the fractal's color mode based on user input.
- * Calls check_color_mode() to determine if changes are necessary.
- * If the requested color mode is not handled here, passes control 
-	to change_color_mode_two().
- * 
- * @param mode The requested color mode.
- * @param fractal A pointer to the fractal structure.
-*/
+/**
+ * @brief  Apply the Blue or Yellow color mode, or delegate further.
+ *
+ * Sets the fractal's colors to a Blue or Yellow gradient if requested,
+ * otherwise delegates to `change_color_mode_two()` for other modes.
+ * Triggers rendering unless the fractal is Sierpinski.
+ *
+ * @param  mode     The requested color mode character.
+ * @param  fractal  Pointer to the fractal context (`t_fractal`).
+ * @return None.
+ *
+ * @note   Uses `check_color_mode()` to handle Normal mode or redundant
+ *         mode changes before applying new colors.
+ * @pre    `fractal` must be initialized with valid color and rendering data.
+ * @post   The fractal color range is updated to Blue or Yellow if applicable.
+ */
 void	change_color_mode(char mode, t_fractal *fractal)
 {
 	if (check_color_mode(mode, fractal))
