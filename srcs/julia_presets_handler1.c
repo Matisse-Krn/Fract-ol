@@ -8,7 +8,7 @@ static void	set_preset5(char *arg, t_fractal *f)
 		f->c.real = -0.8;
 		f->c.imag = 0.156;
 		f->init_c_real = "-0.8";
-		f->init_c_imag = "0.156"; // Cauliflower
+		f->init_c_imag = "0.156";
 		ft_printf("\t\t🥦 Julia preset : Cauliflower "
 			"[%s, %s]\n", f->init_c_real, f->init_c_imag);
 	}
@@ -18,7 +18,7 @@ static void	set_preset5(char *arg, t_fractal *f)
 		f->c.real = -0.7269;
 		f->c.imag = 0.1889;
 		f->init_c_real = "-0.7269";
-		f->init_c_imag = "0.1889"; // Mandelbrot Heart
+		f->init_c_imag = "0.1889";
 		ft_printf("\t\t💖 Julia preset : Mandelbrot Heart "
 			"[%s, %s]\n", f->init_c_real, f->init_c_imag);
 	}
@@ -34,7 +34,7 @@ static void	set_preset4(char *arg, t_fractal *f)
 		f->c.real = -0.4;
 		f->c.imag = 0.6;
 		f->init_c_real = "-0.4";
-		f->init_c_imag = "0.6"; // Biomorph / Filaments
+		f->init_c_imag = "0.6";
 		ft_printf("\t\t🪴 Julia preset : Biomorph/Filaments "
 			"[%s, %s]\n", f->init_c_real, f->init_c_imag);
 	}
@@ -44,7 +44,7 @@ static void	set_preset4(char *arg, t_fractal *f)
 		f->c.real = -0.8;
 		f->c.imag = 0.2;
 		f->init_c_real = "-0.8";
-		f->init_c_imag = "0.2"; // Snowflake / Frosty
+		f->init_c_imag = "0.2";
 		ft_printf("\t\t❄️  Julia preset : Snowflake (Frosty) "
 			"[%s, %s]\n", f->init_c_real, f->init_c_imag);
 	}
