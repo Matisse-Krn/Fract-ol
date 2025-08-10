@@ -19,6 +19,7 @@
 int	handle_exit(t_fractal *fractal)
 {
 	bb_free_histograms(fractal);
+	img_lock_destroy(&fractal->img);
 	mlx_destroy_image(fractal->mlx_ptr, fractal->img.img_ptr);
 	mlx_destroy_window(fractal->mlx_ptr, fractal->win_ptr);
 	mlx_destroy_display(fractal->mlx_ptr);

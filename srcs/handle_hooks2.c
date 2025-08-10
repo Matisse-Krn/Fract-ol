@@ -40,23 +40,29 @@ static int	keypad_to_preset(int keysym)
 }
 
 /**
- * @brief  Handle advanced keyboard inputs for jumps, export, and mode switching.
+ * @brief  Handles specific keyboard events for fractal interactions.
  *
- * Processes keys for:
- * - Jump menu activation ('J'/'j') when in Mandelbrot mode.
- * - Jump choice selection from top-row digits or numeric keypad.
- * - Exporting the current fractal view to PNG ('E'/'e').
- * - Switching rendering mode ('S'/'s').
- * - Displaying help ('H'/'h').
+ * Processes advanced key bindings related to fractal presets, image exporting,
+ * render mode switching, and help menu display. Supports both direct preset
+ * selection and the interactive jump-to menu for Mandelbrot sets. Also triggers
+ * PNG exports for supported fractal types.
  *
- * @param  keysym  Key symbol from the X11 event.
- * @param  f       Pointer to the fractal context (`t_fractal`).
+ * @param  keysym  The key code (from X11) representing the pressed key.
+ * @param  f       Pointer to the current fractal structure containing all
+ *                 rendering parameters and context.
  * @return None.
  *
- * @note   Maintains a static `preset_need` flag to determine if a jump choice
- *         is expected after opening the jump menu.
- * @pre    `f` must be initialized with valid fractal data.
- * @post   The fractal may be updated, exported, or its mode switched.
+ * @note   The function maintains a static flag (`preset_need`) to handle
+ *         multi-step input for the jump-to menu. For Buddhabrot exports,
+ *         `export_view_auto()` is used, while other fractals use `export_image()`.
+ *         Only Mandelbrot supports the jump-to preset menu.
+ *
+ * @warning Passing an invalid `keysym` will have no effect, but
+ *          exporting requires a valid and initialized `f->mlx_ptr` context.
+ * @pre    The fractal rendering context (`f`) must be fully initialized
+ *         before calling this function.
+ * @post   Depending on the key pressed, the fractal display may be updated,
+ *         a file may be exported, or console messages may be displayed.
  */
 static void	handle_key_four(int keysym, t_fractal *f)
 {
@@ -72,10 +78,18 @@ static void	handle_key_four(int keysym, t_fractal *f)
 		preset = keypad_to_preset(keysym);
 	if (preset > 0 && preset <= 9)
 		preset_need = handle_jump_choice(f, preset);
-	else if (keysym == XK_e)
+	else if (keysym == XK_e || keysym == XK_E)
 	{
 		ft_putstr_fd("Exporting image to PNG...\n", 1);
-		export_image(f);
+		if (!ft_strcmp(f->name, "buddhabrot"))
+		{
+			if (!export_view_auto(f))
+				ft_putstr_fd("❌ Export failed\n", 2);
+			else
+				ft_putstr_fd("✅ Export OK (view snapshot)\n", 1);
+		}
+		else
+			export_image(f);
 	}
 	else if (keysym == XK_s || keysym == XK_S)
 		switch_render_mode(f);

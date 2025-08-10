@@ -94,6 +94,7 @@ max : %d\n\n", fractal->max_depth);
 		|| keysym == XK_4 || keysym == XK_5 || keysym == XK_6))
 		fractal->depth = keysym - '0';
 	ft_printf("%d]\n", fractal->depth);
+	img_lock_destroy(&fractal->img);
 	mlx_destroy_image(fractal->mlx_ptr, fractal->img.img_ptr);
 	initialize_image(fractal);
 	rendering_sierpinski(fractal);
@@ -137,6 +138,7 @@ void	change_color_sierpinski(int keysym, t_fractal *fractal)
 		change_color_mode('P', fractal);
 	else if (keysym == XK_c)
 		change_color_mode('C', fractal);
+	img_lock_destroy(&fractal->img);
 	mlx_destroy_image(fractal->mlx_ptr, fractal->img.img_ptr);
 	initialize_image(fractal);
 	rendering_sierpinski(fractal);

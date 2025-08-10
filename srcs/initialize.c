@@ -184,4 +184,5 @@ void	initialize_image(t_fractal *fractal)
 		free(fractal->mlx_ptr);
 		malloc_error();
 	}
+	img_lock_init(&fractal->img);
 }
