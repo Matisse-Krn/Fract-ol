@@ -1,5 +1,23 @@
 #include "fractol.h"
 
+/**
+ * @brief  Move the fractal view in a given direction.
+ *
+ * Adjusts the horizontal or vertical shift of the fractal view based
+ * on the specified direction, moving by 25% of the current visible
+ * range. Triggers a full re-render of the fractal after movement.
+ *
+ * @param  direction  Movement direction: 'L' (left), 'R' (right),
+ *                    'U' (up), or 'D' (down).
+ * @param  f          Pointer to the fractal context (`t_fractal`)
+ *                    containing zoom, aspect ratio, and shift values.
+ * @return None.
+ *
+ * @note   The displacement amount scales with the current zoom level
+ *         and aspect ratio.
+ * @pre    `f` must be initialized with valid rendering parameters.
+ * @post   The view is shifted and the fractal is re-rendered.
+ */
 void	displacement(char direction, t_fractal *f)
 {
 	double	move_amount_x;
@@ -18,15 +36,27 @@ void	displacement(char direction, t_fractal *f)
 	fractal_rendering(f);
 }
 
-/*
- * Applies zooming to the fractal by modifying the zoom rate
-	and adjusting the shift values to center the zoom at the mouse cursor.
- * 
- * @param fractal A pointer to the fractal structure.
- * @param x The x-coordinate of the zoom center.
- * @param y The y-coordinate of the zoom center.
- * @param factor The zoom factor (>1 for zoom out, <1 for zoom in).
-*/
+/**
+ * @brief  Apply zoom to the fractal view centered on a pixel.
+ *
+ * Changes the zoom level of the fractal by a given factor, adjusting
+ * the position so that the specified screen coordinates remain centered
+ * in the view after zooming. Triggers a full re-render after updating.
+ *
+ * @param  f       Pointer to the fractal context (`t_fractal`) containing
+ *                 zoom, aspect ratio, and shift values.
+ * @param  x       X coordinate of the zoom center (in pixels).
+ * @param  y       Y coordinate of the zoom center (in pixels).
+ * @param  factor  Multiplicative zoom factor (> 1.0 for zoom-in,
+ *                 < 1.0 for zoom-out).
+ * @return None.
+ *
+ * @note   Uses `scale_map()` to translate screen coordinates to fractal
+ *         plane coordinates for precise zoom centering.
+ * @pre    `f` must be initialized with valid rendering parameters.
+ * @post   The zoom level and position are updated, and the fractal
+ *		   is re-rendered.
+ */
 void	apply_zoom(t_fractal *f, int x, int y, double factor)
 {
 	double	old_zoom;
@@ -46,16 +76,22 @@ void	apply_zoom(t_fractal *f, int x, int y, double factor)
 	fractal_rendering(f);
 }
 
-/*
- * Increases or decreases the maximum number of iterations used
-	for fractal rendering. The step size is defined by tick_iterations.
- * 
- * @param sign The character indicating increase ('+') or decrease ('-').
- * @param fractal A pointer to the fractal structure.
- * 
- * Constraints:
-	- Cannot decrease below tick_iterations.
-*/
+/**
+ * @brief  Increase or decrease the maximum iteration count.
+ *
+ * Adjusts the `max_iterations` value by `tick_iterations`, either
+ * increasing or decreasing it depending on the given sign. Triggers
+ * a re-render of the fractal after updating.
+ *
+ * @param  sign     '+' to increase iterations, '-' to decrease.
+ * @param  fractal  Pointer to the fractal context (`t_fractal`).
+ * @return None.
+ *
+ * @note   The minimum allowed value for `max_iterations` is equal
+ *         to `tick_iterations`.
+ * @pre    `fractal` must be initialized with valid rendering parameters.
+ * @post   `max_iterations` is updated and the fractal is re-rendered.
+ */
 void	change_max_iterations(char sign, t_fractal *fractal)
 {
 	ft_printf("Changing 'max_iterations' : [%d ->", fractal->max_iterations);
@@ -72,12 +108,21 @@ void	change_max_iterations(char sign, t_fractal *fractal)
 	fractal_rendering(fractal);
 }
 
-/*
- * Resets the fractal view to its initial position and zoom level.
- * Restores shift_x, shift_y, and zoom_rate to their original values.
- * 
- * @param fractal A pointer to the fractal structure.
-*/
+/**
+ * @brief  Reset the fractal view to its initial parameters.
+ *
+ * Restores the shift and zoom level to their initial values stored
+ * in the fractal context. Triggers a re-render after resetting.
+ *
+ * @param  fractal  Pointer to the fractal context (`t_fractal`).
+ * @return None.
+ *
+ * @note   This function does not reset colors or iteration count,
+ *         only position and zoom parameters.
+ * @pre    `fractal` must contain valid `init_shift_x`, `init_shift_y`,
+ *         and `init_zoom_rate` values.
+ * @post   The view is restored to its initial position and zoom.
+ */
 void	reset_view(t_fractal *fractal)
 {
 	fractal->shift_x = fractal->init_shift_x;
