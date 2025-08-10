@@ -1,18 +1,24 @@
 #include "fractol.h"
 
-/*
- * Appends the initial Julia set parameters to the window name.
- * The format includes the real and imaginary parts of the user-defined
-	complex number.
- * 
- * @param name A pointer to the string representing the window name.
- * @param fractal A pointer to the fractal structure.
- * 
- * Process:
-	- If both `init_c_real` and `init_c_imag` are set, appends them to `name`.
-	- Uses str_append() to concatenate values while ensuring memory safety.
-	- Adds spacing to maintain readability in the window title.
-*/
+/**
+ * @brief  Appends Julia set parameters to the window title.
+ *
+ * If initial Julia parameters (`init_c_real` and `init_c_imag`) are set,
+ * this function appends them to the given `name` string, separated by commas
+ * and followed by additional spacing. It ensures each allocation succeeds.
+ *
+ * @param  name      Pointer to the string holding the window title.
+ *                   This string will be reallocated and appended to.
+ * @param  fractal   Pointer to the fractal context containing Julia parameters.
+ * @return None.
+ *
+ * @note   This function only appends details if both real and imaginary parts
+ *         of the Julia constant are non-empty.
+ * @warning Terminates the program via `if_malloc_error()` if a memory
+ *          allocation fails.
+ * @pre    `*name` must be dynamically allocated and modifiable.
+ * @post   The `name` string is extended with Julia parameters when applicable.
+ */
 static void	get_julia_details(char **name, t_fractal *fractal)
 {
 	if (fractal->init_c_real[0] != '\0' && fractal->init_c_imag[0] != '\0')
@@ -28,24 +34,24 @@ static void	get_julia_details(char **name, t_fractal *fractal)
 	}
 }
 
-/*
- * Generates a formatted window name based on the fractal type and image size.
- * Appends additional details for the Julia set if parameters are provided.
- * 
- * @param fractal A pointer to the fractal structure.
- * @return A dynamically allocated string representing the window name.
- * 
- * Process:
-	- Converts the first letter of the fractal name to uppercase using
-		ft_first_l_in_up().
-	- If the fractal is Julia, calls get_julia_details() to add
-		parameter details.
-	- Appends the image width and height to the name.
-	- Ensures memory safety using if_malloc_error().
- * 
- * Memory:
-	- The caller is responsible for freeing the returned string.
-*/
+/**
+ * @brief  Builds the complete window title string.
+ *
+ * Creates a descriptive window name based on the fractal type, Julia parameters
+ * (if applicable), and the current image resolution. Allocates and concatenates
+ * each part dynamically.
+ *
+ * @param  fractal  Pointer to the fractal context containing name, dimensions,
+ *                  and Julia parameters.
+ * @return Dynamically allocated string containing the window title.
+ *
+ * @note   The caller is responsible for freeing the returned string.
+ * @warning Terminates the program via `if_malloc_error()` if a memory
+ *          allocation fails.
+ * @pre    The fractal's `name`, `img.width`, and `img.height`
+ *		   must be initialized.
+ * @post   Returns a newly allocated string containing the full window title.
+ */
 char	*get_window_name(t_fractal *fractal)
 {
 	char	*name;
@@ -73,15 +79,19 @@ char	*get_window_name(t_fractal *fractal)
 	return (if_malloc_error(name));
 }
 
-/*
- * Displays the maximum number of iterations on the fractal window.
- * Converts `max_iterations` to a string and prints it at a fixed position.
- * 
- * @param fractal A pointer to the fractal structure.
- * 
- * Memory:
-	- The allocated string for `max_iterations` is freed after usage.
-*/
+/**
+ * @brief  Displays the maximum number of iterations on-screen.
+ *
+ * Converts the `max_iterations` value to a string and displays it on the window
+ * at fixed coordinates using `put_a_string()`.
+ *
+ * @param  fractal  Pointer to the fractal context containing iteration settings.
+ * @return None.
+ *
+ * @note   The string is freed after being displayed.
+ * @pre    The MLX window and image buffer must be initialized.
+ * @post   "Max iterations" label and value are rendered to the screen.
+ */
 void	put_max_iterations(t_fractal *fractal)
 {
 	char	*max_iterations;
@@ -92,18 +102,21 @@ void	put_max_iterations(t_fractal *fractal)
 	free (max_iterations);
 }
 
-/*
- * Displays the current color mode and psychedelic mode status on the
-	fractal window.
- * 
- * @param fractal A pointer to the fractal structure.
- * 
- * Display:
-	- Prints "Color :" followed by the active color mode.
-	- Prints "Range color mode :" followed by the active range color
-	  mode (PSYCHEDELIC, COMPLEMENTARY, NORMAL),
-	- Uses put_a_string() for rendering text.
-*/
+/**
+ * @brief  Displays the current color mode and psychedelic status.
+ *
+ * Shows the active color scheme based on `color_mode` and the state of the
+ * psychedelic mode (`range_color_mode`). Displays both on the HUD at fixed
+ * coordinates.
+ *
+ * @param  fractal  Pointer to the fractal context containing color settings.
+ * @return None.
+ *
+ * @note   Supported color modes: N (Normal), R (Red), G (Green), B (Blue),
+ *         Y (Yellow), O (Orange), P (Pink), C (Cyan).
+ * @pre    The MLX window and image buffer must be initialized.
+ * @post   Color mode and psychedelic status are rendered to the screen.
+ */
 void	put_color_mode(t_fractal *fractal)
 {
 	put_a_string(5, 40, "Color :", fractal);
@@ -130,6 +143,24 @@ void	put_color_mode(t_fractal *fractal)
 		put_a_string(120, 40, "Psych. : OFF", fractal);
 }
 
+/**
+ * @brief  Displays the current rendering mode on-screen.
+ *
+ * Renders the name of the active rendering mode (`render_mode`) on the HUD
+ * at fixed coordinates using `put_a_string()`.
+ *
+ * @param  f  Pointer to the fractal context containing the rendering mode.
+ * @return None.
+ *
+ * @note   Supported render modes:
+ *         - N: Exponential
+ *         - L: Logarithmic
+ *         - A: Adaptive
+ *         - F: Fixed logarithmic
+ *         - C: Cyclic modulo
+ * @pre    The MLX window and image buffer must be initialized.
+ * @post   Render mode label is displayed on the screen.
+ */
 void	put_render_mode(t_fractal *f)
 {
 	put_a_string(5, 55, "Render mode :", f);

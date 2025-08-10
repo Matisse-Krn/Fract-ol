@@ -1,5 +1,21 @@
 #include "fractol.h"
 
+/**
+ * @brief  Selects and applies a specific Julia fractal preset (IDs 9–10).
+ *
+ * Matches the given argument against preset identifiers or aliases
+ * (e.g., numbers, single letters, or names) and sets the Julia constant `c`
+ * accordingly. If no match is found, passes control to `set_preset6()`.
+ *
+ * @param  arg  Preset identifier or alias (string).
+ * @param  f    Pointer to the fractal context (`t_fractal`) to update.
+ * @return None.
+ *
+ * @note   Prints the selected preset’s name and parameters to the terminal.
+ * @pre    `arg` must not be NULL.
+ * @post   The fields `c.real`, `c.imag`, `init_c_real`, and `init_c_imag`
+ *         are updated in the fractal context.
+ */
 static void	set_preset5(char *arg, t_fractal *f)
 {
 	if (!ft_strcmp(arg, "9") || !ft_strcmp(arg, "c")
@@ -26,6 +42,21 @@ static void	set_preset5(char *arg, t_fractal *f)
 		set_preset6(arg, f);
 }
 
+/**
+ * @brief  Selects and applies a specific Julia fractal preset (IDs 7–8).
+ *
+ * Matches the given argument against preset identifiers or aliases
+ * and sets the Julia constant `c` accordingly. If no match is found,
+ * passes control to `set_preset5()`.
+ *
+ * @param  arg  Preset identifier or alias (string).
+ * @param  f    Pointer to the fractal context (`t_fractal`) to update.
+ * @return None.
+ *
+ * @note   Prints the selected preset’s name and parameters to the terminal.
+ * @pre    `arg` must not be NULL.
+ * @post   Updates `c.real`, `c.imag`, and related initial parameter strings.
+ */
 static void	set_preset4(char *arg, t_fractal *f)
 {
 	if (!ft_strcmp(arg, "7") || !ft_strcmp(arg, "f")
@@ -52,6 +83,21 @@ static void	set_preset4(char *arg, t_fractal *f)
 		set_preset5(arg, f);
 }
 
+/**
+ * @brief  Selects and applies a specific Julia fractal preset (IDs 5–6).
+ *
+ * Matches the given argument against preset identifiers or aliases
+ * and sets the Julia constant `c` accordingly. If no match is found,
+ * passes control to `set_preset4()`.
+ *
+ * @param  arg  Preset identifier or alias (string).
+ * @param  f    Pointer to the fractal context (`t_fractal`) to update.
+ * @return None.
+ *
+ * @note   Prints the selected preset’s name and parameters to the terminal.
+ * @pre    `arg` must not be NULL.
+ * @post   Updates `c.real`, `c.imag`, and related initial parameter strings.
+ */
 static void	set_preset3(char *arg, t_fractal *f)
 {
 	if (!ft_strcmp(arg, "5") || !ft_strcmp(arg, "e")
@@ -78,6 +124,21 @@ static void	set_preset3(char *arg, t_fractal *f)
 		set_preset4(arg, f);
 }
 
+/**
+ * @brief  Selects and applies a specific Julia fractal preset (IDs 3–4).
+ *
+ * Matches the given argument against preset identifiers or aliases
+ * and sets the Julia constant `c` accordingly. If no match is found,
+ * passes control to `set_preset3()`.
+ *
+ * @param  arg  Preset identifier or alias (string).
+ * @param  f    Pointer to the fractal context (`t_fractal`) to update.
+ * @return None.
+ *
+ * @note   Prints the selected preset’s name and parameters to the terminal.
+ * @pre    `arg` must not be NULL.
+ * @post   Updates `c.real`, `c.imag`, and related initial parameter strings.
+ */
 static void	set_preset2(char *arg, t_fractal *f)
 {
 	if (!ft_strcmp(arg, "3") || !ft_strcmp(arg, "t")
@@ -104,6 +165,21 @@ static void	set_preset2(char *arg, t_fractal *f)
 		set_preset3(arg, f);
 }
 
+/**
+ * @brief  Selects and applies a specific Julia fractal preset (IDs 1–2).
+ *
+ * Matches the given argument against preset identifiers or aliases
+ * and sets the Julia constant `c` accordingly. If no match is found,
+ * passes control to `set_preset2()`.
+ *
+ * @param  arg  Preset identifier or alias (string).
+ * @param  f    Pointer to the fractal context (`t_fractal`) to update.
+ * @return None.
+ *
+ * @note   Prints the selected preset’s name and parameters to the terminal.
+ * @pre    `arg` must not be NULL.
+ * @post   Updates `c.real`, `c.imag`, and related initial parameter strings.
+ */
 void	set_preset(char *arg, t_fractal *f)
 {
 	if (!arg)

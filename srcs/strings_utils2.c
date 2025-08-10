@@ -1,17 +1,23 @@
 #include "fractol.h"
 
-/*
- * Displays a string on the fractal window at the specified coordinates.
- * Ensures that text is only rendered within the visible area.
- * 
- * @param x The x-coordinate for text placement.
- * @param y The y-coordinate for text placement.
- * @param s The string to display.
- * @param fractal A pointer to the fractal structure.
- * 
- * Constraints:
-	- Ensures `x` and `y` are within image boundaries before rendering.
-*/
+/**
+ * @brief  Displays a string on the MLX window at given coordinates.
+ *
+ * Renders the given string `s` at position `(x, y)` within the fractal's
+ * MLX window, using a white color. The function checks that the coordinates
+ * are within the current image dimensions before drawing.
+ *
+ * @param  x        Horizontal position in pixels.
+ * @param  y        Vertical position in pixels.
+ * @param  s        Null-terminated string to display.
+ * @param  fractal  Pointer to the fractal context containing MLX pointers
+ *                  and image dimensions.
+ * @return None.
+ *
+ * @note   Uses `mlx_string_put()` from the MLX library for rendering text.
+ * @pre    `fractal->mlx_ptr` and `fractal->win_ptr` must be valid MLX objects.
+ * @post   The string is rendered in the MLX window if coordinates are valid.
+ */
 void	put_a_string(int x, int y, char *s, t_fractal *fractal)
 {
 	if (fractal->img.height > y && fractal->img.width > x)
@@ -21,18 +27,23 @@ void	put_a_string(int x, int y, char *s, t_fractal *fractal)
 	}
 }
 
-/*
- * Prints a list of available keyboard and mouse shortcuts at the
-	bottom of the screen.
- * Displays zoom, reset, psychedelic mode, iteration adjustment, contrast,
-	and color controls.
- * 
- * @param fractal A pointer to the fractal structure.
- * 
- * Layout:
-	- The shortcuts are split into multiple lines for readability.
-	- The function adapts text position based on image height.
-*/
+/**
+ * @brief  Displays a list of keyboard and mouse shortcuts on-screen.
+ *
+ * Draws multiple lines of text describing user interaction shortcuts,
+ * including zoom controls, color modes, rendering options, and other
+ * available actions. The position of each line is anchored relative to
+ * the bottom of the window.
+ *
+ * @param  fractal  Pointer to the fractal context containing image dimensions
+ *                  and MLX pointers.
+ * @return None.
+ *
+ * @note   Shortcuts are hardcoded and positioned with fixed offsets from the
+ *         bottom of the window for consistency across resolutions.
+ * @pre    The MLX window must be initialized and visible.
+ * @post   Shortcut descriptions are rendered in the HUD area of the window.
+ */
 void	print_shortcuts(t_fractal *fractal)
 {
 	put_a_string(5, fractal->img.height - 82, "Scrool Up : zoom in       \
@@ -51,6 +62,23 @@ G : Green       B : Blue       Y : Yellow       O : Orange       P : Pink       
 C : Cyan    ||    TAB : reverse color mode", fractal);
 }
 
+/**
+ * @brief  Displays the current fractal position on-screen.
+ *
+ * Converts the current horizontal (`shift_x`) and vertical (`shift_y`)
+ * offsets of the fractal view into strings, formats them with a label,
+ * and displays them on the MLX window.
+ *
+ * @param  f  Pointer to the fractal context containing position data and MLX
+ *            pointers.
+ * @return None.
+ *
+ * @note   Values are displayed with 4 decimal places of precision.
+ * @warning Terminates the program via `if_malloc_error()` if a memory
+ *          allocation fails during string construction.
+ * @pre    The MLX window must be initialized.
+ * @post   Position coordinates are rendered in the HUD area of the window.
+ */
 static void	put_position(t_fractal *f)
 {
 	char	*x_str;
@@ -73,6 +101,22 @@ static void	put_position(t_fractal *f)
 	free(line);
 }
 
+/**
+ * @brief  Displays the current zoom factor and position on-screen.
+ *
+ * Converts the current zoom factor into a string (with 2 decimal places),
+ * formats it with a label, and displays it on the MLX window. Then calls
+ * `put_position()` to display the view's coordinates.
+ *
+ * @param  f  Pointer to the fractal context containing zoom and position data.
+ * @return None.
+ *
+ * @note   The zoom factor is prefixed with "Zoom : x" for clarity.
+ * @warning Terminates the program via `if_malloc_error()` if memory allocation
+ *          fails when building strings.
+ * @pre    The MLX window must be initialized.
+ * @post   Both the zoom factor and coordinates are displayed on-screen.
+ */
 void	put_zoom_and_position(t_fractal *f)
 {
 	char	*zoom;
@@ -88,19 +132,27 @@ void	put_zoom_and_position(t_fractal *f)
 	put_position(f);
 }
 
-/*
- * Manages all textual elements displayed on the fractal window.
- * Draws background boxes for text, displays shortcuts,
-	and updates dynamic values.
- * 
- * @param fractal A pointer to the fractal structure.
- * 
- * Process:
-	- Calls draw_text_boxes() to prepare background areas.
-	- Prints shortcuts via print_shortcuts().
-	- Displays cursor position stored in `fractal->last_pos`.
-	- Displays the current color mode and iteration count.
-*/
+/**
+ * @brief  Manages all HUD text rendering for the fractal viewer.
+ *
+ * Draws the on-screen heads-up display (HUD) by rendering:
+ * - A background text box.
+ * - The current zoom factor and position.
+ * - Available keyboard/mouse shortcuts.
+ * - The last saved position (if applicable).
+ * - The current color mode and psychedelic mode status.
+ * - The current render mode.
+ * - The maximum iteration count.
+ *
+ * @param  fractal  Pointer to the fractal context containing rendering state,
+ *                  MLX pointers, and HUD data.
+ * @return None.
+ *
+ * @note   This function is called after the fractal image is drawn to
+ *         overlay HUD information without affecting the fractal pixels.
+ * @pre    The fractal image must already be rendered and ready for display.
+ * @post   All HUD elements are rendered on top of the fractal in the window.
+ */
 void	manage_text(t_fractal *fractal)
 {
 	draw_text_boxes(fractal);

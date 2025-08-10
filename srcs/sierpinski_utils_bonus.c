@@ -1,17 +1,23 @@
 #include "fractol.h"
 
-/*
- * Initializes the Sierpiński Carpet fractal parameters.
- * Determines the maximum possible depth based on the window size.
- * 
- * @param fractal A pointer to the fractal structure.
- * 
- * Constraints:
-	- If the window is too small (< 3 pixels), the program exits.
-	- The fractal size is set to the smallest image dimension.
-	- `max_depth` is calculated using logarithmic scaling.
-	- If no depth is provided, sets a default depth of 6 (if possible).
-*/
+/**
+ * @brief  Initializes Sierpinski Carpet parameters based on window size.
+ *
+ * Validates the window dimensions for rendering the Sierpinski Carpet,
+ * determines the maximum drawable size for a square carpet, calculates
+ * the maximum recursion depth possible, and sets the initial depth.
+ *
+ * @param  fractal  Pointer to the fractal context structure.
+ * @return None.
+ *
+ * @note   If the window is smaller than 3x3 pixels, the program exits early
+ *         as the carpet cannot be rendered meaningfully.
+ * @warning Exits the program if the window size is too small.
+ * @pre    The fractal image dimensions (`img.width` and `img.height`) must
+ *         be initialized before this call.
+ * @post   `fractal->size`, `fractal->max_depth`, and `fractal->depth`
+ *         are set appropriately.
+ */
 void	data_init_sierpinski(t_fractal *fractal)
 {
 	if (fractal->img.width < 3 || fractal->img.height < 3)
@@ -31,14 +37,20 @@ void	data_init_sierpinski(t_fractal *fractal)
 		fractal->depth = fractal->max_depth;
 }
 
-/*
- * Computes the maximum depth of recursion based on the image size.
- * Uses logarithmic division by 3 to determine how many recursive 
-	levels fit in the available space.
- * 
- * @param fractal A pointer to the fractal structure.
- * @return The maximum allowable recursion depth.
-*/
+/**
+ * @brief  Calculates the maximum recursion depth for the Sierpinski Carpet.
+ *
+ * Determines how many times the carpet can be subdivided into thirds
+ * based on the smallest window dimension.
+ *
+ * @param  fractal  Pointer to the fractal context structure.
+ * @return Maximum recursion depth as an integer.
+ *
+ * @note   The calculation uses a base-3 logarithm of the smallest window size.
+ * @pre    The fractal image dimensions (`img.width` and `img.height`) must
+ *         be initialized before this call.
+ * @post   No changes are made to the fractal context.
+ */
 int	get_max_depth(t_fractal *fractal)
 {
 	int	min_size;
@@ -50,18 +62,24 @@ int	get_max_depth(t_fractal *fractal)
 	return ((int)(log(min_size) / log(3)));
 }
 
-/*
- * Changes the recursion depth for the Sierpiński Carpet fractal.
- * Adjusts `fractal->depth` based on the pressed key.
- * 
- * @param keysym The key pressed (`XK_0` to `XK_6`).
- * @param fractal A pointer to the fractal structure.
- * 
- * Constraints:
-	- Cannot exceed `max_depth` (limited by window size).
-	- If the requested depth is already set, does nothing.
-	- If valid, updates the fractal and re-renders the image.
-*/
+/**
+ * @brief  Changes the recursion depth of the Sierpinski Carpet.
+ *
+ * Updates the carpet depth according to a numeric key press, ensuring the
+ * new depth does not exceed the maximum allowed or match the current depth.
+ * Redraws the carpet with the new depth.
+ *
+ * @param  keysym   The key symbol representing the chosen depth ('0' to '6').
+ * @param  fractal  Pointer to the fractal context structure.
+ * @return None.
+ *
+ * @note   If the chosen depth exceeds the maximum possible depth for the
+ *         current window size, no change is applied and a warning is printed.
+ * @warning The function destroys and recreates the image buffer before
+ *          re-rendering the carpet.
+ * @pre    The MLX context and window must be initialized.
+ * @post   The carpet is redrawn with the updated recursion depth.
+ */
 void	change_depth_sierpinski(int keysym, t_fractal *fractal)
 {
 	if (keysym - '0' > fractal->max_depth || keysym - '0' == fractal->depth)
@@ -81,19 +99,24 @@ max : %d\n\n", fractal->max_depth);
 	rendering_sierpinski(fractal);
 }
 
-/*
- * Changes the color mode of the Sierpiński Carpet fractal.
- * Updates the color scheme based on user input.
- * 
- * @param keysym The key pressed
-	(`XK_n, XK_r, XK_g, XK_b, XK_y, XK_o, XK_p, XK_c`).
- * @param fractal A pointer to the fractal structure.
- * 
- * Process:
-	- If 'N' is requested and already active, no changes are made.
-	- Calls change_color_mode() to apply the new color mode.
-	- Re-renders the fractal with the updated color scheme.
-*/
+/**
+ * @brief  Changes the color mode of the Sierpinski Carpet.
+ *
+ * Updates the color scheme based on a specific key press, allowing the
+ * carpet to be displayed in various predefined colors. Redraws the carpet
+ * using the new color mode.
+ *
+ * @param  keysym   The key symbol representing the desired color mode.
+ * @param  fractal  Pointer to the fractal context structure.
+ * @return None.
+ *
+ * @note   Supported color modes: 'N' (Normal), 'R' (Red), 'G' (Green),
+ *         'B' (Blue), 'Y' (Yellow), 'O' (Orange), 'P' (Purple), 'C' (Cyan).
+ * @warning The function destroys and recreates the image buffer before
+ *          re-rendering the carpet.
+ * @pre    The MLX context and window must be initialized.
+ * @post   The carpet is redrawn with the updated color mode.
+ */
 void	change_color_sierpinski(int keysym, t_fractal *fractal)
 {
 	if (keysym == XK_n && fractal->color_mode == 'N')

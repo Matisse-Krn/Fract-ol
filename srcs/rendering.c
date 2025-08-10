@@ -1,39 +1,22 @@
 #include "fractol.h"
 
-/*
- * Determines the color of a pixel based on the number of iterations before
-	escaping the fractal boundary.
- * Uses either smooth color interpolation or psychedelic mode scaling.
- * 
- * @param z A pointer to the complex number at the current pixel.
- * @param pixel A pointer to the pixel structure containing coordinates and
-		iteration count.
- * @param fractal A pointer to the fractal structure.
- * @return Returns 1 if the pixel is colored, 0 otherwise.
-*/
-/*static int	distrib_colors(t_complex *z, t_pixel *pixel,*/
-/*	t_fractal *fractal)*/
-/*{*/
-/*	if ((z->real * z->real) + (z->imag * z->imag) > fractal->escape_value)*/
-/*	{*/
-/*		if (fractal->psy == 'N')*/
-/*		{*/
-/*			fractal->color = interpolate_color(fractal->color_min,*/
-/*					fractal->color_max, pixel->i, fractal);*/
-/*		}*/
-/*		else if (fractal->psy == 'Y')*/
-/*		{*/
-/*			fractal->color = scale_map(pixel->i, fractal->color_min,*/
-/*					fractal->color_max, fractal->max_iterations);*/
-/*		}*/
-/*		my_mlx_pixel_put(&fractal->img, pixel->x, pixel->y, fractal->color);*/
-/*		return (1);*/
-/*	}*/
-/*	return (0);*/
-/*}*/
-
-/*
- * In distrib_colors, on mesure i_max si render_mode == 'A'
+/**
+ * @brief  Determines pixel color based on escape condition.
+ *
+ * Checks if the current complex point `z` has escaped the fractal's boundary
+ * (using `escape_value`). If escaped, assigns the appropriate color depending
+ * on the current color mode (normal or psychedelic) and plots it in the image.
+ * If not escaped, no drawing occurs here.
+ *
+ * @param  z       Pointer to the complex number being iterated.
+ * @param  pixel   Pointer to the pixel data (coordinates and iteration count).
+ * @param  f       Pointer to the fractal context containing settings and image.
+ * @return Returns 1 if the point has escaped and was colored, 0 otherwise.
+ *
+ * @note   Color mapping depends on `range_color_mode` ('N' for normal,
+ *         'Y' for psychedelic gradient mode).
+ * @pre    `pixel->i` must contain the current iteration count.
+ * @post   If escaped, the pixel is drawn in the output image.
  */
 int	distrib_colors(t_complex *z, t_pixel *pixel, t_fractal *f)
 {
@@ -51,26 +34,24 @@ int	distrib_colors(t_complex *z, t_pixel *pixel, t_fractal *f)
 	return (0);
 }
 
-/*
- * Computes the color of a pixel for the Mandelbrot set.
- * Iterates through the escape-time algorithm until divergence is detected
-	or the maximum number of iterations is reached.
+/**
+ * @brief  Processes and colors a single Mandelbrot pixel.
  *
- * Apply an iterative algorithm to determine whether the complex point
-	corresponding to (x, y) belongs to the fractal
- * The calculation follows the following recurrence : `z(n+1) = z(n)² + c`
-	where :
-	- 'z' is initialized to (0,0) ;
-	- 'c' is obtained by mapping (x, y) in the complex plane
- * At each iteration:
-	- If |z|² exceeds 'escape_value', the pixel is colored according
-		to the number of iterations before divergence.
-	- If the loop reaches 'max_iterations' without diverging,
-		the pixel is colored black (='0x000000')
- * 
- * @param pixel A pointer to the pixel structure containing coordinates.
- * @param fractal A pointer to the fractal structure.
-*/
+ * Iterates the Mandelbrot formula z = z² + c starting from z = 0,
+ * mapping the pixel coordinates to the complex plane based on the
+ * current zoom and position. If the escape condition is met, the pixel
+ * is colored; otherwise, it is set to black.
+ *
+ * @param  pixel     Pointer to the pixel structure
+ *					 (coordinates, iteration count).
+ * @param  fractal   Pointer to the fractal context with rendering parameters.
+ * @return None.
+ *
+ * @note   The escape condition is handled by `distrib_colors()`.
+ * @pre    `fractal` must be initialized with valid zoom, shift, and image size.
+ * @post   The corresponding pixel in the image is updated with its final color.
+ */
+
 void	handle_pixel_mandelbrot(t_pixel *pixel, t_fractal *fractal)
 {
 	t_complex	z;
@@ -96,28 +77,23 @@ void	handle_pixel_mandelbrot(t_pixel *pixel, t_fractal *fractal)
 	my_mlx_pixel_put(&fractal->img, pixel->x, pixel->y, 0x000000);
 }
 
-/*
- * Computes the color of a pixel for the Julia set.
- * Iterates through the escape-time algorithm until divergence is detected
-	or the maximum number of iterations is reached.
+/**
+ * @brief  Processes and colors a single Julia pixel.
  *
- * Applies an iterative algorithm to determine whether the complex point
-	corresponding to (x, y) belongs to the fractal.
- * The calculation follows the following recurrence : `z(n+1) = z(n)² + c`
-	where :
-	- 'z' is initialized using the mapped coordinates of (x, y) 
-		in the complex plane.
-	- 'c' is a constant complex number, specific to each Julia set,
-		defined by the user at program launch.
- * At each iteration:
-	- If |z|² exceeds 'escape_value', the pixel is colored according
-		to the number of iterations before divergence.
-	- If the loop reaches 'max_iterations' without diverging,
-		the pixel is colored black (='0x000000')
- * 
- * @param pixel A pointer to the pixel structure containing coordinates.
- * @param fractal A pointer to the fractal structure.
-*/
+ * Iterates the Julia formula z = z² + c, where `c` is fixed and defined
+ * by the fractal context or preset. The initial z value is determined
+ * from the pixel's position on the screen, mapped to the complex plane.
+ * The pixel is colored if the escape condition is met; otherwise, it is black.
+ *
+ * @param  pixel     Pointer to the pixel structure
+ *					 (coordinates, iteration count).
+ * @param  fractal   Pointer to the fractal context with rendering parameters.
+ * @return None.
+ *
+ * @note   The escape condition is handled by `distrib_colors()`.
+ * @pre    `fractal->c` must be set to the Julia constant.
+ * @post   The corresponding pixel in the image is updated with its final color.
+ */
 void	handle_pixel_julia(t_pixel *pixel, t_fractal *fractal)
 {
 	t_complex	z;
@@ -137,13 +113,23 @@ void	handle_pixel_julia(t_pixel *pixel, t_fractal *fractal)
 	my_mlx_pixel_put(&fractal->img, pixel->x, pixel->y, 0x000000);
 }
 
-/*
- * Iterates over all pixels in the image and applies the appropriate fractal
-	algorithm (Mandelbrot or Julia) to determine the pixel colors.
- * 
- * @param type The fractal type ('M' for Mandelbrot, 'J' for Julia).
- * @param fractal A pointer to the fractal structure.
-*/
+/**
+ * @brief  Renders a full fractal frame sequentially (single-threaded).
+ *
+ * Loops over all pixels in the image and processes them either as part
+ * of a Mandelbrot or Julia set, depending on the `type` parameter.
+ * Uses `handle_pixel_mandelbrot()` or `handle_pixel_julia()` for
+ * pixel processing.
+ *
+ * @param  type      'M' for Mandelbrot, 'J' for Julia.
+ * @param  fractal   Pointer to the fractal context containing
+ *					 rendering parameters.
+ * @return None.
+ *
+ * @note   This function is only used in single-threaded mode.
+ * @pre    The fractal image buffer must be allocated and initialized.
+ * @post   The image buffer is fully updated with the rendered fractal.
+ */
 void	pixel_loop(char type, t_fractal *fractal)
 {
 	t_pixel	pixel;
@@ -171,21 +157,25 @@ void	pixel_loop(char type, t_fractal *fractal)
 	}
 }
 
-/*
- * Initiates the rendering process for the selected fractal type.
- * Calls pixel_loop() to compute pixel colors and updates the window display.
- * 
- * Based on the fractal name stored in the structure, determines
-	whether to render a Mandelbrot set or a Julia set.
- * Calls pixel_loop() with the appropriate type ('M' or 'J'),
-	which iterates over every pixel of the image and assigns it a color
-	according to the escape-time algorithm.
- * Once the entire image has been computed, the function updates
-	the MiniLibX window with the new fractal representation.
- * Finally, calls manage_text() to update any text overlays.
- * 
- * @param fractal A pointer to the fractal structure.
-*/
+/**
+ * @brief  Main fractal rendering dispatcher.
+ *
+ * Determines the appropriate rendering method (single-threaded or
+ * multi-threaded) and rendering mode. Handles special modes such as
+ * adaptive coloring, and delegates the actual pixel processing to the
+ * relevant functions. Once the image is computed, it is displayed
+ * in the window and overlay text is drawn.
+ *
+ * @param  fractal  Pointer to the fractal context containing all parameters.
+ * @return None.
+ *
+ * @note   Multi-threaded rendering uses `init_threads()` for
+ *		   parallel processing.
+ * @warning Rendering performance may vary greatly depending on resolution,
+ *          fractal complexity, and zoom level.
+ * @pre    `fractal` must be fully initialized with image buffers and MLX window.
+ * @post   The window displays the newly rendered fractal image with overlays.
+ */
 void	fractal_rendering(t_fractal *fractal)
 {
 	if (fractal->render_mode == 'A')

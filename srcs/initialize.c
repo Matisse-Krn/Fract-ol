@@ -1,33 +1,33 @@
 #include "fractol.h"
 
-/*
- * Initializes the default position, zoom settings, and complex plane shift
-	values.
- * Adjusts initial offsets based on the selected fractal type.
- * 
- * @param fractal A pointer to the fractal structure to configure
-	position settings.
- * 
- * Variables:
- * - shift_x, shift_y: Horizontal and vertical shifts in the complex plane.
- *   The Mandelbrot set is adjusted leftward by default (-0.6).
- * - zoom_rate: Initial zoom factor applied to the fractal rendering.
- * - init_shift_x, init_shift_y: Stores the initial shift values to allow
-		reset functionality.
- * - init_zoom_rate: Stores the initial zoom factor to allow reset functionality.
- * - last_pos: Stores the last recorded cursor position (initialized as an
-		empty string).
- * - init_c_real, init_c_imag: Stores the initial complex parameters for
-		Julia fractals.
- *   If not already set, they are initialized to empty strings.
-*/
+/**
+ * @brief  Initialize the initial position and zoom for the fractal view.
+ *
+ * Sets the default shift and zoom values based on the fractal type.
+ * Special cases:
+ * - Mandelbrot and Buddhabrot are horizontally shifted by -0.6.
+ * - Buddhabrot has an initial zoom of 0.5, others default to 1.0.
+ * Also initializes the backup values for reset operations and
+ * sets default empty strings for complex constants if not provided.
+ *
+ * @param  fractal  Pointer to the fractal context (`t_fractal`).
+ * @return None.
+ *
+ * @note   Called internally by `data_init()` to configure the initial view.
+ * @pre    `fractal->name` must be initialized with the fractal type.
+ * @post   Initial position and zoom values are set.
+ */
 static void	position_init(t_fractal *fractal)
 {
 	fractal->shift_x = 0;
-	if (!ft_strcmp(fractal->name, "mandelbrot"))
+	if (!ft_strcmp(fractal->name, "mandelbrot")
+		|| !ft_strcmp(fractal->name, "buddhabrot"))
 		fractal->shift_x = -0.6;
 	fractal->shift_y = 0;
-	fractal->zoom_rate = 1;
+	if (!ft_strcmp(fractal->name, "buddhabrot"))
+		fractal->zoom_rate = 0.5;
+	else
+		fractal->zoom_rate = 1;
 	fractal->init_shift_x = fractal->shift_x;
 	fractal->init_shift_y = fractal->shift_y;
 	fractal->init_zoom_rate = fractal->zoom_rate;
@@ -39,32 +39,20 @@ static void	position_init(t_fractal *fractal)
 	}
 }
 
-/*
- * Initializes all necessary fields in the fractal structure.
- * Sets default values for image dimensions, iteration limits, color settings,
-	contrast, and other essential parameters.
- * 
- * @param fractal A pointer to the fractal structure to initialize.
- * 
- * Variables:
- * - img.height, img.width: Dimensions of the rendering image in pixels.
- * - escape_value: Escape threshold used to determine if a point diverges.
-		Typically set to 2^2 for stability in fractal calculations.
- * - max_iterations: Maximum number of iterations per pixel before considering
-		it non-divergent.
- * - tick_iterations: Increment value for iteration changes when adjusting
-		detail levels.
- * - color: Default color value (used in certain rendering modes).
- * - init_color_min, init_color_max: Initial color range for gradient-based
-		coloring.
- * - color_min, color_max: Current active color range, modified by user
-		interactions.
- * - color_mode: Character representing the current color mode
-		('N' for normal, etc.).
- * - contrast_exponent: Value controlling contrast intensity in coloring
-		calculations.
- * - psy: Character controlling psychedelic color mode ('N' for normal, etc.).
-*/
+/**
+ * @brief  Initialize all rendering-related data for the fractal.
+ *
+ * Sets default escape value, iteration limits, color settings,
+ * rendering mode, and contrast. Also initializes the position
+ * and zoom parameters via `position_init()`.
+ *
+ * @param  fractal  Pointer to the fractal context (`t_fractal`).
+ * @return None.
+ *
+ * @note   Prints a message indicating whether multi-threading is enabled.
+ * @pre    `fractal->mt` must be set before calling.
+ * @post   Fractal parameters are ready for rendering.
+ */
 void	data_init(t_fractal *fractal)
 {
 	ft_putstr_fd("\t\t💭 Initialize all necessary data... 💭\n", 1);
@@ -88,20 +76,20 @@ void	data_init(t_fractal *fractal)
 	position_init(fractal);
 }
 
-/*
- * Sets up event hooks for handling user input such as keyboard and
-	mouse actions.
- * Configures event listeners differently for the Sierpinski Carpet fractal.
- * 
- * @param fractal A pointer to the fractal structure whose events are being
-		initialized.
- * 
- * Events:
- * - DestroyNotify: Handles window close event (calls handle_exit).
- * - KeyPress: Captures keyboard inputs (calls handle_key).
- * - MotionNotify: Captures mouse movement (calls handle_mouse_move).
- * - ButtonPress: Captures mouse clicks (calls handle_mouse).
-*/
+/**
+ * @brief  Set up MLX event hooks for the fractal window.
+ *
+ * Registers the appropriate event handlers for keyboard, mouse movement,
+ * and mouse button input. If the fractal is Sierpinski, uses a specific
+ * event initialization function.
+ *
+ * @param  fractal  Pointer to the fractal context (`t_fractal`).
+ * @return None.
+ *
+ * @note   Uses `mlx_hook()` to bind events to their respective handlers.
+ * @pre    `fractal->win_ptr` must be a valid MLX window pointer.
+ * @post   Event handling is active for the fractal window.
+ */
 void	initialize_events(t_fractal *fractal)
 {
 	if (!ft_strcmp(fractal->name, "sierpinski"))
@@ -127,17 +115,20 @@ void	initialize_events(t_fractal *fractal)
 		handle_mouse, fractal);
 }
 
-/*
- * Creates and initializes the MiniLibX window for rendering the fractal.
- * Allocates memory and ensures proper resource handling in case of allocation
-	failure.
- * 
- * @param fractal A pointer to the fractal structure used to manage the display.
- * 
- * Variables:
- * - mlx_ptr: MiniLibX connection instance, initialized via mlx_init().
- * - win_ptr: MiniLibX window instance, created with mlx_new_window().
-*/
+/**
+ * @brief  Create a new MLX window for the fractal display.
+ *
+ * Computes the aspect ratio, generates the window title,
+ * and creates a new window using MLX. Handles allocation
+ * errors by cleaning up resources.
+ *
+ * @param  f  Pointer to the fractal context (`t_fractal`).
+ * @return None.
+ *
+ * @note   Calls `malloc_error()` and exits if window creation fails.
+ * @pre    `f->mlx_ptr` and image dimensions must be initialized.
+ * @post   A valid MLX window is created and stored in `f->win_ptr`.
+ */
 void	initialize_window(t_fractal *f)
 {
 	char	*name_formatted;
@@ -157,20 +148,20 @@ void	initialize_window(t_fractal *f)
 	}
 }
 
-/*
- * Creates an image buffer for rendering the fractal within the MiniLibX window.
- * Allocates memory for image storage and retrieves the pixel data address.
- * 
- * @param fractal A pointer to the fractal structure that will store the
-		image details.
- * 
- * Variables:
- * - img.img_ptr: Pointer to the MiniLibX image instance.
- * - img.px_ptr: Pointer to the raw pixel data within the image buffer.
- * - img.bits_per_pixel: Number of bits used per pixel (determines color depth).
- * - img.line_length: Number of bytes per row of pixels (accounts for padding).
- * - img.endian: Endianness of the pixel format (determines byte order).
-*/
+/**
+ * @brief  Create and prepare the MLX image buffer for fractal rendering.
+ *
+ * Allocates a new MLX image matching the fractal's dimensions,
+ * retrieves the pixel data address, and stores it in the fractal context.
+ * Handles allocation errors by cleaning up MLX resources.
+ *
+ * @param  fractal  Pointer to the fractal context (`t_fractal`).
+ * @return None.
+ *
+ * @note   Calls `malloc_error()` and exits if allocation fails.
+ * @pre    `fractal->mlx_ptr` and `fractal->win_ptr` must be valid.
+ * @post   The image buffer is ready for pixel drawing.
+ */
 void	initialize_image(t_fractal *fractal)
 {
 	fractal->img.img_ptr = mlx_new_image(fractal->mlx_ptr, fractal->img.width,

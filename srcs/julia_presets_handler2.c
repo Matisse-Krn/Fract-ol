@@ -1,5 +1,20 @@
 #include "fractol.h"
 
+/**
+ * @brief  Sets Julia fractal parameters for preset ID 19 (Airplane).
+ *
+ * Matches the given argument against preset identifiers or aliases
+ * for the Airplane Julia set, then assigns the corresponding complex
+ * constant values to the fractal context.
+ *
+ * @param  arg  Preset identifier or alias (string).
+ * @param  f    Pointer to the fractal context (`t_fractal`) to update.
+ * @return None.
+ *
+ * @note   Prints the selected preset’s name and parameters to the terminal.
+ * @pre    `arg` must not be NULL.
+ * @post   Updates `c.real`, `c.imag`, and related initial parameter strings.
+ */
 static void	set_preset10(char *arg, t_fractal *f)
 {
 	if (!ft_strcmp(arg, "19") || !ft_strcmp(arg, "a")
@@ -14,6 +29,22 @@ static void	set_preset10(char *arg, t_fractal *f)
 	}
 }
 
+/**
+ * @brief  Sets Julia fractal parameters for presets 17–18 or forwards to next.
+ *
+ * Matches the given argument against preset identifiers or aliases
+ * for the Cauliflower (Negative) or Siegel (Golden Mean) Julia sets,
+ * and assigns the corresponding complex constant values.
+ * If no match is found, passes control to `set_preset10()`.
+ *
+ * @param  arg  Preset identifier or alias (string).
+ * @param  f    Pointer to the fractal context (`t_fractal`) to update.
+ * @return None.
+ *
+ * @note   Prints the selected preset’s name and parameters to the terminal.
+ * @pre    `arg` must not be NULL.
+ * @post   Updates `c.real`, `c.imag`, and related initial parameter strings.
+ */
 static void	set_preset9(char *arg, t_fractal *f)
 {
 	if (!ft_strcmp(arg, "17") || !ft_strcmp(arg, "o")
@@ -40,6 +71,22 @@ static void	set_preset9(char *arg, t_fractal *f)
 		set_preset10(arg, f);
 }
 
+/**
+ * @brief  Sets Julia fractal parameters for presets 15–16 or forwards to next.
+ *
+ * Matches the given argument against preset identifiers or aliases
+ * for the Filaments Region or Antennae Julia sets, then assigns
+ * the corresponding complex constant values.
+ * If no match is found, passes control to `set_preset9()`.
+ *
+ * @param  arg  Preset identifier or alias (string).
+ * @param  f    Pointer to the fractal context (`t_fractal`) to update.
+ * @return None.
+ *
+ * @note   Prints the selected preset’s name and parameters to the terminal.
+ * @pre    `arg` must not be NULL.
+ * @post   Updates `c.real`, `c.imag`, and related initial parameter strings.
+ */
 static void	set_preset8(char *arg, t_fractal *f)
 {
 	if (!ft_strcmp(arg, "15") || !ft_strcmp(arg, "y")
@@ -66,6 +113,22 @@ static void	set_preset8(char *arg, t_fractal *f)
 		set_preset9(arg, f);
 }
 
+/**
+ * @brief  Sets Julia fractal parameters for presets 13–14 or forwards to next.
+ *
+ * Matches the given argument against preset identifiers or aliases
+ * for the Siegel Disk or Cactus Julia sets, then assigns
+ * the corresponding complex constant values.
+ * If no match is found, passes control to `set_preset8()`.
+ *
+ * @param  arg  Preset identifier or alias (string).
+ * @param  f    Pointer to the fractal context (`t_fractal`) to update.
+ * @return None.
+ *
+ * @note   Prints the selected preset’s name and parameters to the terminal.
+ * @pre    `arg` must not be NULL.
+ * @post   Updates `c.real`, `c.imag`, and related initial parameter strings.
+ */
 static void	set_preset7(char *arg, t_fractal *f)
 {
 	if (!ft_strcmp(arg, "13") || !ft_strcmp(arg, "a")
@@ -92,6 +155,22 @@ static void	set_preset7(char *arg, t_fractal *f)
 		set_preset8(arg, f);
 }
 
+/**
+ * @brief  Sets Julia fractal parameters for presets 11–12 or forwards to next.
+ *
+ * Matches the given argument against preset identifiers or aliases
+ * for the Spiral Valley or Diagonal Symmetry/Quadratic Julia sets,
+ * then assigns the corresponding complex constant values.
+ * If no match is found, passes control to `set_preset7()`.
+ *
+ * @param  arg  Preset identifier or alias (string).
+ * @param  f    Pointer to the fractal context (`t_fractal`) to update.
+ * @return None.
+ *
+ * @note   Prints the selected preset’s name and parameters to the terminal.
+ * @pre    `arg` must not be NULL.
+ * @post   Updates `c.real`, `c.imag`, and related initial parameter strings.
+ */
 void	set_preset6(char *arg, t_fractal *f)
 {
 	if (!ft_strcmp(arg, "11") || !ft_strcmp(arg, "v")

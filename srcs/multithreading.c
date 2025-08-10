@@ -1,30 +1,29 @@
 #include "fractol.h"
 
-int	get_multi_thread(void)
-{
-	int		ret;
-	char	buf[2];
-
-	ret = FALSE;
-	write(1, "\nActivate multi-threading ? Yes/No :  ", 38);
-	while (read(0, buf, 1) > 0)
-	{
-		if (!ft_strncmp(buf, "y", 1) || !ft_strncmp(buf, "Y", 1))
-			ret = TRUE;
-		else if (!ft_strncmp(buf, "n", 1) || !ft_strncmp(buf, "N", 1))
-			break ;
-		else
-		{
-			write(1, "Retry :\n\ny/Y/yes/YES  or  n/N/no/No\n", 36);
-			write(1, "\nActivate multi-threading ? Yes/No : ", 38);
-			continue ;
-		}
-		break ;
-	}
-	write(1, "\n", 1);
-	return (ret);
-}
-
+/**
+ * @brief  Processes a portion of the image by rendering pixels in
+ *		   a specific range.
+ *
+ * Iterates over a rectangular section of the fractal image between the
+ * specified `y_start` and `y_end` rows, processing each pixel according
+ * to the fractal type.
+ * For Mandelbrot ('M') and Julia ('J'), calls the appropriate pixel
+ * handler function.
+ *
+ * @param  type     Character indicating the fractal type
+ *					('M' for Mandelbrot, 'J' for Julia).
+ * @param  f        Pointer to the fractal structure containing
+ *					rendering parameters.
+ * @param  y_start  Starting row index (inclusive) for processing.
+ * @param  y_end    Ending row index (exclusive) for processing.
+ * @return None.
+ *
+ * @note   This function does not handle any synchronization; it assumes that the
+ *         processed pixel range does not overlap with other threads.
+ * @warning Passing an unsupported `type` will result in no rendering.
+ * @pre    `f` must be properly initialized and valid.
+ * @post   The specified image segment is rendered into `f->img`.
+ */
 static void	pixel_part_loop(char type, t_fractal *f, int y_start, int y_end)
 {
 	t_pixel	pixel;
@@ -50,6 +49,22 @@ static void	pixel_part_loop(char type, t_fractal *f, int y_start, int y_end)
 	}
 }
 
+/**
+ * @brief  Thread entry point for fractal rendering.
+ *
+ * Executes the rendering of a specific image section, as defined by
+ * the arguments passed in a `t_thread_args` structure.
+ *
+ * @param  arg  Pointer to a `t_thread_args` structure containing
+ *				rendering parameters.
+ * @return Always returns NULL.
+ *
+ * @note   Designed to be used with `pthread_create()`.
+ * @warning The pointer passed in `arg` must be valid and remain accessible
+ *          for the duration of the thread's execution.
+ * @pre    `arg` must point to a valid `t_thread_args` object.
+ * @post   The designated section of the fractal image is rendered.
+ */
 static void	*thread_routine(void *arg)
 {
 	t_thread_args	*args;
@@ -59,6 +74,27 @@ static void	*thread_routine(void *arg)
 	return (NULL);
 }
 
+/**
+ * @brief  Initializes and starts rendering threads.
+ *
+ * Divides the fractal image vertically into segments, assigns each segment
+ * to a thread, and starts all threads for concurrent rendering. Each thread
+ * processes a non-overlapping region of the image.
+ *
+ * @param  n_threads  Number of threads to create.
+ * @param  threads    Array of pthread_t to hold created thread IDs.
+ * @param  args       Array of `t_thread_args` structures to hold
+ *					  thread parameters.
+ * @param  fractal    Pointer to the fractal structure containing rendering data.
+ * @return TRUE on success, FALSE on failure (thread creation failure will
+ *         join and clean up all previously created threads).
+ *
+ * @note   Last thread handles any remainder rows caused by uneven division.
+ * @warning Requires `threads` and `args` arrays of size `n_threads`
+ *			to be allocated.
+ * @pre    `n_threads` must be > 0 and `fractal` must be initialized.
+ * @post   All threads are running and processing assigned sections.
+ */
 static int	loop_init_threads(long n_threads, pthread_t *threads,
 							t_thread_args *args, t_fractal *fractal)
 {
@@ -87,6 +123,26 @@ static int	loop_init_threads(long n_threads, pthread_t *threads,
 	return (TRUE);
 }
 
+/**
+ * @brief  Creates and manages rendering threads for the fractal.
+ *
+ * Determines a choosen number of threads based on the system's CPU core count
+ * (cores × 4), allocates necessary resources, initializes thread parameters, and
+ * launches all rendering threads. Waits for all threads to complete before
+ * freeing resources.
+ *
+ * @param  fractal  Pointer to the fractal structure containing
+ *					rendering parameters.
+ * @return TRUE if all threads were successfully created and joined,
+ *		   FALSE otherwise.
+ *
+ * @note   Uses `sysconf(_SC_NPROCESSORS_ONLN)` to detect CPU cores and
+ *		   scales the number of threads accordingly.
+ * @warning Memory allocation failures or thread creation errors will
+ *			cause an early exit.
+ * @pre    `fractal` must be fully initialized with valid rendering parameters.
+ * @post   All threads have finished rendering; allocated memory is freed.
+ */
 int	init_threads(t_fractal *fractal)
 {
 	pthread_t		*threads;

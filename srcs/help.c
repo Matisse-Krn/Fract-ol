@@ -1,5 +1,18 @@
 #include "fractol.h"
 
+/**
+ * @brief  Print the second half of Julia fractal presets.
+ *
+ * Displays presets 9 through 19 for Julia set rendering, including
+ * their numeric index, alias, name, and corresponding complex constant.
+ *
+ * @param  None.
+ * @return None.
+ *
+ * @note   Output is printed to file descriptor 2 (stderr).
+ * @pre    None.
+ * @post   Preset list is printed to the console.
+ */
 static void	print_julia_presets2(void)
 {
 	ft_putstr_fd("\t\t9 / c  / cauliflower   : Cauliflower         "
@@ -26,6 +39,20 @@ static void	print_julia_presets2(void)
 		"[-0.39054, 0.58679]\n", 2);
 }
 
+/**
+ * @brief  Print the complete list of Julia fractal presets.
+ *
+ * Displays usage examples for accessing Julia presets and prints
+ * presets 1 through 19, including their aliases, names, and complex
+ * constants. Delegates printing of presets 9–19 to `print_julia_presets2()`.
+ *
+ * @param  None.
+ * @return None.
+ *
+ * @note   Output is printed to file descriptor 2 (stderr).
+ * @pre    None.
+ * @post   Full preset list for Julia fractals is displayed.
+ */
 static void	print_julia_presets(void)
 {
 	ft_putstr_fd(BOLD BLUE UNDERLINE"\nJulia presets "
@@ -54,6 +81,19 @@ static void	print_julia_presets(void)
 	print_julia_presets2();
 }
 
+/**
+ * @brief  Print usage instructions and parameter descriptions.
+ *
+ * Displays valid command-line usage for launching the program,
+ * lists available parameters, and describes the supported fractal types.
+ *
+ * @param  None.
+ * @return None.
+ *
+ * @note   Output is printed to file descriptor 2 (stderr).
+ * @pre    None.
+ * @post   Usage and parameter information are displayed to the console.
+ */
 static void	print_usage_params(void)
 {
 	ft_putstr_fd(BOLD RED UNDERLINE"\nUsage :"RST"\n\n", 2);
@@ -75,6 +115,19 @@ static void	print_usage_params(void)
 		": Sierpinski Carpet (depth param. optional)\n\n", 2);
 }
 
+/**
+ * @brief  Print the complete help manual.
+ *
+ * Displays usage instructions, Julia and Mandelbrot presets,
+ * a shortcut reminder, and additional notes for the program.
+ *
+ * @param  None.
+ * @return None.
+ *
+ * @note   Combines several helper functions to present the full manual.
+ * @pre    None.
+ * @post   The help content is printed to the console.
+ */
 void	print_help(void)
 {
 	print_usage_params();
@@ -82,9 +135,22 @@ void	print_help(void)
 	print_mandelbrot_presets();
 	print_reminder_shortcuts();
 	print_other_notes();
-	write(2, "\n\n", 2);
+	ft_putstr_fd("\n\n", 2);
 }
 
+/**
+ * @brief  Handle the '--help' or '-h' command-line option.
+ *
+ * Scans the program's arguments for a help flag. If found, prints
+ * the help manual and terminates the program.
+ *
+ * @param  argv  Array of command-line arguments.
+ * @return None.
+ *
+ * @note   If `argv` is NULL or empty, the function returns immediately.
+ * @pre    `argv` must be a valid null-terminated string array or NULL.
+ * @post   If help is requested, the manual is displayed and the program exits.
+ */
 void	handle_help(char **argv)
 {
 	int	i;

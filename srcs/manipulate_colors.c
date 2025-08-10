@@ -1,5 +1,25 @@
 #include "fractol.h"
 
+/**
+ * @brief  Computes the adjusted ratio for color interpolation.
+ *
+ * Calculates a normalized ratio based on the current rendering mode,
+ * the iteration count, and fractal parameters. This ratio is later
+ * used to interpolate between minimum and maximum colors for each pixel.
+ *
+ * @param  adjusted  Pointer to store the computed ratio.
+ * @param  i         The number of iterations for the current pixel.
+ * @param  f         Pointer to the fractal structure containing
+ *					 render parameters.
+ * @return None.
+ *
+ * @note   Supports multiple rendering modes: logarithmic (L), fixed log (F),
+ *         cyclic modulo (C), adaptive (A), and contrast-adjusted (default).
+ * @warning Division by zero is avoided by checking `f->i_max` and
+ *			`f->max_iterations`.
+ * @pre    `adjusted` must be a valid pointer.
+ * @post   `*adjusted` contains the normalized ratio for color interpolation.
+ */
 static void	get_adjusted_ratio(double *adjusted, int i, t_fractal *f)
 {
 	double	ratio;
@@ -29,30 +49,26 @@ static void	get_adjusted_ratio(double *adjusted, int i, t_fractal *f)
 	}
 }
 
-/*int	interpolate_color(int min, int max, int i, t_fractal *fractal)*/
-/*{*/
-/*	t_rgb	color;*/
-/*	double	ratio;*/
-/*	double	adjusted_ratio;*/
-/**/
-/*	ratio = (double)i / (double)fractal->max_iterations;*/
-/*	adjusted_ratio = pow(ratio, fractal->contrast_exponent);*/
-/*	color.r_min = (min >> 16) & 0xFF;*/
-/*	color.g_min = (min >> 8) & 0xFF;*/
-/*	color.b_min = min & 0xFF;*/
-/*	color.r_max = (max >> 16) & 0xFF;*/
-/*	color.g_max = (max >> 8) & 0xFF;*/
-/*	color.b_max = max & 0xFF;*/
-/*	color.r_min += (color.r_max - color.r_min) * adjusted_ratio;*/
-/*	color.g_min += (color.g_max - color.g_min) * adjusted_ratio;*/
-/*	color.b_min += (color.b_max - color.b_min) * adjusted_ratio;*/
-/*	return ((color.r_min << 16) | (color.g_min << 8) | color.b_min);*/
-/*}*/
-
+/**
+ * @brief  Interpolates a color between two RGB values.
+ *
+ * Computes a new color by linearly interpolating each RGB channel
+ * between a minimum and a maximum color based on the adjusted ratio
+ * from the fractal's rendering parameters.
+ *
+ * @param  min  The minimum RGB color (as a 24-bit integer).
+ * @param  max  The maximum RGB color (as a 24-bit integer).
+ * @param  i    The number of iterations for the current pixel.
+ * @param  f    Pointer to the fractal structure containing render parameters.
+ * @return The interpolated RGB color as a 24-bit integer.
+ *
+ * @note   Uses `get_adjusted_ratio()` to determine interpolation progress.
+ * @pre    `min` and `max` must be valid RGB integer values.
+ * @post   Returns an RGB color smoothly transitioning from `min` to `max`.
+ */
 int	interpolate_color(int min, int max, int i, t_fractal *f)
 {
 	t_rgb	color;
-	double	ratio;
 	double	adjusted;
 
 	get_adjusted_ratio(&adjusted, i, f);
@@ -68,13 +84,22 @@ int	interpolate_color(int min, int max, int i, t_fractal *f)
 	return ((color.r_min << 16) | (color.g_min << 8) | color.b_min);
 }
 
-/*
- * Adjusts the contrast exponent, modifying the gradient effect.
- * Limits the contrast exponent between 0.1 and 3.
- * 
- * @param sign The character indicating increase ('+') or decrease ('-').
- * @param fractal A pointer to the fractal structure.
-*/
+/**
+ * @brief  Adjusts the fractal's contrast exponent.
+ *
+ * Increases or decreases the contrast exponent used for color rendering
+ * depending on the `sign` parameter. Higher values increase contrast,
+ * lower values reduce it.
+ *
+ * @param  sign     '+' to increase contrast, '-' to decrease.
+ * @param  fractal  Pointer to the fractal structure.
+ * @return None.
+ *
+ * @note   After modification, the fractal is re-rendered to apply changes.
+ * @warning Changes are bounded between 0.15 and 3.0 to avoid extreme effects.
+ * @pre    `fractal` must be initialized.
+ * @post   `fractal->contrast_exponent` is updated and rendering refreshed.
+ */
 void	change_contrast(char sign, t_fractal *fractal)
 {
 	if (!sign)
@@ -99,12 +124,19 @@ void	change_contrast(char sign, t_fractal *fractal)
 	}
 }
 
-/*
- * Swaps the current minimum and maximum colors.
- * This effectively inverts the color gradient.
- * 
- * @param fractal A pointer to the fractal structure.
-*/
+/**
+ * @brief  Swaps the fractal's minimum and maximum colors.
+ *
+ * Exchanges `color_min` and `color_max` values to invert the gradient.
+ * This results in a reversed color scheme for rendering.
+ *
+ * @param  fractal  Pointer to the fractal structure.
+ * @return None.
+ *
+ * @note   The fractal is immediately re-rendered after swapping colors.
+ * @pre    `fractal` must have valid `color_min` and `color_max` values.
+ * @post   Colors are inverted in the gradient used for rendering.
+ */
 void	swap_colors(t_fractal *fractal)
 {
 	double	tmp;
@@ -116,15 +148,20 @@ void	swap_colors(t_fractal *fractal)
 	fractal_rendering(fractal);
 }
 
-/*
- * Toggles psychedelic/complementary modes on or off.
- * In psychedelic mode, color transitions are unpredictable,
-	and contrast or smoothing adjustments are disabled.
- * Changing the maximum number of iterations ('max_iterations') will change
-	the color palette.
- * 
- * @param fractal A pointer to the fractal structure.
-*/
+/**
+ * @brief  Toggles between normal and psychedelic color range modes.
+ *
+ * Switches the `range_color_mode` between normal ('N') and psychedelic ('Y')
+ * rendering. Psychedelic mode cycles through colors regardless of standard
+ * color key mappings, and disables contrast/smoothing adjustments.
+ *
+ * @param  fractal  Pointer to the fractal structure.
+ * @return None.
+ *
+ * @note   Displays a contextual message explaining the mode's behavior.
+ * @pre    `fractal` must be initialized.
+ * @post   `range_color_mode` is updated and rendering refreshed.
+ */
 void	swap_range_color_mode(t_fractal *fractal)
 {
 	if (fractal->range_color_mode == 'N')

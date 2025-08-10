@@ -1,5 +1,20 @@
 #include "fractol.h"
 
+/**
+ * @brief  Print additional usage notes for the program (second part).
+ *
+ * Displays tips and additional information about program usage, such as
+ * thread disabling, fullscreen mode, quick Julia presets, depth parameter
+ * for Sierpinski, sharing parameters, case-insensitive input, color scheme
+ * effects, and bug reporting.
+ *
+ * @param  None.
+ * @return None.
+ *
+ * @note   Output is printed to file descriptor 2 (stderr).
+ * @pre    None.
+ * @post   Extra notes are displayed in the console.
+ */
 static void	print_other_notes2(void)
 {
 	ft_putstr_fd("\t\t- Use '-mt=no' to disable threads (for "
@@ -24,6 +39,20 @@ static void	print_other_notes2(void)
 		"or press 'H' anytime.\n\n", 2);
 }
 
+/**
+ * @brief  Print the "Other notes" section of the help manual.
+ *
+ * Displays real-time UI features, available color modes, preset and jump-to
+ * options, export capabilities, and multi-threading details. Calls
+ * `print_other_notes2()` to print the remaining notes.
+ *
+ * @param  None.
+ * @return None.
+ *
+ * @note   Output is printed to file descriptor 2 (stderr).
+ * @pre    None.
+ * @post   The "Other notes" section is displayed in the console.
+ */
 void	print_other_notes(void)
 {
 	ft_putstr_fd(BOLD BLUE UNDERLINE"\n\nOther notes :"RST"\n", 2);
@@ -47,6 +76,20 @@ void	print_other_notes(void)
 	print_other_notes2();
 }
 
+/**
+ * @brief  Print the list of available runtime keyboard shortcuts.
+ *
+ * Displays all in-application key bindings for controlling fractal navigation,
+ * zoom, view reset, color changes, rendering adjustments, exporting, and
+ * help access.
+ *
+ * @param  None.
+ * @return None.
+ *
+ * @note   Output is printed to file descriptor 2 (stderr).
+ * @pre    None.
+ * @post   Shortcut list is displayed in the console.
+ */
 void	print_reminder_shortcuts(void)
 {
 	ft_putstr_fd(BOLD BLUE UNDERLINE"\n\nShortcuts (while running):"RST"\n", 2);
@@ -74,6 +117,19 @@ void	print_reminder_shortcuts(void)
 	ft_putstr_fd("\t\tH : "UNDERLINE"Print this manual page\n"RST, 2);
 }
 
+/**
+ * @brief  Print the Mandelbrot "jump-to" preset list.
+ *
+ * Displays predefined coordinates for notable Mandelbrot regions that
+ * can be instantly accessed during runtime via the jump-to menu.
+ *
+ * @param  None.
+ * @return None.
+ *
+ * @note   Output is printed to file descriptor 2 (stderr).
+ * @pre    None.
+ * @post   The Mandelbrot preset list is displayed in the console.
+ */
 void	print_mandelbrot_presets(void)
 {
 	ft_putstr_fd(BOLD BLUE UNDERLINE"\n\nMandelbrot 'jump-to' presets "
