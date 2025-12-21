@@ -48,6 +48,6 @@ void	initialize_events(t_fractal *fractal)
 		initialize_events_buddhabrot(fractal);
 		return ;
 	}
-	if (!ft_strcmp(fractal->name, "sierpinski"))
+	else
 		initialize_events_julia_mandelbrot(fractal);
 }
