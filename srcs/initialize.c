@@ -72,7 +72,7 @@ void	data_init(t_fractal *fractal)
 	fractal->bb_samples_total = 0;
 	fractal->bb_max_count = 1;
 	fractal->escape_value = pow(2, 2);
-	fractal->max_iterations = 200;
+	fractal->max_iterations = 100;
 	fractal->i_max = 0;
 	fractal->tick_iterations = 10;
 	fractal->color = 0x000000;
@@ -84,6 +84,7 @@ void	data_init(t_fractal *fractal)
 	fractal->render_mode = 'N';
 	fractal->contrast_exponent = 0.5;
 	fractal->range_color_mode = 'N';
+	fractal->exporting = FALSE;
 	position_init(fractal);
 }
 

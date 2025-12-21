@@ -134,6 +134,7 @@ void	export_image(t_fractal *fractal)
 
 	img_snapshot_take(&orig, &fractal->img);
 	backup = duplicate_fractal(fractal);
+	fractal->exporting = TRUE;
 	setup_export_image(&export, fractal);
 	render_only_to_image(fractal);
 

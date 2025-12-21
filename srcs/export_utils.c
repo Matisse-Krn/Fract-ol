@@ -120,6 +120,7 @@ t_fractal	duplicate_fractal(t_fractal *src)
 	copy.size = src->size;
 	copy.fullscreen = src->fullscreen;
 	copy.mt = src->mt;
+	copy.exporting = src->exporting;
 	duplicate_fractal2(src, &copy);
 	return (copy);
 }
@@ -144,6 +145,7 @@ void	restore_fractal(t_fractal *f, t_fractal *backup,
 	f->shift_x = backup->shift_x;
 	f->shift_y = backup->shift_y;
 	f->zoom_rate = backup->zoom_rate;
+	f->exporting = backup->exporting;
 	img_snapshot_apply(&f->img, orig);
 	f->aspect_ratio = (double)f->img.width / (double)f->img.height;
 }

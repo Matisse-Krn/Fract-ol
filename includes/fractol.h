@@ -57,6 +57,7 @@ typedef struct s_fractal
 	int			size;
 	int			fullscreen;
 	int			mt;
+	int			exporting;
 	double		aspect_ratio;
 	double		escape_value;
 	double		shift_x;
@@ -98,6 +99,12 @@ typedef struct s_img_snapshot
 	int			full_width;
 	int			full_height;
 }				t_img_snapshot;
+
+typedef struct s_bb_export_ctx
+{
+	t_image		orig;
+	t_image		tmp;
+}				t_bb_export_ctx;
 
 typedef struct s_pixel
 {
@@ -247,6 +254,7 @@ void		change_depth_sierpinski(int keysym, t_fractal *fractal);
 char		*get_window_name(t_fractal *fractal);
 void		manage_text(t_fractal *fractal);
 void		put_a_string( int x, int y, char *s, t_fractal *fractal);
+void		put_zoom_and_position(t_fractal *f);
 void		put_color_mode(t_fractal *fractal);
 void		put_render_mode(t_fractal *f);
 void		put_max_iterations(t_fractal *fractal);
@@ -345,8 +353,9 @@ int			bb_run_samples_local(t_fractal *f, int n, unsigned int *seed, t_bb_accum *
 /* palette_utils.c */
 int			bb_palette_ramp5(double t);
 
-/* buddhabrot_export_view.c */
-int			export_view_auto(t_fractal *f);
+
+int	export_view_png(t_fractal *f, const char *filepath);
+int	export_view_auto(t_fractal *f);
 
 /* buddhabrot_export_utils.c */
 int			ensure_exports_dir(void);

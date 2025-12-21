@@ -1,79 +1,65 @@
 #include "fractol.h"
-#include "stb_image_write.h"
 
-static void	convert_bgra_to_rgba_line(const unsigned char *src,
-					unsigned char *dst, int w)
+static int	bb_export_make_tmp(t_fractal *f, t_image *tmp)
 {
-	int	x;
+	int	w;
+	int	h;
 
-	x = -1;
-	while (++x < w)
-	{
-		dst[0] = src[2];
-		dst[1] = src[1];
-		dst[2] = src[0];
-		dst[3] = 255;
-		src += 4;
-		dst += 4;
-	}
-}
-
-static void	blit_bgra_to_rgba(t_image *img, unsigned char *dst, int dst_stride)
-{
-	int					y;
-	const unsigned char	*src_line;
-	unsigned char		*dst_line;
-
-	y = -1;
-	while (++y < img->height)
-	{
-		src_line = (const unsigned char *)img->px_ptr
-			+ (size_t)y * (size_t)img->line_length;
-		dst_line = dst + (size_t)y * (size_t)dst_stride;
-		convert_bgra_to_rgba_line(src_line, dst_line, img->width);
-	}
-}
-
-static int	alloc_rgba_buffer(int w, int h, unsigned char **out, int *stride)
-{
-	size_t	size;
-
-	if (w <= 0 || h <= 0 || !out || !stride)
+	w = f->img.width;
+	h = f->img.height;
+	ft_bzero(tmp, sizeof(t_image));
+	tmp->width = w;
+	tmp->height = h;
+	tmp->img_ptr = mlx_new_image(f->mlx_ptr, w, h);
+	if (!tmp->img_ptr)
 		return (0);
-	size = (size_t)w * (size_t)h * 4u;
-	*out = (unsigned char *)malloc(size);
-	if (!*out)
+	tmp->px_ptr = mlx_get_data_addr(tmp->img_ptr,
+			&tmp->bits_per_pixel, &tmp->line_length, &tmp->endian);
+	if (!tmp->px_ptr)
+	{
+		mlx_destroy_image(f->mlx_ptr, tmp->img_ptr);
+		tmp->img_ptr = NULL;
 		return (0);
-	*stride = w * 4;
+	}
 	return (1);
 }
 
-static int	export_view_png(t_fractal *f, const char *filepath)
+static void	bb_export_swap_in(t_fractal *f, t_img_snapshot *orig, t_image *tmp)
 {
-	int				ok;
-	int				w;
-	int				h;
-	int				stride;
-	unsigned char	*rgba;
+	img_snapshot_take(orig, &f->img);
+	f->img.img_ptr = tmp->img_ptr;
+	f->img.px_ptr = tmp->px_ptr;
+	f->img.width = tmp->width;
+	f->img.height = tmp->height;
+	f->img.bits_per_pixel = tmp->bits_per_pixel;
+	f->img.line_length = tmp->line_length;
+	f->img.endian = tmp->endian;
+}
 
-	if (f->img.bits_per_pixel != 32)
-		return (0);
+static void	bb_export_restore(t_fractal *f, t_img_snapshot *orig, t_image *tmp)
+{
+	img_snapshot_apply(&f->img, orig);
+	if (tmp->img_ptr)
+		mlx_destroy_image(f->mlx_ptr, tmp->img_ptr);
+	tmp->img_ptr = NULL;
+	tmp->px_ptr = NULL;
+}
+
+static int	export_clean_buddhabrot_view(t_fractal *f, const char *filepath)
+{
+	t_img_snapshot	orig;
+	t_image			tmp;
+	int				ok;
+
 	ok = 0;
-	w = f->img.width;
-	h = f->img.height;
-	rgba = NULL;
-	if (!snap_lock(&f->img))
+	if (!bb_export_make_tmp(f, &tmp))
 		return (0);
-	if (!alloc_rgba_buffer(w, h, &rgba, &stride))
-	{
-		snap_unlock(&f->img);
-		return (0);
-	}
-	blit_bgra_to_rgba(&f->img, rgba, stride);
-	snap_unlock(&f->img);
-	if (stbi_write_png(filepath, w, h, 4, rgba, stride))
-		ok = 1;
-	free(rgba);
+	bb_export_swap_in(f, &orig, &tmp);
+	f->exporting = 1;
+	bb_draw_from_histogram(f);
+	ok = export_view_png(f, filepath);
+	f->exporting = 0;
+	bb_export_restore(f, &orig, &tmp);
 	return (ok);
 }
 
@@ -83,13 +69,13 @@ int	export_view_auto(t_fractal *f)
 	int		ok;
 
 	ok = 0;
+	path = NULL;
 	if (!ensure_exports_dir())
 		return (0);
 	path = generate_view_export_filename(f);
 	if (!path)
 		return (0);
-	if (export_view_png(f, path))
-		ok = 1;
+	ok = export_clean_buddhabrot_view(f, path);
 	free(path);
 	return (ok);
 }
