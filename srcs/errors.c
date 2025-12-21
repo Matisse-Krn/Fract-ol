@@ -55,6 +55,7 @@ char	*if_malloc_error(char *s)
 int	is_valid_number(const char *str)
 {
 	int	has_dot;
+	int	has_digit;
 
 	if (!str)
 		return (FALSE);
@@ -64,10 +65,11 @@ int	is_valid_number(const char *str)
 	if (*str == '-' || *str == '+')
 		str++;
 	has_dot = 0;
+	has_digit = 0;
 	while (*str)
 	{
 		if (*str >= '0' && *str <= '9')
-			;
+			has_digit = 1;
 		else if (*str == '.' || *str == ',')
 		{
 			if (has_dot)
@@ -78,6 +80,8 @@ int	is_valid_number(const char *str)
 			return (FALSE);
 		str++;
 	}
+	if (has_digit == 0)
+		return (FALSE);
 	return (TRUE);
 }
 

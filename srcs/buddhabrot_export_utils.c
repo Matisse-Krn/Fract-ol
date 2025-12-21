@@ -1,12 +1,18 @@
+
 #include "fractol.h"
+#include <errno.h>
 
 int	ensure_exports_dir(void)
 {
 	struct stat	st;
 
-	if (stat("exports", &st) == 0 && S_ISDIR(st.st_mode))
+	if (stat("exports", &st) == 0)
+		return (S_ISDIR(st.st_mode));
+	if (errno != ENOENT)
+		return (0);
+	if (mkdir("exports", 0755) == 0)
 		return (1);
-	if (mkdir("exports", 0777) == 0)
+	if (errno == EEXIST)
 		return (1);
 	return (0);
 }

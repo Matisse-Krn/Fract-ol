@@ -5,23 +5,7 @@ NAME			= fractol
 LIBPATH 		= -Lmlx_linux -Llibft -L/usr/lib
 LIBNAME 		= -lmlx_Linux -lft -lz -lX11 -lXext -lm
 
-SRC				= srcs/maths_functions.c srcs/rendering.c srcs/errors.c \
-				  srcs/main.c srcs/handle_hooks.c srcs/strings_utils.c \
-				  srcs/text_box.c srcs/strings_utils2.c srcs/manipulate_colors.c \
-				  srcs/display_functions.c srcs/change_colors.c srcs/initialize.c \
-				  srcs/handle_hooks2.c srcs/parsing.c srcs/sierpinski_bonus.c \
-				  srcs/sierpinski_utils_bonus.c srcs/multithreading.c srcs/init_utils.c \
-				  srcs/screen_utils.c srcs/jump_to.c srcs/export_image.c srcs/export_utils.c \
-				  srcs/render_colors_mode.c srcs/julia_presets.c srcs/julia_presets_handler1.c \
-				  srcs/julia_presets_handler2.c srcs/help.c srcs/help2.c srcs/adaptive_mode.c \
-				  srcs/adaptive_mode_multithreading.c srcs/buddhabrot_init.c srcs/buddhabrot.c \
-				  srcs/buddhabrot_histogram.c srcs/buddhabrot_sampling.c srcs/buddhabrot_color.c \
-				  srcs/buddhabrot_mt_orchestrator.c srcs/buddhabrot_palette_utils.c \
-				  srcs/buddhabrot_draw.c srcs/buddhabrot_histogram_mem.c \
-				  srcs/buddhabrot_mt_sampling_core.c srcs/buddhabrot_mt_sampling_runner.c \
-				  srcs/buddhabrot_mt_hist_local.c srcs/buddhabrot_mt_thread.c \
-				  srcs/buddhabrot_mt_ctx.c srcs/buddhabrot_export_view.c \
-				  srcs/buddhabrot_export_utils.c srcs/buddhabrot_mutex.c
+SRC				= srcs/buddhabrot_export_utils.c srcs/errors.c srcs/handle_key_julia_mandelbrot.c srcs/buddhabrot.c srcs/buddhabrot_init.c srcs/change_colors.c srcs/buddhabrot_mutex.c srcs/buddhabrot_mt_ctx.c srcs/help2.c srcs/initialize.c srcs/parsing.c srcs/strings_utils2.c srcs/help.c srcs/buddhabrot_histogram.c srcs/adaptive_mode_multithreading.c srcs/rendering.c srcs/stb_image_write_impl.c srcs/manipulate_colors.c srcs/maths_functions.c srcs/buddhabrot_export_view.c srcs/buddhabrot_histogram_mem.c srcs/buddhabrot_mt_sampling_core.c srcs/buddhabrot_mt_thread.c srcs/strings_utils.c srcs/julia_presets.c srcs/export_snapshot.c srcs/buddhabrot_draw.c srcs/buddhabrot_mt_hist_local.c srcs/init_utils.c srcs/sierpinski_bonus.c srcs/render_colors_mode.c srcs/buddhabrot_sampling.c srcs/julia_presets_handler2.c srcs/buddhabrot_color.c srcs/jump_to.c srcs/screen_utils.c srcs/buddhabrot_palette_utils.c srcs/buddhabrot_mt_sampling_runner.c srcs/adaptive_mode.c srcs/sierpinski_utils_bonus.c srcs/handle_key_sierpinski_buddhabrot.c srcs/multithreading.c srcs/text_box.c srcs/julia_presets_handler1.c srcs/initialize_events.c srcs/main.c srcs/handle_mouse_and_exit.c srcs/export_utils.c srcs/export_image.c srcs/buddhabrot_mt_orchestrator.c srcs/display_functions.c
 
 INCLUDE			= -I/usr/include -Ilibft -Imlx_linux -Iincludes
 
@@ -50,4 +34,13 @@ fclean			: clean
 
 re				: fclean all
 
-.PHONY			: all bonus clean fclean re
+listC			:
+	@LIST=$$(find -wholename "./srcs/*.c" | cut -c 3- | tr '\n' ' '); \
+	printf "🗅 $(INFOS)All C sources files copied into clipboard :\n$(RESET)$$LIST\n"; \
+	echo -n $$LIST | xclip -selection clipboard
+
+listNb			:
+	@echo "Number of .c files :" 
+	@find -wholename "./srcs/*.c" | wc -l
+
+.PHONY			: all bonus clean fclean re listC listNb

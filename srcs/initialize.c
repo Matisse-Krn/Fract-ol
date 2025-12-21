@@ -60,6 +60,17 @@ void	data_init(t_fractal *fractal)
 		printf("🏁 [MultiThreading=yes] 🏁\n");
 	else
 		printf("🏁 [MultiThreading=no] 🏁\n");
+	fractal->bb_hist = NULL;
+	fractal->bb_hist_r = NULL;
+	fractal->bb_hist_g = NULL;
+	fractal->bb_hist_b = NULL;
+	fractal->bb_nebula = 'N';
+	fractal->bb_samples_per_tick = 0;
+	fractal->bb_min_iter = 0;
+	fractal->bb_max_iter = 0;
+	fractal->bb_seed = 0;
+	fractal->bb_samples_total = 0;
+	fractal->bb_max_count = 1;
 	fractal->escape_value = pow(2, 2);
 	fractal->max_iterations = 200;
 	fractal->i_max = 0;
@@ -74,45 +85,6 @@ void	data_init(t_fractal *fractal)
 	fractal->contrast_exponent = 0.5;
 	fractal->range_color_mode = 'N';
 	position_init(fractal);
-}
-
-/**
- * @brief  Set up MLX event hooks for the fractal window.
- *
- * Registers the appropriate event handlers for keyboard, mouse movement,
- * and mouse button input. If the fractal is Sierpinski, uses a specific
- * event initialization function.
- *
- * @param  fractal  Pointer to the fractal context (`t_fractal`).
- * @return None.
- *
- * @note   Uses `mlx_hook()` to bind events to their respective handlers.
- * @pre    `fractal->win_ptr` must be a valid MLX window pointer.
- * @post   Event handling is active for the fractal window.
- */
-void	initialize_events(t_fractal *fractal)
-{
-	if (!ft_strcmp(fractal->name, "sierpinski"))
-	{
-		initialize_events_sierpinski(fractal);
-		return ;
-	}
-	mlx_hook(fractal->win_ptr,
-		DestroyNotify,
-		StructureNotifyMask,
-		handle_exit, fractal);
-	mlx_hook(fractal->win_ptr,
-		KeyPress,
-		KeyPressMask,
-		handle_key, fractal);
-	mlx_hook(fractal->win_ptr,
-		MotionNotify,
-		PointerMotionMask,
-		handle_mouse_move, fractal);
-	mlx_hook(fractal->win_ptr,
-		ButtonPress,
-		ButtonPressMask,
-		handle_mouse, fractal);
 }
 
 /**

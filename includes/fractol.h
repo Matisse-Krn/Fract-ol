@@ -12,7 +12,6 @@
 # include <math.h>
 # include <float.h>
 # include <time.h>
-# include <stdint.h>
 # include <sys/time.h>
 # include <sys/stat.h>
 
@@ -80,12 +79,25 @@ typedef struct s_fractal
 	uint64_t		bb_samples_total;
 	uint32_t		bb_max_count;
 	uint32_t		*bb_hist;           /* simple mode */
-	uint32_t		*bb_hist_r;         /* Nebulabrot (optionnel, plus tard) */
+	uint32_t		*bb_hist_r;         /* Nebulabrot */
 	uint32_t		*bb_hist_g;
 	uint32_t		*bb_hist_b;
 	t_image		img;
 	t_complex	c;
 }				t_fractal;
+
+typedef struct s_img_snapshot
+{
+	void		*img_ptr;
+	char		*px_ptr;
+	int			width;
+	int			height;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+	int			full_width;
+	int			full_height;
+}				t_img_snapshot;
 
 typedef struct s_pixel
 {
@@ -171,7 +183,6 @@ void		data_init_sierpinski(t_fractal *fractal);
 void		invalid_depth(char **argv, t_fractal *fractal);
 void		initialize_window(t_fractal *f);
 void		initialize_image(t_fractal *fractal);
-void		initialize_text_image(t_fractal *fractal);
 
 /*	Initialization utils */
 void		init_mlx(t_fractal *fractal);
@@ -186,12 +197,11 @@ int			init_threads(t_fractal *fractal);
 /* Event handling */
 void		initialize_events(t_fractal *fractal);
 void		initialize_events_sierpinski(t_fractal *fractal);
-void		handle_key_two(int keysym, t_fractal *fractal);
-void		handle_key_three(int keysym, t_fractal *fractal);
-int			handle_key(int keysym, t_fractal *fractal);
+int			handle_key_julia_mandelbrot(int keysym, t_fractal *fractal);
 int			handle_key_sierpinski(int keysym, t_fractal *fractal);
+int			handle_key_buddhabrot(int keysym, t_fractal *fractal);
 int			handle_exit(t_fractal *fractal);
-int			handle_mouse(int button, int x, int y, t_fractal *fractal);
+int			handle_mouse_julia_mandelbrot(int button, int x, int y, t_fractal *fractal);
 int			handle_mouse_move(int x, int y, t_fractal *fractal);
 
 /* Fractal rendering management */
@@ -267,10 +277,13 @@ void		set_preset6(char *arg, t_fractal *f);
 
 /* Export image to PNG */
 void		setup_export_image(t_image *export, t_fractal *fractal);
+void		img_snapshot_take(t_img_snapshot *s, t_image *img);
+void		img_snapshot_apply(t_image *img, const t_img_snapshot *s);
 void		export_image(t_fractal *fractal);
 char		*build_sierpinski_filename(t_fractal *f, int suffix);
 t_fractal	duplicate_fractal(t_fractal *src);
-void		restore_fractal(t_fractal *f, t_fractal *backup, t_image *export);
+void		restore_fractal(t_fractal *f, t_fractal *backup, \
+			const t_img_snapshot *orig);
 void		compute_imax_for_export(t_fractal *f);
 
 /* Help, Man, Documentation */
@@ -300,17 +313,17 @@ int			bb_world_to_screen(const t_fractal *f, double x_real, double y_imag, t_pix
 int			bb_reject_cardioid_bulb(double real_c, double imag_c);
 
 /* buddhabrot_mt_sampling_core.c */
-double	bb_rand_range(unsigned int *seed, double lo, double hi);
-void	bb_orbit_accumulate(const t_fractal *f, t_complex c, int esc, t_bb_accum *acc);
+double		bb_rand_range(unsigned int *seed, double lo, double hi);
+void		bb_orbit_accumulate(const t_fractal *f, t_complex c, int esc, t_bb_accum *acc);
 
 /* buddhabrot_mt_ctx.c */
-int		bb_mt_prepare_ctx(const t_fractal *f, t_bb_mt_ctx *ctx);
-void	bb_mt_fill_arg_common(t_fractal *f, t_bb_mt_ctx *ctx, int i);
-void	bb_mt_cleanup_partial(t_bb_mt_ctx *ctx, int upto);
+int			bb_mt_prepare_ctx(const t_fractal *f, t_bb_mt_ctx *ctx);
+void		bb_mt_fill_arg_common(t_fractal *f, t_bb_mt_ctx *ctx, int i);
+void		bb_mt_cleanup_partial(t_bb_mt_ctx *ctx, int upto);
 void	bb_mt_finalize(t_fractal *f, t_bb_mt_ctx *ctx, uint32_t max_after_merge);
 
 /* buddhabrot_color.c */
-double	bb_normalize_iteration_count(uint32_t iteration_count, uint32_t iteration_max, t_fractal *fractal);
+double		bb_normalize_iteration_count(uint32_t iteration_count, uint32_t iteration_max, t_fractal *fractal);
 
 /* buddhabrot_sampling.c */
 int				bb_run_samples_single(t_fractal *f, int n);

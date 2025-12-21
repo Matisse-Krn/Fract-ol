@@ -20,10 +20,9 @@
  */
 int	bb_alloc_local_hist(uint32_t **hist, int count)
 {
-	*hist = (uint32_t *)ft_calloc(sizeof(uint32_t), count);
+	*hist = (uint32_t *)ft_calloc(count, sizeof(uint32_t));
 	if (!*hist)
 		return (0);
-	ft_bzero(*hist, sizeof(uint32_t) * count);
 	return (1);
 }
 

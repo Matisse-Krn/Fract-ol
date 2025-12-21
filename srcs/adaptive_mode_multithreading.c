@@ -137,7 +137,13 @@ int	find_imax_frame_mt(t_fractal *f)
 	int				i;
 
 	f->i_max = 0;
-	n_threads = sysconf(_SC_NPROCESSORS_ONLN) * 4;
+	n_threads = sysconf(_SC_NPROCESSORS_ONLN) * 3;
+	if (n_threads < 1)
+		return (FALSE);
+	if (n_threads > f->img.height)
+		n_threads = f->img.height;
+	if (n_threads > 32)
+		n_threads = 32;
 	threads = (pthread_t *)ft_calloc(n_threads, sizeof(pthread_t));
 	if (!threads)
 		return (FALSE);

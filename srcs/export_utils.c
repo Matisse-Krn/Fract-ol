@@ -35,7 +35,13 @@ void	setup_export_image(t_image *export, t_fractal *fractal)
 			&export->endian);
 	if (!export->px_ptr)
 		malloc_error();
-	fractal->img = *export;
+	fractal->img.width = export->width;
+	fractal->img.height = export->height;
+	fractal->img.img_ptr = export->img_ptr;
+	fractal->img.px_ptr = export->px_ptr;
+	fractal->img.bits_per_pixel = export->bits_per_pixel;
+	fractal->img.line_length = export->line_length;
+	fractal->img.endian = export->endian;
 	fractal->aspect_ratio = (double)fractal->img.width
 		/ (double)fractal->img.height;
 }
@@ -118,34 +124,30 @@ t_fractal	duplicate_fractal(t_fractal *src)
 	return (copy);
 }
 
-/**
- * @brief  Restore fractal state from a backup after export.
- *
- * Replaces the fractal's rendering parameters and image buffer with those
- * stored in a backup and the original image reference.
- *
- * @param  f         Pointer to the fractal context to restore.
- * @param  backup    Pointer to the backup fractal containing saved parameters.
- * @param  orig_img  Pointer to the original image structure to restore.
- * @return None.
- *
- * @note   Typically used after an export to restore the fractal's
- *		   on-screen state.
- * @pre    `backup` and `orig_img` must be initialized with valid data.
- * @post   `f` matches the rendering state prior to export.
- */
-void	restore_fractal(t_fractal *f, t_fractal *backup, t_image *orig_img)
+void	restore_fractal(t_fractal *f, t_fractal *backup,
+			const t_img_snapshot *orig)
 {
+	if (!f || !backup || !orig)
+		return ;
 	f->max_iterations = backup->max_iterations;
 	f->i_max = backup->i_max;
+	f->tick_iterations = backup->tick_iterations;
 	f->color = backup->color;
 	f->color_min = backup->color_min;
 	f->color_max = backup->color_max;
+	f->init_color_min = backup->init_color_min;
+	f->init_color_max = backup->init_color_max;
+	f->color_mode = backup->color_mode;
 	f->render_mode = backup->render_mode;
 	f->range_color_mode = backup->range_color_mode;
-	f->aspect_ratio = (double)orig_img->width / (double)orig_img->height;
-	f->img = *orig_img;
+	f->contrast_exponent = backup->contrast_exponent;
+	f->shift_x = backup->shift_x;
+	f->shift_y = backup->shift_y;
+	f->zoom_rate = backup->zoom_rate;
+	img_snapshot_apply(&f->img, orig);
+	f->aspect_ratio = (double)f->img.width / (double)f->img.height;
 }
+
 
 /**
  * @brief  Build a descriptive export filename for a Sierpinski fractal.
